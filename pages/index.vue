@@ -6,7 +6,7 @@
     <v-flex xs12 class="text-xs-center" mt-3>
       <h2>А карта 
         <nuxt-link to="/map">
-          тут.
+          <i>тут.</i>
         </nuxt-link>
       </h2>
     </v-flex>
