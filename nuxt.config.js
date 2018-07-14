@@ -13,11 +13,14 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: pkg.description }
+      { hid: 'Reservation Map Project', name: 'Reservation Map Project', content: pkg.description }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' }
+    ],
+    script: [
+      { src: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAgePCfKDNY16GzsMB9k-GJCi3YrbexORA'}
     ]
   },
 
@@ -44,6 +47,7 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
+
   ],
 
   /*
