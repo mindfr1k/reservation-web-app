@@ -1,7 +1,7 @@
 <template>
   <v-layout column>
     <v-flex xs12 class="text-xs-center" mt-3>
-      <h1>Здарова, здарова. Вот собственно и {{ title }}.</h1>
+      <h1>Здарова, здарова. Вот, собственно, и {{ title }}.</h1>
     </v-flex>
     <v-flex xs12 class="text-xs-center" mt-3>
       <img :src="bannerPath">
@@ -31,4 +31,3 @@ export default {
     max-height: 50vh;
   }
 </style>
-
