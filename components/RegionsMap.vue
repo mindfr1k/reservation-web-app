@@ -7,7 +7,7 @@ export default {
   props: [
     'mapId',
     'centerCoords',
-    'polygonsCoords'
+    'polygons'
   ],
   computed: {
     map() {
@@ -16,14 +16,14 @@ export default {
     bounds() {
       return this.$store.state.bounds;
     },
-    polygons() {
-      return this.$store.state.polygons;
-    },
     infoWindow() {
       return this.$store.state.infoWindow;
     }
   },
   mounted() {
+    const infoWindow = new google.maps.InfoWindow;
+    this.$store.dispatch('setInfoWindow', infoWindow);
+
     this.$store.dispatch('setBounds', new google.maps.LatLngBounds());
     const { lat, lng } = this.centerCoords;
 
@@ -32,11 +32,11 @@ export default {
     });
     this.$store.dispatch('setMap', map);
 
-    for (let i = 0; i < this.polygonsCoords.length; i++) {
-      const { color, eventHandler } = this.chooseInstance(i);
+    this.polygons.forEach(polygon => {
+      const { color, previewTitle, pageLink, coords } = polygon;
 
-      const polygon = new google.maps.Polygon({
-        paths: this.polygonsCoords[i],
+      const mapPolygon = new google.maps.Polygon({
+        paths: coords,
         strokeColor: color,
         strokeOpacity: 1,
         strokeWeight: 3,
@@ -44,46 +44,29 @@ export default {
         fillOpacity: 0.3
       });
 
-      polygon.setMap(this.map);
-      this.$store.dispatch('addPolygon', polygon);
-      polygon.addListener('click', eventHandler);
+      mapPolygon.setMap(this.map);
+      mapPolygon.addListener('click', function (event) {
+        const contentString = `
+          <div style="text-align: left;
+            line-height: 1.2">
+            <h1>${previewTitle},</h1>
+            <h2>так сказать.</h2>
+            <br/>
+            <i><a href=${pageLink}>подробнее...</a></i>
+          </div>`;
 
-      for (let coord of this.polygonsCoords[i]) {
+        infoWindow.setContent(contentString);
+        infoWindow.setPosition(event.latLng);
+
+        infoWindow.open(map);
+      });
+
+      for (let coord of coords) {
         const { lat, lng } = coord;
         const position = new google.maps.LatLng(lat, lng);
         this.map.fitBounds(this.bounds.extend(position));
       }
-    }
-
-    const infoWindow = new google.maps.InfoWindow;
-    this.$store.dispatch('setInfoWindow', infoWindow);
-  },
-  methods: {
-    showClickedCoords(event) {
-      this.infoWindow.setContent(`lat: ${event.latLng.lat()}, lng: ${event.latLng.lng()}`);
-      this.infoWindow.setPosition(event.latLng);
-
-      this.infoWindow.open(this.map);
-    },
-    chooseInstance(index) {
-      switch (index) {
-        case 0:
-          return {
-            color: '#0000FF',
-            eventHandler: this.showClickedCoords
-          };
-        case 1:
-          return {
-            color: '#FF0000',
-            eventHandler: this.showClickedCoords
-          };
-        default: 
-          return {
-            color: '#000000',
-            eventHandler: this.showClickedCoords
-          };  
-      }
-    }
+    });
   }
 }
 </script>

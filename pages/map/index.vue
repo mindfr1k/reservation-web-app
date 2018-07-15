@@ -4,7 +4,7 @@
       <RegionsMap 
       :mapId="mapId"
       :centerCoords="centerCoords"
-      :polygonsCoords="polygonsCoords" />
+      :polygons="polygons" />
     </v-flex>
   </v-layout>
 </template>
@@ -23,8 +23,8 @@ export default {
     centerCoords() {
       return this.$store.state.centerCoords;
     },
-    polygonsCoords() {
-      return this.$store.state.polygonsCoords;
+    polygons() {
+      return this.$store.state.polygons;
     }
   }
 }
