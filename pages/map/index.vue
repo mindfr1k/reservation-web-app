@@ -3,7 +3,8 @@
     <v-flex xs12 class="text-xs-center">
       <RegionsMap 
       :mapId="mapId"
-      :markerCoords="markerCoords" />
+      :centerCoords="centerCoords"
+      :polygonsCoords="polygonsCoords" />
     </v-flex>
   </v-layout>
 </template>
@@ -19,8 +20,11 @@ export default {
     mapId() {
       return this.$store.state.mapId;
     },
-    markerCoords() {
-      return this.$store.state.markerCoords;
+    centerCoords() {
+      return this.$store.state.centerCoords;
+    },
+    polygonsCoords() {
+      return this.$store.state.polygonsCoords;
     }
   }
 }
