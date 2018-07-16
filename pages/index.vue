@@ -3,7 +3,7 @@
     <v-flex xs12 class="text-xs-center" mt-5>
       <h1>Здарова, я Рыжий.</h1>
     </v-flex>
-    <v-flex xs12 class="text-xs-center" mt-3>
+    <v-flex xs12 class="subheading text-xs-center" mt-3>
       <h2>А карта 
         <nuxt-link to="/map">
           <i>тут.</i>
@@ -11,7 +11,7 @@
       </h2>
     </v-flex>
     <v-flex xs12 class="text-xs-center" mt-3>
-      <em>&mdash;Изречения  величайших</em>
+      <i>&mdash;Изречения  величайших</i>
     </v-flex>
   </v-layout>
 </template>

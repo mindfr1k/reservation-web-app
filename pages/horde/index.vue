@@ -10,7 +10,6 @@
 import DetailedInfo from '@/components/DetailedInfo';
 
 export default {
-  transition: 'slide',
   components: {
     DetailedInfo
   }
