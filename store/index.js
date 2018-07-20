@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 const initStore = () => new Vuex.Store({
   state: {
-    appTitle: 'Заповедник',
+    appTitle: 'Главная',
     menuItems: [
       { title: 'Карта', path: '/map', icon: 'map'}
     ],
