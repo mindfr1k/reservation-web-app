@@ -1,8 +1,8 @@
 <template>
   <v-layout row wrap>
     <DetailedInfo 
-    title="Альянс" 
-    bannerPath="/alliance-banner.jpg"/>
+    title="Второй" 
+    bannerPath="/second-region.jpg"/>
   </v-layout>
 </template>
 

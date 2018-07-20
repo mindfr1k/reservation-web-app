@@ -1,8 +1,8 @@
 <template>
   <v-layout row wrap>
     <DetailedInfo 
-    title="Орда" 
-    bannerPath="/horde-banner.jpg"/>
+    title="Первый" 
+    bannerPath="/first-region.jpg"/>
   </v-layout>
 </template>
 

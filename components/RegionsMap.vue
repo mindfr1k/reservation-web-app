@@ -49,8 +49,8 @@ export default {
         const contentString = `
           <div style="text-align: left;
             line-height: 1.2">
-            <h1>${previewTitle},</h1>
-            <h2>так сказать.</h2>
+            <h1>${previewTitle}</h1>
+            <h2>регион.</h2>
             <br/>
             <i><a href=${pageLink}>подробнее...</a></i>
           </div>`;

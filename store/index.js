@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 const initStore = () => new Vuex.Store({
   state: {
-    appTitle: 'Проект Рыжего',
+    appTitle: 'Заповедник',
     menuItems: [
       { title: 'Карта', path: '/map', icon: 'map'}
     ],
@@ -18,8 +18,8 @@ const initStore = () => new Vuex.Store({
     polygons: [
       {
         color: '#0000FF',
-        previewTitle: 'Альянс',
-        pageLink: '/alliance',
+        previewTitle: 'Первый',
+        pageLink: '/first-region',
         coords: [
           { lat: 48.469, lng: 35.050 },
           { lat: 48.458, lng: 35.042 },
@@ -31,8 +31,8 @@ const initStore = () => new Vuex.Store({
       },
       {
         color: '#FF0000',
-        previewTitle: 'Орда',
-        pageLink: '/horde',
+        previewTitle: 'Второй',
+        pageLink: '/second-region',
         coords: [
           { lat: 48.4941, lng: 35.0099 },
           { lat: 48.5052, lng: 35.0224 },
