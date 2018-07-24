@@ -1,5 +1,5 @@
 <template>
-  <v-layout column>
+  <v-layout row wrap align-center>
     <v-flex xs12 class="text-xs-center" mt-3>
       <h1>Данный раздел предоставляет информацию о регионе {{ title }}.</h1>
     </v-flex>
@@ -27,7 +27,8 @@ export default {
 
 <style scoped>
   img {
-    width: 100vh;
     height: 50vh;
+    max-width: 100%;
+
   }
 </style>

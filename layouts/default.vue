@@ -41,7 +41,7 @@
     </v-toolbar>
 
     <v-content>
-      <v-container fluid>
+      <v-container fluid fill-height>
         <nuxt/>
       </v-container>
     </v-content>
