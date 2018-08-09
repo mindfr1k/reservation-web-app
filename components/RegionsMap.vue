@@ -52,7 +52,7 @@ export default {
             <h1>${previewTitle}</h1>
             <h2>регион.</h2>
             <br/>
-            <i><a href=${pageLink}>подробнее...</a></i>
+            <i><a href=/regions${pageLink}>подробнее...</a></i>
           </div>`;
 
         infoWindow.setContent(contentString);

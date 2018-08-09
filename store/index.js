@@ -44,6 +44,7 @@ const initStore = () => new Vuex.Store({
         ]
       }
     ],
+    titleFilteredPolygon: null,
 
     map: null,
     bounds: null,
@@ -58,9 +59,19 @@ const initStore = () => new Vuex.Store({
     },
     setInfoWindow(state, payload) {
       state.infoWindow = payload;
+    },
+    setTitleFilteredPolygon(state, payload) {
+      state.titleFilteredPolygon = payload;
     }
   },
   actions: {
+    filterPolygonByTitle({commit, state}, payload) {
+      const filteredPolygon = state.polygons.filter(polygon => {
+        const { pageLink } = polygon;
+        return pageLink === `/${payload}`;
+      });
+      commit('setTitleFilteredPolygon', filteredPolygon);
+    },
     setMap({commit}, payload) {
       commit('setMap', payload);
     },
