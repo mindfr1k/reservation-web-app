@@ -7,7 +7,8 @@ const initStore = () => new Vuex.Store({
   state: {
     appTitle: 'Главная',
     menuItems: [
-      { title: 'Карта', path: '/map', icon: 'map'}
+      { title: 'Карта', path: '/map', icon: 'map' },
+      { title: 'Каталог', path: '/animals', icon: 'info' }
     ],
 
     mapId: 'regionMap',
@@ -15,6 +16,7 @@ const initStore = () => new Vuex.Store({
       lat: 48.475, 
       lng: 35.03 
     },
+
     polygons: [
       {
         color: '#0000FF',
@@ -45,6 +47,14 @@ const initStore = () => new Vuex.Store({
       }
     ],
     titleFilteredPolygon: null,
+
+    animals: [
+      {
+        name: 'Пооули',
+        description: 'Описание описание описание описание описание описание описание описание описание описание.',
+        imagePath: '/poouli.jpg'
+      }
+    ],
 
     map: null,
     bounds: null,
