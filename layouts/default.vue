@@ -41,12 +41,10 @@
     </v-toolbar>
 
     <v-content>
-      <v-container fluid>
-        <nuxt/>
-      </v-container>
+      <nuxt/>
     </v-content>
 
-    <v-footer app>
+    <v-footer>
       <v-flex xs12 class="text-xs-center">
         <span>&copy; 2018 Василюк Роман</span>
       </v-flex>

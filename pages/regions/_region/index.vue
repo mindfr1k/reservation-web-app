@@ -1,9 +1,11 @@
 <template>
-  <v-layout row wrap>
-    <DetailedInfo 
-    :title="previewTitle" 
-    :bannerPath="`${pageLink}.jpg`"/>
-  </v-layout>
+  <v-container fluid>
+    <v-layout row wrap>
+      <DetailedInfo 
+      :title="previewTitle" 
+      :bannerPath="`${pageLink}.jpg`"/>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>

@@ -1,12 +1,14 @@
 <template>
-  <v-layout row wrap>
-    <v-flex xs12 class="text-xs-center">
-      <RegionsMap 
-      :mapId="mapId"
-      :centerCoords="centerCoords"
-      :polygons="polygons" />
-    </v-flex>
-  </v-layout>
+  <v-container fluid>
+    <v-layout row wrap>
+      <v-flex xs12 class="text-xs-center">
+        <RegionsMap 
+        :mapId="mapId"
+        :centerCoords="centerCoords"
+        :polygons="polygons" />
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
