@@ -8,7 +8,7 @@ const initStore = () => new Vuex.Store({
     appTitle: 'Главная',
     menuItems: [
       { title: 'Карта', path: '/map', icon: 'map' },
-      { title: 'Каталог', path: '/animals', icon: 'info' }
+      { title: 'Каталог', path: '/animals/1', icon: 'info' }
     ],
 
     mapId: 'regionMap',
@@ -100,6 +100,7 @@ const initStore = () => new Vuex.Store({
         imagePath: '/pyreneian-capricorn.jpg'
       }
     ],
+    pageFilteredAnimals: null,
 
     map: null,
     bounds: null,
@@ -117,6 +118,9 @@ const initStore = () => new Vuex.Store({
     },
     setTitleFilteredPolygon(state, payload) {
       state.titleFilteredPolygon = payload;
+    },
+    setPageFilteredAnimals(state, payload) {
+      state.pageFilteredAnimals = payload;
     }
   },
   actions: {
@@ -127,6 +131,19 @@ const initStore = () => new Vuex.Store({
       });
       commit('setTitleFilteredPolygon', filteredPolygon);
     },
+    filterAnimalsByPage({commit, state}, payload) {
+      const animalsPerPage = 9;
+      const offset = (payload - 1) * animalsPerPage;
+      const filteredAnimals = [];
+
+      for (let i = offset; i < offset + animalsPerPage; i++) {
+        if (state.animals[i] !== undefined) {
+          filteredAnimals.push(state.animals[i]);
+        }
+      }
+      commit('setPageFilteredAnimals', filteredAnimals);
+    },
+
     setMap({commit}, payload) {
       commit('setMap', payload);
     },
