@@ -1,22 +1,31 @@
 <template>
   <v-container fluid grid-list-xl>
-    <v-layout row wrap>
-      <v-flex xs12 sm6 md4 class="text-xs-center row wrap" 
-      v-for="animal in animals" 
-      :key="animal.name">
-        <AnimalCard 
-        :title="animal.name"
-        :description="animal.description"
-        :imagePath="animal.imagePath" />
+    <v-layout column>
+      <v-flex xs1 class="text-xs-center">
+        <v-text-field
+        label="Введите название вида..."
+        single-line
+        solo 
+        append-icon="search"/>
       </v-flex>
-      <v-flex xs12 class="text-xs-center">
-        <v-pagination
-        v-model="page"
-        :length="2"
-        @input="navigate"
-        >
-        </v-pagination>
-      </v-flex>
+
+      <v-layout row wrap>
+        <v-flex xs12 sm6 md4 class="text-xs-center row wrap" 
+        v-for="animal in animals" 
+        :key="animal.name">
+          <AnimalCard 
+          :title="animal.name"
+          :description="animal.description"
+          :imagePath="animal.imagePath" />
+        </v-flex>
+
+        <v-flex xs12 class="text-xs-center">
+          <v-pagination
+          v-model="page"
+          :length="2"
+          @input="navigate" />
+        </v-flex>
+      </v-layout>
     </v-layout>
   </v-container>
 </template>
