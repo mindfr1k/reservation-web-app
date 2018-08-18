@@ -1,14 +1,5 @@
 <template>
   <v-container fluid grid-list-xl>
-    <v-layout column>
-      <v-flex xs12 sm6 class="text-xs-center">
-        <v-text-field
-        label="Введите название вида..."
-        single-line
-        solo 
-        append-icon="search"/>
-      </v-flex>
-    </v-layout>
     
       <v-layout row wrap>
         <v-flex xs12 sm6 md4 class="text-xs-center row wrap" 

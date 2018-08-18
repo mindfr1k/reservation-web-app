@@ -28,6 +28,15 @@
       </v-toolbar-title>
 
       <v-spacer></v-spacer>
+
+      <v-flex xs8 ml-4 mr-2 v-if="searchField">
+        <v-text-field
+        label="Введите название вида..."  
+        hide-details
+        solo
+        append-icon="search"/>
+      </v-flex>
+
       <v-toolbar-items class="hidden-xs-only">
           <v-btn
           flat
@@ -66,6 +75,9 @@
       },
       menuItems() {
         return this.$store.state.menuItems;
+      },
+      searchField() {
+        return this.$route.name.match(/animals/);
       }
     }
   }
