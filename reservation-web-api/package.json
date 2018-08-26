@@ -1,0 +1,11 @@
+{
+  "name": "reservation-web-api",
+  "version": "1.0.0",
+  "description": "Web API on Node.js for usage with reservation project front-end.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Oleksandr Zaychenko",
+  "license": "ISC"
+}
