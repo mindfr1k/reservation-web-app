@@ -2,7 +2,7 @@
   "name": "reservation-project",
   "version": "1.0.0",
   "description": "Project for observing various regions of given reservation",
-  "author": "Alex",
+  "author": "Oleksandr Zaychenko",
   "private": true,
   "scripts": {
     "dev": "nuxt",

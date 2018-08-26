@@ -77,7 +77,11 @@
         return this.$store.state.menuItems;
       },
       searchField() {
-        return this.$route.name.match(/animals/);
+        const pages = this.$store.state.searchNeededPages.reduce((acc, value) => {
+          return `${acc}|${value}`;
+        });
+
+        return this.$route.name.match(pages);
       }
     }
   }

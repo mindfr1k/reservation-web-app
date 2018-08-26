@@ -102,9 +102,13 @@ const initStore = () => new Vuex.Store({
     ],
     pageFilteredAnimals: null,
 
+    searchNeededPages: [
+      'animals'
+    ],
+
     map: null,
     bounds: null,
-    infoWindow: null
+    infoWnidwo: null
   },
   mutations: {
     setMap(state, payload) {
