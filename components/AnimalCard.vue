@@ -5,7 +5,7 @@
     <v-card-title primary-title>
       <v-layout column>
         <h3 class="headline">{{ title }}</h3>
-      <div class="text-xs-left mt-2">{{ description }}</div>
+      <div class="text-xs-left mt-2 pl-1">{{ description }}</div>
       </v-layout>
     </v-card-title>
 

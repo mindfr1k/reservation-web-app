@@ -44,8 +44,8 @@ export default {
         fillOpacity: 0.3
       });
 
-      mapPolygon.setMap(this.map);
-      mapPolygon.addListener('click', function (event) {
+      mapPolygon.setMap(map);
+      mapPolygon.addListener('click', function(event) {
         const contentString = `
           <div style="text-align: left;
             line-height: 1.2">

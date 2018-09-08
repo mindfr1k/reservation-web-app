@@ -81,7 +81,9 @@
           return `${acc}|${value}`;
         });
 
-        return this.$route.name.match(pages);
+        if (this.$route.name) {
+          return this.$route.name.match(pages);
+        }   
       }
     }
   }
