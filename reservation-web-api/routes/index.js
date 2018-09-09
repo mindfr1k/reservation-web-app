@@ -1,8 +1,8 @@
 const { Router } = require('express');
 
-const validate = require('../services/validation.service');
+const { validate, upload } = require('../services');
 const schemas = require('../validations');
 const ctrls = require('../controllers');
 
 module.exports = Router()
-  .post('/animals', validate(schemas.animal.add), ctrls.animal.add);
+  .post('/animals', upload('photo'), validate(schemas.animal.add), ctrls.animal.add);

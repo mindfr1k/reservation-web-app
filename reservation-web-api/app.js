@@ -6,6 +6,7 @@ const routes = require('./routes');
 
 module.exports = express()
   .use(morgan('dev'))
+  .use('/uploads', express.static('uploads'))
   .use(cors())
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({ extended: true }))
