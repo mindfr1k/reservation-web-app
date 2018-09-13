@@ -2,13 +2,16 @@ const Joi = require('joi');
 
 module.exports = (schema) => {
   return (req, res, next) => {
-    const { body, query, file } = req;
+    const  { body, query, params, file } = req;
 
     const { error, value } = Joi.validate({
       ...body,
       ...query,
+      ...params,
       photo: file
-    }, schema);
+    }, schema, {
+      stripUnknown: true
+    });
 
     if (error) {
       return res.status(400).json(

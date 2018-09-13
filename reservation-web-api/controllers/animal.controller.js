@@ -19,5 +19,17 @@ module.exports = {
         error: err.message
       });
     }
+  },
+  async getList(req, res) {
+    try {
+      return res.status(200).json({
+        message: req.payload
+      });
+    }
+    catch (err) {
+      return res.status(500).json({
+        error: err.message
+      });
+    }
   }
 };
