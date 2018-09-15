@@ -8,6 +8,6 @@ module.exports = {
   }),
   getList: Joi.object({
     page: Joi.number().min(1).integer().default(1),
-    filter: Joi.string()
+    filter: Joi.string().default('')
   })
 };

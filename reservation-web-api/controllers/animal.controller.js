@@ -22,9 +22,14 @@ module.exports = {
   },
   async getList(req, res) {
     try {
-      return res.status(200).json({
-        message: req.payload
+      const { filter, page } = req.payload;
+
+      const { rows } = await db.query({
+        text: `SELECT * FROM animals WHERE name ILIKE $1 OR description ILIKE $1 LIMIT 9 OFFSET ($2 - 1) * 9`,
+        values: [ `%${filter}%`, page ]
       });
+
+      return res.status(200).json(rows);
     }
     catch (err) {
       return res.status(500).json({
