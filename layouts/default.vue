@@ -2,7 +2,7 @@
   <div>
   <nuxt/>
 
-  <div class="footer navbar-fixed-bottom">
+  <div class="footer navbar-bottom">
     <div class="container">
       <div class="row">
         <div class="col-xs-12">
