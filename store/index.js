@@ -5,6 +5,13 @@ Vue.use(Vuex);
 
 const initStore = () => new Vuex.Store({
   state: {
+    appTitle: 'Главная',
+
+    menuItems: [
+      { title: 'Карта', path: '/map', icon: '' },
+      { title: 'Каталог', path: '/animals/1', icon: '' }
+    ],
+
     mapId: 'regionMap',
     centerCoords: { 
       lat: 48.475, 

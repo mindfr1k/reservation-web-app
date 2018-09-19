@@ -11,8 +11,6 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "bootstrap": "^3.3.7",
-    "jquery": "^3.3.1",
     "nuxt": "^1.0.0"
   },
   "devDependencies": {

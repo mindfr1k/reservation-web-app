@@ -1,15 +1,20 @@
 <template>
   <div>
-  <nuxt/>
+  <h1>Zdarova, zdarova.</h1>
 
-  <div class="footer navbar-bottom">
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12">
-          <p class="nav-text">&copy; 2018 Василюк Роман</p>
-        </div>
-      </div>
-    </div>
+  <nuxt />
   </div>
-</div>
 </template>
+
+<script>
+export default {
+  computed: {
+    appTitle() {
+      return this.$store.state.appTitle;
+    },
+    menuItems() {
+      return this.$store.state.menuItems;
+    }
+  }
+}
+</script>

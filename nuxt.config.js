@@ -31,15 +31,14 @@ module.exports = {
   ** Global CSS
   */
   css: [
-    'bootstrap/dist/css/bootstrap.css',
-    '~/css/main.css'
+    
   ],
 
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '~plugins/bootstrap.js'
+    
   ],
 
   /*
@@ -53,15 +52,10 @@ module.exports = {
   */
   build: {
     vendor: [
-      'jquery',
-      'bootstrap'
+      
     ],
     plugins: [
-      new  webpack.ProvidePlugin({
-        $: 'jquery',
-        jQuery: 'jquery',
-        'window.jQuery': 'jquery'
-      })
+      
     ]
   }
 }

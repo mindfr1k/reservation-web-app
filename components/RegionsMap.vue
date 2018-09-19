@@ -48,7 +48,7 @@ export default {
       mapPolygon.addListener('click', function(event) {
         const contentString = `
           <div style="text-align: left;
-            line-height: 1">
+            line-height: 1rem">
             <h1>${previewTitle}</h1>
             <h2>регион.</h2>
             <br/>
@@ -73,7 +73,7 @@ export default {
 
 <style scoped>
   .map-container {
-    height: 95vh;
+    height: 94vh;
     background: grey;
   }
 </style>

@@ -1,10 +1,8 @@
 <template>
-  <div class="container-fluid">
-    <RegionsMap 
-      :mapId="mapId"
-      :centerCoords="centerCoords"
-      :polygons="polygons" />
-  </div>
+  <RegionsMap 
+    :mapId="mapId"
+    :centerCoords="centerCoords"
+    :polygons="polygons" />
 </template>
 
 <script>
