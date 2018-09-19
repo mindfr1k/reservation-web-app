@@ -15,10 +15,13 @@ module.exports = {
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons' },
+      { rel: 'stylesheet', type: 'text/css', href: 'css/materialize.min.css' }
     ],
     script: [
-      { src: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAgePCfKDNY16GzsMB9k-GJCi3YrbexORA'}
+      { src: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAgePCfKDNY16GzsMB9k-GJCi3YrbexORA'},
+      { src: 'js/materialize.min.js' }
     ]
   },
 
