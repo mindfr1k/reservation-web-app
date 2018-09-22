@@ -8,8 +8,8 @@ const initStore = () => new Vuex.Store({
     appTitle: 'Главная',
 
     menuItems: [
-      { title: 'Карта', path: '/map', icon: '' },
-      { title: 'Каталог', path: '/animals/1', icon: '' }
+      { title: 'Карта', path: '/map', icon: 'map' },
+      { title: 'Каталог', path: '/animals/1', icon: 'info' }
     ],
 
     mapId: 'regionMap',
