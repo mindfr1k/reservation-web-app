@@ -2,8 +2,12 @@
   <div>
     <nav>
       <div class="nav-wrapper grey lighten-4 z-depth-1">
-        <nuxt-link to="/" class="brand-logo text-black">{{ appTitle }}</nuxt-link>
-        <ul id="nav-mobile" class="right hide-on-med-and-down text-black">
+        <nuxt-link to="" data-activates="slide-out" class="button-collapse valign-wrapper hide-on-med-and-up">
+            <i class="material-icons">menu</i>
+        </nuxt-link>
+        <nuxt-link to="/" class="brand-logo text-black left hide-on-med-and-up ">{{ appTitle }}</nuxt-link>
+        <nuxt-link to="/" class="brand-logo text-black left hide-on-small-only">{{ appTitle }}</nuxt-link>
+        <ul id="nav-mobile" class="right hide-on-small-only">
           <li v-for="item in menuItems"
           :key="item.title">
             <nuxt-link :to="item.path">
@@ -36,18 +40,33 @@ export default {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   }
   ul {
-   padding: 0 1.5rem;
+   margin: 0 1.5rem;
  }
 .brand-logo, a {
   color: rgba(0, 0, 0, 0.87);
   font-weight: 500;
 }
-.brand-logo {
+.brand-logo.left {
   font-size: 1.3rem;
-  padding: 0 1.5rem 0 3rem;
+  margin: 0 1.5rem 0 2rem;
+}
+.brand-logo.hide-on-med-and-up {
+  margin: 0 1.5rem 0 5rem;
 }
 li a {
   font-size: 0.9rem;
   text-transform: uppercase;
 }
+.button-collapse {
+  width: 3em;
+  height: 3rem;
+  border-radius: 2rem;
+  text-align: center;
+  margin: 0.5rem 0 2rem 1rem;
+  padding: 0 0 0 0.67rem;
+}
+.button-collapse:hover {
+  background-color: #d3d3d3;
+}
+
 </style>
