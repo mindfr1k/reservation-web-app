@@ -73,7 +73,7 @@ export default {
 
 <style scoped>
   .map-container {
-    height: 94vh;
+    height: 85vh;
     background: grey;
   }
 </style>

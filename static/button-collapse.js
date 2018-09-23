@@ -1,1 +1,3 @@
-$('.button-collapse').sideNav();
+$('.button-collapse').sideNav({
+  closeOnClick: true
+});
