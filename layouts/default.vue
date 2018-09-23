@@ -1,40 +1,42 @@
 <template>
   <div>
-    <nav>
-      <ul id="slide-out" class="side-nav">
-          <li v-for="item in menuItems"
-          :key="item.title">
-            <nuxt-link :to="item.path">
-              <i class="material-icons left">{{ item.icon }}</i>{{ item.title }}
-            </nuxt-link>
-          </li>
-      </ul>
-
-      <div class="nav-wrapper grey lighten-4 z-depth-1">
-        <nuxt-link to="" data-activates="slide-out" class="button-collapse 
-        waves-effect waves-light valign-wrapper hide-on-med-and-up">
-            <i class="material-icons">menu</i>
+    <ul id="slide-out" class="side-nav">
+      <li v-for="item in menuItems"
+      :key="item.title">
+        <nuxt-link :to="item.path">
+          <i class="material-icons left">{{ item.icon }}</i>{{ item.title }}
         </nuxt-link>
-        <nuxt-link to="/" class="brand-logo text-black left hide-on-med-and-up ">{{ appTitle }}</nuxt-link>
-        <nuxt-link to="/" class="brand-logo text-black left hide-on-small-only">{{ appTitle }}</nuxt-link>
+      </li>
+    </ul>
 
-        <ul class="right hide-on-small-only">
-          <li v-for="item in menuItems"
-          :key="item.title">
-            <nuxt-link :to="item.path" class="waves-effect waves-light">
-              <i class="material-icons left">{{ item.icon }}</i>{{ item.title }}
-            </nuxt-link>
-          </li>
-        </ul>
+    <div class="navbar-fixed">
+      <nav>
+        <div class="nav-wrapper grey lighten-4 z-depth-1">
+          <nuxt-link to="" data-activates="slide-out" class="button-collapse 
+          waves-effect waves-light valign-wrapper hide-on-med-and-up">
+              <i class="material-icons">menu</i>
+          </nuxt-link>
+          <nuxt-link to="/" class="brand-logo text-black left hide-on-med-and-up ">{{ appTitle }}</nuxt-link>
+          <nuxt-link to="/" class="brand-logo text-black left hide-on-small-only">{{ appTitle }}</nuxt-link>
 
-      </div>
-    </nav>
+          <ul class="right hide-on-small-only">
+            <li v-for="item in menuItems"
+            :key="item.title">
+              <nuxt-link :to="item.path" class="waves-effect waves-light">
+                <i class="material-icons left">{{ item.icon }}</i>{{ item.title }}
+              </nuxt-link>
+            </li>
+          </ul>
 
-    <main>
+        </div>
+      </nav>
+    </div>
+
+    <div class="container-fluid">
       <nuxt />
-    </main>
-    
-    <footer class="footer-copyright footer-fixed grey lighten-4">
+    </div>
+
+    <footer class="footer-copyright grey lighten-4">
       <div class="container center-align">
         <span class="footer-text">&copy; 2018 Василюк Роман</span>
       </div>
@@ -57,7 +59,10 @@ export default {
 </script>
 
 <style scoped>
-  main {
+  .container-fluid {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
     margin: 1.5rem;
   }
   .nav-wrapper {
