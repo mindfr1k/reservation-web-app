@@ -47,13 +47,17 @@ export default {
       mapPolygon.setMap(map);
       mapPolygon.addListener('click', function(event) {
         const contentString = `
-          <div style="text-align: left;
-            line-height: 1rem">
-            <h1>${previewTitle}</h1>
-            <h2>регион.</h2>
+          <div style="text-align: left;">
+            <h1 style="font-size: 2rem;
+            line-height: 1rem;">${previewTitle}</h1>
+            <h2 style="font-size: 2rem;
+            line-height: 1rem;">регион.</h2>
             <br/>
-            <i><a href=/regions${pageLink}>подробнее...</a></i>
-          </div>`;
+            </div>
+            <div style="text-align: center;"
+              <i><a style="text-decoration: underline;" 
+              href=/regions${pageLink}>подробнее...</a></i>
+            </div>`;
 
         infoWindow.setContent(contentString);
         infoWindow.setPosition(event.latLng);

@@ -14,7 +14,7 @@
         <div class="nav-wrapper grey lighten-4 z-depth-1">
           <nuxt-link to="" data-activates="slide-out" class="button-collapse 
           waves-effect waves-light valign-wrapper hide-on-med-and-up">
-              <i class="material-icons">menu</i>
+              <i class="material-icons center">menu</i>
           </nuxt-link>
           <nuxt-link to="/" class="brand-logo text-black left hide-on-med-and-up ">{{ appTitle }}</nuxt-link>
           <nuxt-link to="/" class="brand-logo text-black left hide-on-small-only">{{ appTitle }}</nuxt-link>
@@ -68,16 +68,17 @@ export default {
   .nav-wrapper {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   }
-  /*.button-collapse {
+  .button-collapse {
     width: 3rem;
     height: 3rem;
     border-radius: 2rem;
-    text-align: center;
     margin: 0.5rem 0 2rem 1rem;
-    padding: 0 0 0 0.67rem;
-  }*/
+  }
   .button-collapse:hover {
     background-color: #d3d3d3;
+  }
+  .material-icons.center {
+    margin: -0.6rem 0 0 0;
   }
   .brand-logo, a {
     color: rgba(0, 0, 0, 0.87);
