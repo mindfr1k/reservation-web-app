@@ -48,6 +48,8 @@ const initStore = () => new Vuex.Store({
       }
     ],
 
+    filteredPolygon: null,
+
     map: null,
     bounds: null,
     infoWindow: null
@@ -61,6 +63,9 @@ const initStore = () => new Vuex.Store({
     },
     setInfoWindow(state, payload) {
       state.infoWindow = payload;
+    },
+    setRegionFilteredPolygon(state, payload) {
+      state.filteredPolygon = payload;
     }
   },
   actions: {
@@ -72,6 +77,13 @@ const initStore = () => new Vuex.Store({
     },
     setInfoWindow({commit}, payload) {
       commit('setInfoWindow', payload);
+    },
+    filterPolygonByRegion({commit, state}, payload) {
+      const filteredPolygon = state.polygons.find(polygon => {
+        const { pageLink } = polygon;
+        return pageLink === `/${payload}`;
+      });
+      commit('setRegionFilteredPolygon', filteredPolygon);
     }
   }
 });
