@@ -47,6 +47,11 @@
 
 <script>
 export default {
+  head: {
+    script: [
+      { src: 'button-collapse.js', body: true }
+    ]
+  },
   computed: {
     appTitle() {
       return this.$store.state.appTitle;
