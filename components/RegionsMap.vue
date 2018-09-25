@@ -56,7 +56,7 @@ export default {
             </div>
             <div style="text-align: center;"
               <i><a style="text-decoration: underline;" 
-              href=${pageLink}>подробнее...</a></i>
+              href="/regions${pageLink}">подробнее...</a></i>
             </div>`;
 
         infoWindow.setContent(contentString);
