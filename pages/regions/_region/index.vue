@@ -1,9 +1,11 @@
 <template>
-  <div class="row">
-    <div class="col s12">
-      <DetailedInfo
-      :title="previewTitle"
-      :bannerPath="`${pageLink}.jpg`"/>
+  <div>
+    <div class="row">
+      <div class="col s12">
+        <DetailedInfo
+        :title="previewTitle"
+        :bannerPath="`${pageLink}.jpg`"/>
+      </div>
     </div>
   </div>
 </template>
