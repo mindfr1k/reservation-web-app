@@ -50,6 +50,69 @@ const initStore = () => new Vuex.Store({
 
     filteredPolygon: null,
 
+    animals: [
+      {
+        image: 'sample1.jpg',
+        title: 'Название вида',
+        description: 'Описание описание описание описание описание описание'
+      },
+      {
+        image: 'sample1.jpg',
+        title: 'Название вида',
+        description: 'Описание описание описание описание описание описание'
+      },
+      {
+        image: 'sample1.jpg',
+        title: 'Название вида',
+        description: 'Описание описание описание описание описание описание'
+      },
+      {
+        image: 'sample1.jpg',
+        title: 'Название вида',
+        description: 'Описание описание описание описание описание описание'
+      },
+      {
+        image: 'sample1.jpg',
+        title: 'Название вида',
+        description: 'Описание описание описание описание описание описание'
+      },
+      {
+        image: 'sample1.jpg',
+        title: 'Название вида',
+        description: 'Описание описание описание описание описание описание'
+      },
+      {
+        image: 'sample1.jpg',
+        title: 'Название вида',
+        description: 'Описание описание описание описание описание описание'
+      },
+      {
+        image: 'sample1.jpg',
+        title: 'Название вида',
+        description: 'Описание описание описание описание описание описание'
+      },
+      {
+        image: 'sample1.jpg',
+        title: 'Название вида',
+        description: 'Описание описание описание описание описание описание'
+      },
+      {
+        image: 'sample1.jpg',
+        title: 'Название вида',
+        description: 'Описание описание описание описание описание описание'
+      },
+      {
+        image: 'sample1.jpg',
+        title: 'Название вида',
+        description: 'Описание описание описание описание описание описание'
+      },
+      {
+        image: 'sample1.jpg',
+        title: 'Название вида',
+        description: 'Описание описание описание описание описание описание'
+      }
+    ],
+
     map: null,
     bounds: null,
     infoWindow: null

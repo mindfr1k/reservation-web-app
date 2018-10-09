@@ -2,15 +2,15 @@
   <div>
     <div class="card">
       <div class="card-image">
-        <img class="responsive-img" src="http://materializecss.com/images/sample-1.jpg">
+        <img class="responsive-img" :src="img">
       </div>
 
       <span class="card-title">
-        <h5 class="center-align">Card Title</h5>
+        <h5 class="center-align">{{ title }}</h5>
       </span>
 
       <div class="card-content">
-        <p class="left-align">Описание описание описание описание описание описание</p>
+        <p class="left-align">{{ description }}</p>
       </div>
 
       <div class="card-action center-align">
@@ -21,6 +21,17 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  props: [
+    'img',
+    'title',
+    'description'
+  ]
+}
+</script>
+
 
 <style scoped>
   img {

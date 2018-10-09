@@ -1,17 +1,15 @@
 <template>
-  <div>
-    <ul class="pagination">
-      <li class="disabled">
-        <nuxt-link to="1"><i class="material-icons">chevron_left</i></nuxt-link>
-      </li>
-      <li class="active"><nuxt-link to="animals/1">1</nuxt-link></li>
-      <li class="waves-effect"><nuxt-link to="animals/2">2</nuxt-link></li>
-      <li class="waves-effect">
-        <nuxt-link to="/1"><i class="material-icons">chevron_right</i></nuxt-link>
-      </li>
-    </ul>
-  </div>
+  <li class="active"><nuxt-link :to="`animals/${pageIndex}`">{{ pageIndex }}</nuxt-link></li>
 </template>
+
+<script>
+export default {
+  props: [
+    'pageIndex'
+  ]
+}
+</script>
+
 
 <style scoped>
   li.active a {
