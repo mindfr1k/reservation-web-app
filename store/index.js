@@ -53,65 +53,68 @@ const initStore = () => new Vuex.Store({
     animals: [
       {
         image: 'sample1.jpg',
-        title: 'Название вида',
+        title: 'Вид животного',
         description: 'Описание описание описание описание описание описание'
       },
       {
         image: 'sample1.jpg',
-        title: 'Название вида',
+        title: 'Вид животного',
         description: 'Описание описание описание описание описание описание'
       },
       {
         image: 'sample1.jpg',
-        title: 'Название вида',
+        title: 'Вид животного',
         description: 'Описание описание описание описание описание описание'
       },
       {
         image: 'sample1.jpg',
-        title: 'Название вида',
+        title: 'Вид животного',
         description: 'Описание описание описание описание описание описание'
       },
       {
         image: 'sample1.jpg',
-        title: 'Название вида',
+        title: 'Вид животного',
         description: 'Описание описание описание описание описание описание'
       },
       {
         image: 'sample1.jpg',
-        title: 'Название вида',
+        title: 'Вид животного',
         description: 'Описание описание описание описание описание описание'
       },
       {
         image: 'sample1.jpg',
-        title: 'Название вида',
+        title: 'Вид животного',
         description: 'Описание описание описание описание описание описание'
       },
       {
         image: 'sample1.jpg',
-        title: 'Название вида',
+        title: 'Вид животного',
         description: 'Описание описание описание описание описание описание'
       },
       {
         image: 'sample1.jpg',
-        title: 'Название вида',
+        title: 'Вид животного',
         description: 'Описание описание описание описание описание описание'
       },
       {
         image: 'sample1.jpg',
-        title: 'Название вида',
+        title: 'Вид животного',
         description: 'Описание описание описание описание описание описание'
       },
       {
         image: 'sample1.jpg',
-        title: 'Название вида',
+        title: 'Вид животного',
         description: 'Описание описание описание описание описание описание'
       },
       {
         image: 'sample1.jpg',
-        title: 'Название вида',
+        title: 'Вид животного',
         description: 'Описание описание описание описание описание описание'
       }
     ],
+
+    filteredAnimals: null,
+    animalPages: null,
 
     map: null,
     bounds: null,
@@ -129,6 +132,12 @@ const initStore = () => new Vuex.Store({
     },
     setRegionFilteredPolygon(state, payload) {
       state.filteredPolygon = payload;
+    },
+    setFilteredAnimals(state, payload) {
+      state.filteredAnimals = payload;
+    },
+    setAnimalPages(state, payload) {
+      state.animalPages = payload;
     }
   },
   actions: {
@@ -147,6 +156,14 @@ const initStore = () => new Vuex.Store({
         return pageLink === `/${payload}`;
       });
       commit('setRegionFilteredPolygon', filteredPolygon);
+    },
+    filterAnimalsByPage({commit, state}, payload) {
+      payload = parseInt(payload);
+      commit('setFilteredAnimals', state.animals.slice((payload - 1) * 9, payload * 9));
+    },
+    setAnimalPages({commit}) {
+      const pages = Math.floor(55 / 9) + 1;
+      commit('setAnimalPages', pages);
     }
   }
 });
