@@ -2,7 +2,7 @@
   <div>
     <div class="row">
       <div class="col s12 m6 l4" v-for="animal in filteredAnimals" :key="animal.title">
-        <AnimalCard 
+        <InfoCard 
         :img="animal.image"
         :title="animal.title"
         :description="animal.description" />
@@ -15,12 +15,12 @@
 </template>
 
 <script>
-import AnimalCard from '@/components/AnimalCard';
+import InfoCard from '@/components/InfoCard';
 import Pagination from '@/components/Pagination';
 
 export default {
   components: {
-    AnimalCard,
+    InfoCard,
     Pagination
   },
   computed: {
