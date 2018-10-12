@@ -12,7 +12,7 @@
           <nuxt-link :to="`/animals/${nextPage}`"><i class="material-icons">chevron_right</i></nuxt-link>
         </li>
       </ul>
-  </div>
+    </div>
 
     <div class="center-align" v-if="pages > 6">
       <ul class="pagination" v-if="currentPage <= 2 || currentPage > pages - 2">

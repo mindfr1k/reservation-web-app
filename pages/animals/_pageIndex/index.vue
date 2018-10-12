@@ -1,11 +1,14 @@
 <template>
   <div>
     <div class="row">
-      <div class="col s12 m6 l4" v-for="animal in filteredAnimals" :key="animal.title">
-        <InfoCard 
+      <div class="col s12 m6 l10">
+        <InfoCard class="col s12 m6 l4" v-for="animal in filteredAnimals" :key="animal.title"
         :img="animal.image"
         :title="animal.title"
         :description="animal.description" />
+      </div>
+      <div class="col s12 m6 l2">
+        <SideCategories />
       </div>
     </div>
 
@@ -17,22 +20,17 @@
 <script>
 import InfoCard from '@/components/InfoCard';
 import Pagination from '@/components/Pagination';
+import SideCategories from '@/components/SideCategories';
 
 export default {
   components: {
     InfoCard,
-    Pagination
+    Pagination,
+    SideCategories
   },
   computed: {
     filteredAnimals() {
       return this.$store.state.filteredAnimals;
-    }
-  },
-  methods: {
-    getPageClass(page) {
-      return page === this.currentPage
-        ? 'active'
-        : 'waves-effect'
     }
   },
   mounted() {

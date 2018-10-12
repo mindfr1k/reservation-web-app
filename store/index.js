@@ -12,6 +12,12 @@ const initStore = () => new Vuex.Store({
       { title: 'Каталог', path: '/animals/1', icon: 'info' }
     ],
 
+    reservationCategories: [
+      { title: 'Животные', icon: ''},
+      { title: 'Растения', icon: ''},
+      { title: 'Почва', icon: ''},
+    ],
+
     mapId: 'regionMap',
     centerCoords: { 
       lat: 48.475, 
