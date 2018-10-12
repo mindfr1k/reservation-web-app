@@ -161,8 +161,8 @@ const initStore = () => new Vuex.Store({
       payload = parseInt(payload);
       commit('setFilteredAnimals', state.animals.slice((payload - 1) * 9, payload * 9));
     },
-    setAnimalPages({commit}) {
-      const pages = Math.floor(55 / 9) + 1;
+    setAnimalPages({commit, state}) {
+      const pages = Math.floor(state.animals.length / 9) + 1;
       commit('setAnimalPages', pages);
     }
   }
