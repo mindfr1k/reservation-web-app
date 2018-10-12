@@ -1,11 +1,9 @@
 <template>
   <div>
-    <form action="#">
+    <form>
       <p v-for="category in reservationCategories" :key="category.title">
-        <label>
-          <input type="checkbox" />
-          <span>{{ category.title }}</span>
-        </label>
+          <input type="checkbox" :id="category.title" />
+          <label :for="category.title">{{ category.title }}</label>
       </p>
     </form>
   </div>
