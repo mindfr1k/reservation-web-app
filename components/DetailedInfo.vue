@@ -49,10 +49,16 @@ export default {
 <style scoped>
   img {
     height: 50vh;
-    width: 100%;
+    width: 70%;
   }
   a {
     color: black;
     text-decoration: underline;
   }
+  .col.s12 h5 {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="center-align">
-      <ul class="pagination">
+      <ul class="pagination" v-if="pages <= 6">
         <li v-bind:class="getLeftChevronClass">
           <nuxt-link :to="`/animals/${previousPage}`"><i class="material-icons">chevron_left</i></nuxt-link>
         </li>
@@ -11,6 +11,23 @@
           <nuxt-link :to="`/animals/${nextPage}`"><i class="material-icons">chevron_right</i></nuxt-link>
         </li>
       </ul>
+
+      <ul class="pagination" v-if="pages > 6">
+        <li v-bind:class="getLeftChevronClass">
+          <nuxt-link :to="`/animals/${previousPage}`"><i class="material-icons">chevron_left</i></nuxt-link>
+        </li>
+        <li v-for="page in pages" :key="page" v-bind:class="getPageClass(page)" v-if="page <= 3">
+          <nuxt-link :to="`/animals/${page}`">{{ page }}</nuxt-link>
+        </li>
+        <span>...</span>
+        <li v-for="page in pages" :key="page" v-bind:class="getPageClass(page)" v-if="page >= pages - 2">
+          <nuxt-link :to="`/animals/${page}`">{{ page }}</nuxt-link>
+        </li>
+        <li v-bind:class="getRightChevronClass">
+          <nuxt-link :to="`/animals/${nextPage}`"><i class="material-icons">chevron_right</i></nuxt-link>
+        </li>
+      </ul>
+
   </div>
 </template>
 
@@ -61,10 +78,13 @@ export default {
   li.active a {
     background-color: #ffd17c;
   }
-  li a {
+  li a, span {
     margin-right: 0.5rem;
   }
   .pagination li.active {
     background-color: #fff;
+  }
+  span {
+    font-size: 1.2rem;
   }
 </style>
