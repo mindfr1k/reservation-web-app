@@ -14,9 +14,13 @@
       </div>
 
       <div class="card-action center-align">
-        <nuxt-link to="/" class="btn-flat waves-effect waves-light">
-          <span class="btn-text">Подробнее</span>
+        <nuxt-link to="/animals/1" class="btn-flat waves-effect waves-light activator">
+          <span class="btn-text activator">Подробнее</span>
         </nuxt-link>
+      </div>
+      <div class="card-reveal">
+        <span class="card-title center-align">{{ title }}</span>
+        <p>{{ description }}</p>
       </div>
     </div>
   </div>
