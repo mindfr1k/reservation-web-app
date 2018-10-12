@@ -8,7 +8,7 @@
           :polygons="polygons" />
       </div>
       <div class="col m2 l2 hide-on-small-only">
-        <SideCategories />
+        <SideMap />
       </div>
     </div>
   </div>
@@ -16,12 +16,12 @@
 
 <script>
 import RegionsMap from '@/components/RegionsMap';
-import SideCategories from '@/components/SideCategories';
+import SideMap from '@/components/SideMap';
 
 export default {
   components: {
     RegionsMap,
-    SideCategories
+    SideMap
   },
   computed: {
     mapId() {
