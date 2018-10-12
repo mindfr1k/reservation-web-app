@@ -1,13 +1,13 @@
 <template>
   <div>
     <div class="row">
-      <div class="col s12 m6 l10">
+      <div class="col s12 m10 l10">
         <InfoCard class="col s12 m6 l4" v-for="animal in filteredAnimals" :key="animal.title"
         :img="animal.image"
         :title="animal.title"
         :description="animal.description" />
       </div>
-      <div class="col s12 m6 l2">
+      <div class="col m2 l2 hide-on-small-only">
         <SideCategories />
       </div>
     </div>

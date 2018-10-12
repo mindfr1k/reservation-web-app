@@ -1,13 +1,13 @@
 <template>
   <div>
     <div class="row">
-      <div class="col s12 m6 l10">
+      <div class="col s12 m10 l10">
         <RegionsMap 
           :mapId="mapId"
           :centerCoords="centerCoords"
           :polygons="polygons" />
       </div>
-      <div class="col s12 m6 l2">
+      <div class="col m2 l2 hide-on-small-only">
         <SideCategories />
       </div>
     </div>

@@ -13,9 +13,9 @@ const initStore = () => new Vuex.Store({
     ],
 
     reservationCategories: [
-      { title: 'Животные', icon: ''},
-      { title: 'Растения', icon: ''},
-      { title: 'Почва', icon: ''},
+      { title: 'Животные', icon: 'bug_report'},
+      { title: 'Растения', icon: 'local_florist'},
+      { title: 'Почва', icon: 'landscape'},
     ],
 
     mapId: 'regionMap',
