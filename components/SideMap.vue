@@ -14,11 +14,6 @@
 
 <script>
 export default {
-  data() {
-    return {
-      selectedCategories: []
-    }
-  },
   computed: {
     reservationCategories() {
       return this.$store.state.reservationCategories;

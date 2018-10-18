@@ -19,16 +19,24 @@ const initStore = () => new Vuex.Store({
     ],
 
     mapId: 'regionMap',
-    centerCoords: { 
-      lat: 48.475, 
-      lng: 35.03 
-    },
 
-    polygons: [
+    borderPolyline: {
+      strokeColor: '#000000',
+      coords: [
+        { lat: 48.511, lng: 34.986 },
+        { lat: 48.489, lng: 34.957 },
+        { lat: 48.464, lng: 34.985 },
+        { lat: 48.450, lng: 35.061 },
+        { lat: 48.473, lng: 35.091 },
+        { lat: 48.502, lng: 35.078 },
+        { lat: 48.511, lng: 34.986 }
+      ]
+    },
+    animalPolygons: [
       {
-        color: '#0000FF',
-        previewTitle: 'Первый',
-        pageLink: '/first-region',
+        fillColor: '#0000FF',
+        previewTitle: 'Первый животный',
+        pageLink: '/first-animal',
         coords: [
           { lat: 48.469, lng: 35.050 },
           { lat: 48.458, lng: 35.042 },
@@ -39,9 +47,9 @@ const initStore = () => new Vuex.Store({
         ]
       },
       {
-        color: '#FF0000',
-        previewTitle: 'Второй',
-        pageLink: '/second-region',
+        fillColor: '#FF0000',
+        previewTitle: 'Второй животный',
+        pageLink: '/second-animal',
         coords: [
           { lat: 48.4941, lng: 35.0099 },
           { lat: 48.5052, lng: 35.0224 },
@@ -50,6 +58,31 @@ const initStore = () => new Vuex.Store({
           { lat: 48.4850, lng: 35.0552},
           { lat: 48.4877, lng: 35.0487},
           { lat: 48.4907, lng: 35.0371 }
+        ]
+      }
+    ],
+    plantPolygons: [
+      {
+        fillColor: '#FFFF00',
+        previewTitle: 'Первый растительный',
+        pageLink: '/first-plant',
+        coords: [
+          { lat: 48.502, lng: 34.989 },
+          { lat: 48.488, lng: 34.970 },
+          { lat: 48.489, lng: 34.997 },
+          { lat: 48.502, lng: 35.007 }
+        ]
+      }
+    ],
+    soilPolygons: [
+      {
+        fillColor: '#00FF00',
+        previewTitle: 'Первый почвенный',
+        pageLink: '/first-soil',
+        coords: [
+          { lat: 48.477, lng: 35.068 },
+          { lat: 48.460, lng: 35.055 },
+          { lat: 48.472, lng: 35.081 }
         ]
       }
     ],

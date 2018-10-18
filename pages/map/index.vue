@@ -4,7 +4,6 @@
       <div class="col s12 m10 l10">
         <RegionsMap 
           :mapId="mapId"
-          :centerCoords="centerCoords"
           :polygons="polygons" />
       </div>
       <div class="col m2 l2 hide-on-small-only">
@@ -19,6 +18,11 @@ import RegionsMap from '@/components/RegionsMap';
 import SideMap from '@/components/SideMap';
 
 export default {
+  data() {
+    return {
+      initPolygons: []
+    }
+  },
   components: {
     RegionsMap,
     SideMap
@@ -27,11 +31,11 @@ export default {
     mapId() {
       return this.$store.state.mapId;
     },
-    centerCoords() {
-      return this.$store.state.centerCoords;
-    },
     polygons() {
-      return this.$store.state.polygons;
+      return this.initPolygons
+        .concat(this.$store.state.animalPolygons)
+        .concat(this.$store.state.plantPolygons)
+        .concat(this.$store.state.soilPolygons)
     }
   }
 }
