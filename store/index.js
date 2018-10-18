@@ -35,7 +35,7 @@ const initStore = () => new Vuex.Store({
     animalPolygons: [
       {
         fillColor: '#0000FF',
-        previewTitle: 'Первый животный',
+        previewTitle: 'Первый животный регион',
         pageLink: '/first-animal',
         coords: [
           { lat: 48.469, lng: 35.050 },
@@ -48,7 +48,7 @@ const initStore = () => new Vuex.Store({
       },
       {
         fillColor: '#FF0000',
-        previewTitle: 'Второй животный',
+        previewTitle: 'Второй животный регион',
         pageLink: '/second-animal',
         coords: [
           { lat: 48.4941, lng: 35.0099 },
@@ -64,7 +64,7 @@ const initStore = () => new Vuex.Store({
     plantPolygons: [
       {
         fillColor: '#FFFF00',
-        previewTitle: 'Первый растительный',
+        previewTitle: 'Первый растительный регион',
         pageLink: '/first-plant',
         coords: [
           { lat: 48.502, lng: 34.989 },
@@ -77,7 +77,7 @@ const initStore = () => new Vuex.Store({
     soilPolygons: [
       {
         fillColor: '#00FF00',
-        previewTitle: 'Первый почвенный',
+        previewTitle: 'Первый почвенный регион',
         pageLink: '/first-soil',
         coords: [
           { lat: 48.477, lng: 35.068 },
@@ -190,10 +190,13 @@ const initStore = () => new Vuex.Store({
       commit('setInfoWindow', payload);
     },
     filterPolygonByRegion({commit, state}, payload) {
-      const filteredPolygon = state.polygons.find(polygon => {
-        const { pageLink } = polygon;
-        return pageLink === `/${payload}`;
-      });
+      const filteredPolygon = state.animalPolygons
+        .concat(state.plantPolygons)
+        .concat(state.soilPolygons)
+        .find(polygon => {
+          const { pageLink } = polygon;
+          return pageLink === `/${payload}`;
+        });
       commit('setRegionFilteredPolygon', filteredPolygon);
     },
     filterAnimalsByPage({commit, state}, payload) {

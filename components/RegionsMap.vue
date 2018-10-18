@@ -27,12 +27,6 @@ export default {
     const bounds = new google.maps.LatLngBounds();
     const map = new google.maps.Map(document.getElementById(this.mapId));
 
-    map.addListener('click', function(event) {
-        infoWindow.setContent(`${event.latLng}`)
-        infoWindow.setPosition(event.latLng)
-        infoWindow.open(map)
-      })
-
     const { strokeColor, coords } = this.borderPolyline;
     const mapBorder = new google.maps.Polyline({
       path: coords,
@@ -61,13 +55,11 @@ export default {
       });
 
       mapPolygon.setMap(map);
-      /*mapPolygon.addListener('click', function(event) {
+      mapPolygon.addListener('click', function(event) {
         const contentString = `
           <div style="text-align: left;">
             <h1 style="font-size: 2rem;
-            line-height: 1rem;">${previewTitle}</h1>
-            <h2 style="font-size: 2rem;
-            line-height: 1rem;">регион</h2>
+            line-height: 2rem;">${previewTitle}</h1>
             <br/>
             </div>
             <div style="text-align: center;"
@@ -79,7 +71,7 @@ export default {
         infoWindow.setPosition(event.latLng);
 
         infoWindow.open(map);
-      });*/
+      });
     
       for (let coord of coords) {
         const { lat, lng } = coord;
