@@ -38,7 +38,7 @@ export default {
 
     for (let coord of coords) {
       const { lat, lng } = coord;
-      const position = new google.maps.LatLng(lat, lng);
+      const position = new google.maps.LatLng(lat - 0.005, lng);
       map.fitBounds(bounds.extend(position));
     }
 
@@ -72,12 +72,6 @@ export default {
 
         infoWindow.open(map);
       });
-    
-      for (let coord of coords) {
-        const { lat, lng } = coord;
-        const position = new google.maps.LatLng(lat, lng);
-        map.fitBounds(bounds.extend(position));
-      }
     });
   }
 }
