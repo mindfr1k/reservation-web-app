@@ -1,31 +1,38 @@
 <template>
+  <div>
     <div class="map-container" :id="mapId"></div>
+    <ul>
+      <li v-for="polygon in polygons" :key="polygon.previewTitle">
+        {{ polygon.previewTitle }}
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
 export default {
-  props: [
-    'mapId',
-    'polygons'
-  ],
+  data() {
+    return {
+      infoWindow: {},
+      bounds: {},
+      map: {}
+    }
+  },
   computed: {
-    map() {
-      return this.$store.state.map;
-    },
-    bounds() {
-      return this.$store.state.bounds;
-    },
-    infoWindow() {
-      return this.$store.state.infoWindow;
+    mapId() {
+      return this.$store.state.mapId;
     },
     borderPolyline() {
       return this.$store.state.borderPolyline;
+    },
+    polygons() {
+      return this.$store.state.checkedPolygons;
     }
   },
   mounted() {
-    const infoWindow = new google.maps.InfoWindow;
-    const bounds = new google.maps.LatLngBounds();
-    const map = new google.maps.Map(document.getElementById(this.mapId));
+    this.infoWindow = new google.maps.InfoWindow;
+    this.bounds = new google.maps.LatLngBounds();
+    this.map = new google.maps.Map(document.getElementById(this.mapId));
 
     const { strokeColor, coords } = this.borderPolyline;
     const mapBorder = new google.maps.Polyline({
@@ -34,13 +41,16 @@ export default {
       strokeOpacity: 1,
       strokeWeight: 3
     });
-    mapBorder.setMap(map)
+    mapBorder.setMap(this.map)
 
     for (let coord of coords) {
       const { lat, lng } = coord;
       const position = new google.maps.LatLng(lat - 0.005, lng);
-      map.fitBounds(bounds.extend(position));
+      this.map.fitBounds(this.bounds.extend(position));
     }
+  },
+  beforeUpdate() {
+    console.log('test')
 
     this.polygons.forEach(polygon => {
       const { fillColor, previewTitle, pageLink, coords } = polygon;
@@ -54,7 +64,7 @@ export default {
         fillOpacity: 0.3
       });
 
-      mapPolygon.setMap(map);
+      mapPolygon.setMap(this.map);
       mapPolygon.addListener('click', function(event) {
         const contentString = `
           <div style="text-align: left;">
@@ -67,10 +77,10 @@ export default {
               href="/regions${pageLink}">подробнее...</a></i>
             </div>`;
 
-        infoWindow.setContent(contentString);
-        infoWindow.setPosition(event.latLng);
+        this.infoWindow.setContent(contentString);
+        this.infoWindow.setPosition(event.latLng);
 
-        infoWindow.open(map);
+        this.infoWindow.open(this.map);
       });
     });
   }

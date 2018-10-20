@@ -13,9 +13,9 @@ const initStore = () => new Vuex.Store({
     ],
 
     reservationCategories: [
-      { title: 'Животные', icon: 'bug_report', path: '/animals/1'},
-      { title: 'Растения', icon: 'local_florist', path: '/plants/1'},
-      { title: 'Почва', icon: 'landscape', path: '/soils/1'}
+      { id: 'animals', title: 'Животные', icon: 'bug_report', path: '/animals/1', isChecked: false, },
+      { id: 'plants', title: 'Растения', icon: 'local_florist', path: '/plants/1', isChecked: false },
+      { id: 'soils', title: 'Почва', icon: 'landscape', path: '/soils/1', isChecked: false }
     ],
 
     mapId: 'regionMap',
@@ -32,8 +32,9 @@ const initStore = () => new Vuex.Store({
         { lat: 48.511, lng: 34.986 }
       ]
     },
-    animalPolygons: [
+    polygons: [
       {
+        type: 'animals',
         fillColor: '#0000FF',
         previewTitle: 'Первый животный регион',
         pageLink: '/first-animal',
@@ -47,6 +48,7 @@ const initStore = () => new Vuex.Store({
         ]
       },
       {
+        type: 'animals',
         fillColor: '#FF0000',
         previewTitle: 'Второй животный регион',
         pageLink: '/second-animal',
@@ -59,10 +61,9 @@ const initStore = () => new Vuex.Store({
           { lat: 48.4877, lng: 35.0487},
           { lat: 48.4907, lng: 35.0371 }
         ]
-      }
-    ],
-    plantPolygons: [
+      },
       {
+        type: 'plants',
         fillColor: '#FFFF00',
         previewTitle: 'Первый растительный регион',
         pageLink: '/first-plant',
@@ -72,10 +73,9 @@ const initStore = () => new Vuex.Store({
           { lat: 48.489, lng: 34.997 },
           { lat: 48.502, lng: 35.007 }
         ]
-      }
-    ],
-    soilPolygons: [
+      },
       {
+        type: 'soils',
         fillColor: '#00FF00',
         previewTitle: 'Первый почвенный регион',
         pageLink: '/first-soil',
@@ -87,6 +87,7 @@ const initStore = () => new Vuex.Store({
       }
     ],
 
+    checkedPolygons: [],
     filteredPolygon: null,
 
     animals: [
@@ -153,22 +154,9 @@ const initStore = () => new Vuex.Store({
     ],
 
     filteredAnimals: null,
-    animalPages: null,
-
-    map: null,
-    bounds: null,
-    infoWindow: null
+    animalPages: null
   },
   mutations: {
-    setMap(state, payload) {
-      state.map = payload;
-    },
-    setBounds(state, payload) {
-      state.bounds = payload;
-    },
-    setInfoWindow(state, payload) {
-      state.infoWindow = payload;
-    },
     setRegionFilteredPolygon(state, payload) {
       state.filteredPolygon = payload;
     },
@@ -177,26 +165,21 @@ const initStore = () => new Vuex.Store({
     },
     setAnimalPages(state, payload) {
       state.animalPages = payload;
+    },
+    setCheckedProperty(state, payload) {
+      const checkbox = state.reservationCategories[payload];
+      checkbox.isChecked = !checkbox.isChecked;
+    },
+    setCheckedPolygons(state, payload) {
+      state.checkedPolygons = payload;
     }
   },
   actions: {
-    setMap({commit}, payload) {
-      commit('setMap', payload);
-    },
-    setBounds({commit}, payload) {
-      commit('setBounds', payload);
-    },
-    setInfoWindow({commit}, payload) {
-      commit('setInfoWindow', payload);
-    },
     filterPolygonByRegion({commit, state}, payload) {
-      const filteredPolygon = state.animalPolygons
-        .concat(state.plantPolygons)
-        .concat(state.soilPolygons)
-        .find(polygon => {
-          const { pageLink } = polygon;
-          return pageLink === `/${payload}`;
-        });
+      const filteredPolygon = state.polygons.find(polygon => {
+        const { pageLink } = polygon;
+        return pageLink === `/${payload}`;
+      });
       commit('setRegionFilteredPolygon', filteredPolygon);
     },
     filterAnimalsByPage({commit, state}, payload) {
@@ -206,6 +189,23 @@ const initStore = () => new Vuex.Store({
     setAnimalPages({commit, state}) {
       const pages = Math.floor(state.animals.length / 9) + 1;
       commit('setAnimalPages', pages);
+    },
+    filterCheckboxes({commit}, payload) {
+      commit('setCheckedProperty', payload);
+    },
+    filterCheckedPolygons({commit, state}) {
+      const filteredBoxes = state.reservationCategories.filter(box => {
+        return box.isChecked === true
+      });
+      const result = [];
+      
+      for (let box of filteredBoxes) {
+        const filteredPolygon = state.polygons.filter(polygon => {
+          return polygon.type === box.id;
+        })
+        result.push(...filteredPolygon)
+      }
+      commit('setCheckedPolygons', result);
     }
   }
 });
