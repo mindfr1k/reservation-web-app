@@ -19,7 +19,10 @@
         </nuxt-link>
       </div>
       <div class="card-reveal">
-        <span class="card-title center-align">{{ title }}</span>
+        <span class="card-title center-align">
+          <i class="material-icons right">close</i>
+          {{ title }}
+          </span>
         <p>{{ description }}</p>
       </div>
     </div>
