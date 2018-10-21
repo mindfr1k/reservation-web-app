@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="map-container" :id="mapId"></div>
-    <ul>
+    <ul class="hide">
       <li v-for="polygon in polygons" :key="polygon.previewTitle">
         {{ polygon.previewTitle }}
       </li>
@@ -13,9 +13,9 @@
 export default {
   data() {
     return {
-      infoWindow: {},
       bounds: {},
-      map: {}
+      map: {},
+      previousPolygons: []
     }
   },
   computed: {
@@ -50,7 +50,10 @@ export default {
     }
   },
   beforeUpdate() {
-    console.log('test')
+    this.previousPolygons.forEach(polygon => {
+      polygon.setMap(null);
+    });
+    this.previousPolygons = [];
 
     this.polygons.forEach(polygon => {
       const { fillColor, previewTitle, pageLink, coords } = polygon;
@@ -77,11 +80,14 @@ export default {
               href="/regions${pageLink}">подробнее...</a></i>
             </div>`;
 
-        this.infoWindow.setContent(contentString);
-        this.infoWindow.setPosition(event.latLng);
+        const infoWindow = new google.maps.InfoWindow;
+        infoWindow.setContent(contentString);
+        infoWindow.setPosition(event.latLng);
 
-        this.infoWindow.open(this.map);
+        infoWindow.open(this.map);
       });
+
+      this.previousPolygons.push(mapPolygon);
     });
   }
 }
