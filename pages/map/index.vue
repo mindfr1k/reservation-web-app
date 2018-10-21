@@ -1,13 +1,26 @@
 <template>
   <div>
     <div class="row">
-      <div class="col s12 m10 l10">
+      <div class="col s12 m12 hide-on-large-only">
+        <form>
+          <p class="col s4 m4" v-for="(category, index) in $store.state.reservationCategories" :key="category.title">
+            <input type="checkbox" :id="`${category.title}-small`" @click="filterCheckedPolygons(index)" />
+            <label :for="`${category.title}-small`">
+              <i class="material-icons left">{{ category.icon }}</i>
+              <span>{{ category.title }}</span>
+            </label>
+          </p>
+        </form>
+      </div>
+
+      <div class="col s12 m12 l10">
         <RegionsMap />
       </div>
-      <div class="col m2 l2 hide-on-small-only">
+
+      <div class="col l2 hide-on-med-and-down">
         <form>
           <p v-for="(category, index) in $store.state.reservationCategories" :key="category.title">
-            <input type="checkbox" :id="category.title" @change="filterCheckedPolygons(index)" />
+            <input type="checkbox" :id="category.title" @click="filterCheckedPolygons(index)" />
             <label :for="category.title">
               <i class="material-icons left">{{ category.icon }}</i>
               <span>{{ category.title }}</span>
