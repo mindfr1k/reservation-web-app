@@ -13,9 +13,9 @@ const initStore = () => new Vuex.Store({
     ],
 
     reservationCategories: [
-      { id: 'animals', title: 'Животные', icon: 'bug_report', path: '/animals/1', isChecked: false, },
-      { id: 'plants', title: 'Растения', icon: 'local_florist', path: '/plants/1', isChecked: false },
-      { id: 'soils', title: 'Почва', icon: 'landscape', path: '/soils/1', isChecked: false }
+      { id: 'animals', title: 'Животные', icon: 'bug_report', path: '/animals/1' },
+      { id: 'plants', title: 'Растения', icon: 'local_florist', path: '/plants/1' },
+      { id: 'soils', title: 'Почва', icon: 'landscape', path: '/soils/1' }
     ],
 
     mapId: 'regionMap',
