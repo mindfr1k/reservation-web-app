@@ -44,7 +44,6 @@ export default {
     filterCheckedPolygons(index) {
       this.$store.dispatch('filterCheckboxes', index)
       this.$store.dispatch('filterCheckedPolygons')
-      console.log(this.$store.state.checkedPolygons)
     }
   }
 }

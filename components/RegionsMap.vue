@@ -45,7 +45,7 @@ export default {
 
     for (let coord of coords) {
       const { lat, lng } = coord;
-      const position = new google.maps.LatLng(lat - 0.005, lng);
+      const position = new google.maps.LatLng(lat - 0.0005, lng);
       this.map.fitBounds(this.bounds.extend(position));
     }
   },
@@ -68,6 +68,8 @@ export default {
       });
 
       mapPolygon.setMap(this.map);
+      const infoWindow = new google.maps.InfoWindow;
+      
       mapPolygon.addListener('click', function(event) {
         const contentString = `
           <div style="text-align: left;">
@@ -80,7 +82,6 @@ export default {
               href="/regions${pageLink}">подробнее...</a></i>
             </div>`;
 
-        const infoWindow = new google.maps.InfoWindow;
         infoWindow.setContent(contentString);
         infoWindow.setPosition(event.latLng);
 

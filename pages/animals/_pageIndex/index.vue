@@ -2,7 +2,7 @@
   <div>
     <div class="row">
       <div class="col s12 m12 hide-on-large-only">
-        <p class="col s3 m4" v-for="category in reservationCategories" :key="category.title">
+        <p class="col s4 m4" v-for="category in reservationCategories" :key="category.title">
           <nuxt-link :to="category.path">
             <i class="material-icons left">{{ category.icon }}</i>
             {{ category.title }}
@@ -60,5 +60,8 @@ export default {
   p a {
     font-weight: 500;
     color: rgba(0, 0, 0, 0.87);
+  }
+  .col.s4.m4 a {
+    font-size: 1.3rem;
   }
 </style>
