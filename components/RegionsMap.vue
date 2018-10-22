@@ -30,7 +30,6 @@ export default {
     }
   },
   mounted() {
-    console.log(new google.maps.InfoWindow);
     this.bounds = new google.maps.LatLngBounds();
     this.map = new google.maps.Map(document.getElementById(this.mapId));
 
@@ -69,7 +68,6 @@ export default {
       });
 
       mapPolygon.setMap(this.map);
-
       mapPolygon.addListener('click', function(event) {
         const contentString = `
           <div style="text-align: left;">
