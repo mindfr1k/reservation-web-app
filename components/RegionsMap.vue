@@ -30,7 +30,7 @@ export default {
     }
   },
   mounted() {
-    this.infoWindow = new google.maps.InfoWindow;
+    console.log(new google.maps.InfoWindow);
     this.bounds = new google.maps.LatLngBounds();
     this.map = new google.maps.Map(document.getElementById(this.mapId));
 
@@ -55,6 +55,7 @@ export default {
     });
     this.previousPolygons = [];
 
+    const infoWindow = new google.maps.InfoWindow;
     this.polygons.forEach(polygon => {
       const { fillColor, previewTitle, pageLink, coords } = polygon;
 
@@ -68,8 +69,7 @@ export default {
       });
 
       mapPolygon.setMap(this.map);
-      const infoWindow = new google.maps.InfoWindow;
-      
+
       mapPolygon.addListener('click', function(event) {
         const contentString = `
           <div style="text-align: left;">
@@ -81,6 +81,7 @@ export default {
               <i><a style="text-decoration: underline;" 
               href="/regions${pageLink}">подробнее...</a></i>
             </div>`;
+
 
         infoWindow.setContent(contentString);
         infoWindow.setPosition(event.latLng);
