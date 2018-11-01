@@ -1,27 +1,14 @@
 {
   "name": "reservation-web-api",
-  "version": "1.0.0",
-  "description": "Web API on Node.js for usage with reservation project front-end.",
+  "version": "0.0.1",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Oleksandr Zaychenko",
+  "author": "Alex Zaychenko",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^3.0.0",
-    "body-parser": "^1.18.3",
-    "cors": "^2.8.4",
-    "dotenv": "^6.0.0",
-    "express": "^4.16.3",
-    "joi": "^13.6.0",
-    "jsonwebtoken": "^8.3.0",
-    "morgan": "^1.9.0",
-    "multer": "^1.3.1",
-    "pg": "^7.4.3"
-  },
-  "devDependencies": {
-    "nodemon": "^1.18.3"
+    "express": "^4.16.4"
   }
 }
