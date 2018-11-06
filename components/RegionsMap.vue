@@ -37,6 +37,7 @@ export default {
     this.map = new google.maps.Map(document.getElementById(this.mapId), this.mapOptions);
 
     this.map.addListener('click', event => {
+      console.log(this.map.getZoom())
       console.log(`{ lat: ${event.latLng.lat().toFixed(10)}, lng: ${event.latLng.lng().toFixed(10)} }`)
     })
 
