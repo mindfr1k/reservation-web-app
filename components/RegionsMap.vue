@@ -33,6 +33,10 @@ export default {
     this.bounds = new google.maps.LatLngBounds();
     this.map = new google.maps.Map(document.getElementById(this.mapId));
 
+    this.map.addListener('click', function(event) {
+      console.log(`lat: ${event.latLng.lat()}, lng: ${event.latLng.lng()}`)
+    })
+
     const { strokeColor, coords } = this.borderPolyline;
     const mapBorder = new google.maps.Polyline({
       path: coords,
@@ -55,6 +59,7 @@ export default {
     this.previousPolygons = [];
 
     const infoWindow = new google.maps.InfoWindow;
+
     this.polygons.forEach(polygon => {
       const { fillColor, previewTitle, pageLink, coords } = polygon;
 
@@ -68,6 +73,7 @@ export default {
       });
 
       mapPolygon.setMap(this.map);
+
       mapPolygon.addListener('click', function(event) {
         const contentString = `
           <div style="text-align: left;">
