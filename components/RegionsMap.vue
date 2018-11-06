@@ -22,6 +22,9 @@ export default {
     mapId() {
       return this.$store.state.mapId;
     },
+    mapOptions() {
+      return this.$store.state.mapOptions;
+    },
     borderPolyline() {
       return this.$store.state.borderPolyline;
     },
@@ -31,10 +34,10 @@ export default {
   },
   mounted() {
     this.bounds = new google.maps.LatLngBounds();
-    this.map = new google.maps.Map(document.getElementById(this.mapId));
+    this.map = new google.maps.Map(document.getElementById(this.mapId), this.mapOptions);
 
-    this.map.addListener('click', function(event) {
-      console.log(`lat: ${event.latLng.lat()}, lng: ${event.latLng.lng()}`)
+    this.map.addListener('click', event => {
+      console.log(`{ lat: ${event.latLng.lat().toFixed(10)}, lng: ${event.latLng.lng().toFixed(10)} }`)
     })
 
     const { strokeColor, coords } = this.borderPolyline;

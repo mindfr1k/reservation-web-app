@@ -19,7 +19,12 @@ const initStore = () => new Vuex.Store({
       { id: 'plants', title: 'Растения', icon: 'local_florist', path: '/plants/1' },
       { id: 'soils', title: 'Почва', icon: 'landscape', path: '/soils/1' }
     ],
+
     mapId: 'regionMap',
+    mapOptions: {
+      minZoom: 13,
+      maxZoom: 17
+    },
 
     borderPolyline,
 
