@@ -1,6 +1,6 @@
 # reservation-web-app
 
-> Project for providing info about various regions of given reservation area.
+> Project for providing info about various regions of Dniprovsko-Orilskyi reservation area.
 
 ## Build Setup
 
