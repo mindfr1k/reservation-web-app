@@ -42,7 +42,8 @@ export default {
       strokeColor,
       strokeOpacity: 1,
       strokeWeight: 3,
-      //editable: true
+      //editable: true,
+      suppressUndo: true
     });
     mapBorder.setMap(this.map)
 
