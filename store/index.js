@@ -22,7 +22,6 @@ const initStore = () => new Vuex.Store({
 
     mapId: 'regionMap',
     mapOptions: {
-      minZoom: 13,
       maxZoom: 15
     },
 

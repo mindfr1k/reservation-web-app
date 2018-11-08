@@ -35,20 +35,32 @@ export default {
   mounted() {
     this.bounds = new google.maps.LatLngBounds();
     this.map = new google.maps.Map(document.getElementById(this.mapId), this.mapOptions);
-
-    this.map.addListener('click', event => {
-      console.log(this.map.getZoom())
-      console.log(`{ lat: ${event.latLng.lat().toFixed(10)}, lng: ${event.latLng.lng().toFixed(10)} }`)
-    })
-
+    
     const { strokeColor, coords } = this.borderPolyline;
     const mapBorder = new google.maps.Polyline({
       path: coords,
       strokeColor,
       strokeOpacity: 1,
-      strokeWeight: 3
+      strokeWeight: 3,
+      //editable: true
     });
     mapBorder.setMap(this.map)
+
+    mapBorder.addListener('click', event => {
+      const coords = mapBorder.getPath().getArray().toString().match(/\(.+?\)/g)
+      const normalizedCoords = coords.map(coord => {
+        return {
+          lat: parseFloat(coord.split('(')[1].split(',')[0]),
+          lng: parseFloat(coord.split(', ')[1].split(')')[0])
+        }
+      })
+
+      let coordString = ''
+      normalizedCoords.forEach(coord => {
+        coordString += `{ lat: ${coord.lat}, lng: ${coord.lng} },\n`
+      })
+      console.log(coordString)
+    })
 
     for (let coord of coords) {
       const { lat, lng } = coord;
