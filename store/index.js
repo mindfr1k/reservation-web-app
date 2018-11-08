@@ -22,7 +22,8 @@ const initStore = () => new Vuex.Store({
 
     mapId: 'regionMap',
     mapOptions: {
-      maxZoom: 15
+      maxZoom: 15,
+      mapTypeId: 'satellite'
     },
 
     borderPolyline,
