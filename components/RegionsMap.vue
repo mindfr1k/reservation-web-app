@@ -65,7 +65,7 @@ export default {
 
     for (let coord of coords) {
       const { lat, lng } = coord;
-      const position = new google.maps.LatLng(lat - 0.0005, lng);
+      const position = new google.maps.LatLng(lat - 0.01, lng);
       this.map.fitBounds(this.bounds.extend(position));
     }
   },
