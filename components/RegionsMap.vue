@@ -28,27 +28,50 @@ export default {
     borderPolyline() {
       return this.$store.state.borderPolyline;
     },
+    zonePolylines() {
+      return this.$store.state.zonePolylines;
+    },
     polygons() {
       return this.$store.state.checkedPolygons;
+    }
+  },
+  methods: {
+    getGoogleShapeCoords(path) {
+      const coords = path.toString().match(/\(.+?\)/g)
+      const normalizedCoords = coords.map(coord => {
+        return {
+          lat: parseFloat(coord.split('(')[1].split(',')[0]),
+          lng: parseFloat(coord.split(', ')[1].split(')')[0])
+        }
+      })
+
+      let coordString = ''
+      normalizedCoords.forEach(coord => {
+        coordString += `{ lat: ${coord.lat}, lng: ${coord.lng} },\n`
+      })
+      return coordString
     }
   },
   mounted() {
     this.bounds = new google.maps.LatLngBounds();
     this.map = new google.maps.Map(document.getElementById(this.mapId), this.mapOptions);
-    
-    const { strokeColor, coords } = this.borderPolyline;
-    const mapBorder = new google.maps.Polyline({
-      path: coords,
-      strokeColor,
-      strokeOpacity: 1,
-      strokeWeight: 3,
-      //editable: true,
-      suppressUndo: true
-    });
-    mapBorder.setMap(this.map)
 
-    mapBorder.addListener('click', event => {
-      const coords = mapBorder.getPath().getArray().toString().match(/\(.+?\)/g)
+    /*const drawingManager = new google.maps.drawing.DrawingManager({
+      drawingControl: true,
+      drawingControlOptions: {
+        position: google.maps.ControlPosition.TOP_CENTER,
+        drawingModes: [ 'polyline']
+      },
+      polylineOptions: {
+        strokeColor: '#ffff00',
+        strokeOpacity: 1,
+        strokeWeight: 3
+      }
+    })
+    drawingManager.setMap(this.map)
+
+    drawingManager.addListener('polylinecomplete', event => {
+      const coords = event.getPath().getArray().toString().match(/\(.+?\)/g)
       const normalizedCoords = coords.map(coord => {
         return {
           lat: parseFloat(coord.split('(')[1].split(',')[0]),
@@ -61,9 +84,35 @@ export default {
         coordString += `{ lat: ${coord.lat}, lng: ${coord.lng} },\n`
       })
       console.log(coordString)
+    })*/
+
+    const { strokeColor, path } = this.borderPolyline;
+    const mapBorder = new google.maps.Polyline({
+      path,
+      strokeColor,
+      strokeOpacity: 1,
+      strokeWeight: 3,
+    });
+    mapBorder.setMap(this.map)
+
+    mapBorder.addListener('click', event => {
+      console.log(this.getGoogleShapeCoords(mapBorder.getPath().getArray()))
     })
 
-    for (let coord of coords) {
+    this.zonePolylines.forEach(zone => {
+      const { strokeColor, path } = zone
+      const zonePolyline = new google.maps.Polyline({
+        path,
+        strokeColor,
+        strokeOpacity: 1,
+        strokeWeight: 3,
+        //editable: true,
+        suppressUndo: true
+      })
+      zonePolyline.setMap(this.map)
+    })
+
+    for (let coord of path) {
       const { lat, lng } = coord;
       const position = new google.maps.LatLng(lat - 0.01, lng);
       this.map.fitBounds(this.bounds.extend(position));

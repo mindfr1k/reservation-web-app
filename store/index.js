@@ -3,7 +3,8 @@ import Vuex from 'vuex'
 
 import polygons from './polygons'
 import animals from './animals'
-import borderPolyline from './borderPolyline'
+import borderPolyline from './border/borderPolyline'
+import zonePolylines from './border/zonePolylines'
 
 Vue.use(Vuex);
 
@@ -27,6 +28,7 @@ const initStore = () => new Vuex.Store({
     },
 
     borderPolyline,
+    zonePolylines,
 
     polygons,
     checkedPolygons: [],
