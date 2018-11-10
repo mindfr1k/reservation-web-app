@@ -71,19 +71,7 @@ export default {
     drawingManager.setMap(this.map)
 
     drawingManager.addListener('polylinecomplete', event => {
-      const coords = event.getPath().getArray().toString().match(/\(.+?\)/g)
-      const normalizedCoords = coords.map(coord => {
-        return {
-          lat: parseFloat(coord.split('(')[1].split(',')[0]),
-          lng: parseFloat(coord.split(', ')[1].split(')')[0])
-        }
-      })
-
-      let coordString = ''
-      normalizedCoords.forEach(coord => {
-        coordString += `{ lat: ${coord.lat}, lng: ${coord.lng} },\n`
-      })
-      console.log(coordString)
+      console.log(this.getGoogleShapeCoords(event.getPath().getArray()))
     })*/
 
     const { strokeColor, path } = this.borderPolyline;
@@ -92,9 +80,10 @@ export default {
       strokeColor,
       strokeOpacity: 1,
       strokeWeight: 3,
+      //editable: true,
+      suppressUndo: true
     });
     mapBorder.setMap(this.map)
-
     mapBorder.addListener('click', event => {
       console.log(this.getGoogleShapeCoords(mapBorder.getPath().getArray()))
     })
@@ -110,6 +99,9 @@ export default {
         suppressUndo: true
       })
       zonePolyline.setMap(this.map)
+      zonePolyline.addListener('click', event => {
+        console.log(this.getGoogleShapeCoords(zonePolyline.getPath().getArray()))
+      })
     })
 
     for (let coord of path) {
