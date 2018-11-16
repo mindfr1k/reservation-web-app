@@ -8,8 +8,8 @@
 # install dependencies
 $ npm install
 
-# launch backend part
-$ npm start
+# launch backend
+$ cd reservation-web-api/ && npm start
 
 # serve with hot reload at localhost:3000
 $ cd ../ && npm run dev
