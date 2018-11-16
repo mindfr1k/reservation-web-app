@@ -1,7 +1,7 @@
 {
   "name": "reservation-web-app",
   "version": "1.0.0",
-  "description": "Project for providing info about various regions of given reservation area.",
+  "description": "Project for providing info about various regions of Dniprovsko-Orylskyi natural reservation.",
   "author": "Oleksandr Zaychenko",
   "private": true,
   "scripts": {
@@ -11,6 +11,7 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "express": "^4.16.4",
     "nuxt": "^1.0.0"
   },
   "devDependencies": {
