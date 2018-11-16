@@ -6,7 +6,7 @@
 
 ``` bash
 # install dependencies
-$ npm install
+$ npm i
 
 # launch backend
 $ cd reservation-web-api/ && npm start
