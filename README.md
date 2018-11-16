@@ -12,7 +12,7 @@ $ npm i
 $ cd reservation-web-api/ && npm start
 
 # serve with hot reload at localhost:3000
-$ cd ../ && npm run dev
+$ npm run dev
 
 # build for production and launch server
 $ npm run build
