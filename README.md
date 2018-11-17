@@ -9,7 +9,7 @@
 $ npm i
 
 # launch backend
-$ cd reservation-web-api/ && npm start
+$ npm run backend
 
 # serve with hot reload at localhost:3000
 $ npm run dev
