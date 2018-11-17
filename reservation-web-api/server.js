@@ -13,7 +13,7 @@ express()
   .use(bodyParser.urlencoded({ extended: true }))
   .use(bodyParser.json())
   .use((_, res, __) => {
-    return res.status(400).json({
+    return res.status(404).json({
       error: 'Resource was not found'
     })
   })
