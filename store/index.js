@@ -10,15 +10,15 @@ Vue.use(Vuex);
 
 const initStore = () => new Vuex.Store({
   state: {
-    appTitle: 'Главная',
+    appTitle: 'Головна',
     menuItems: [
-      { title: 'Карта', path: '/map', icon: 'map' },
+      { title: 'Мапа', path: '/map', icon: 'map' },
       { title: 'Каталог', path: '/animals/1', icon: 'info' }
     ],
     reservationCategories: [
-      { id: 'animals', title: 'Животные', icon: 'bug_report', path: '/animals/1' },
-      { id: 'plants', title: 'Растения', icon: 'local_florist', path: '/plants/1' },
-      { id: 'soils', title: 'Почва', icon: 'landscape', path: '/soils/1' }
+      { id: 'animals', title: 'Тварини', icon: 'bug_report', path: '/animals/1' },
+      { id: 'plants', title: 'Рослини', icon: 'local_florist', path: '/plants/1' },
+      { id: 'soils', title: 'Грунт', icon: 'landscape', path: '/soils/1' }
     ],
 
     mapId: 'regionMap',
