@@ -1,9 +1,12 @@
 const { Router } = require('express')
 const { ObjectId } = require('mongodb')
 
+const validate = require('../services/validator')
+const { postCatalog, getCatalog, patchCatalog } = require('../schemas/crudCatalog')
+
 module.exports = db => Router()
-  .post('/', async (req, res) => {
-    const { title, preview, description } = req.body
+  .post('/', validate(postCatalog), async (req, res) => {
+    const { title, preview, description } = req.payload
     const savedAnimal = (await db.collection('animals').insertOne({
       title,
       preview,
@@ -15,8 +18,8 @@ module.exports = db => Router()
       savedAnimal
     })
   })
-  .get('/', async (req, res) => {
-    const { skip, limit } = req.query
+  .get('/', validate(getCatalog), async (req, res) => {
+    const { skip, limit } = req.payload
     return res.status(200).json(await db.collection('animals')
       .find()
       .skip(parseInt(skip))
@@ -24,13 +27,13 @@ module.exports = db => Router()
       .toArray()
     )
   })
-  .patch('/:id', async (req, res) => {
+  .patch('/:id', validate(patchCatalog), async (req, res) => {
     const { id } = req.params
     await db.collection('animals')
     .updateOne({
       _id: ObjectId(id)
     }, {
-      $set: req.body
+      $set: req.payload
     })
     return res.status(200).json({
       message: 'Animal was updated successfully'
