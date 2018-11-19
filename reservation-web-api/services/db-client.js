@@ -6,7 +6,7 @@ module.exports = {
       const mongoClient = await MongoClient.connect(uri, {
         useNewUrlParser: true
       })
-      const db = mongoClient.db(dbName)
+      return mongoClient.db(dbName)
     }
     catch (err) {
       console.log(err)

@@ -1,18 +1,10 @@
 const { Router } = require('express')
 
-module.exports = Router()
-  .get('/animals', (req, res) => {
-    return res.status(200).json({
-      message: 'Animals route works.'
-    })
-  })
-  .get('/plants', (req, res) => {
-    return res.status(200).json({
-      message: 'Plants route works.'
-    })
-  })
-  .get('/soils', (req, res) => {
-    return res.status(200).json({
-      message: 'Soils route works.'
-    })
-  })
+const animalRoutes = require('./animals')
+const plantRoutes = require('./plants')
+const soilRoutes = require('./soils')
+
+module.exports = db => Router()
+  .use('/animals', animalRoutes(db))
+  .use('/plants', plantRoutes(db))
+  .use('/soils', soilRoutes(db))
