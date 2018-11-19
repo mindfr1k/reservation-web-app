@@ -1,14 +1,16 @@
 const { Router } = require('express')
 const { ObjectId } = require('mongodb')
 
-const validate = require('../services/validator')
 const { postCatalog, getCatalog, patchCatalog } = require('../schemas/crudCatalog')
+const validate = require('../services/validator')
+const upload = require('../services/uploader')
 
 module.exports = db => Router()
-  .post('/', validate(postCatalog), async (req, res) => {
+  .post('/', upload('image'), validate(postCatalog), async (req, res) => {
     const { title, preview, description } = req.payload
     const savedAnimal = (await db.collection('animals').insertOne({
       title,
+      image: req.file.path,
       preview,
       description
     })).ops[0]

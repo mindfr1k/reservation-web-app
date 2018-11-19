@@ -2,10 +2,11 @@ const Joi = require('joi')
 
 module.exports = schema => {
   return (req, res, next) => {
-    const { body, query } = req
+    const { body, query , file } = req
     const { error, value } = Joi.validate({
       ...body,
-      ...query
+      ...query,
+      image: file
     }, schema, {
       stripUnknown: true
     })

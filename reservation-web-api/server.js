@@ -2,6 +2,7 @@ const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
 const bodyParser = require('body-parser')
+const { join } = require('path')
 
 const { setupConnection } = require('./services/db-client')
 const initRoutes = require('./routes')
@@ -16,8 +17,9 @@ const initRoutes = require('./routes')
       .use(morgan('dev'))
       .use(cors())
       .disable('x-powered-by')
-      .use(bodyParser.urlencoded({ extended: true }))
       .use(bodyParser.json())
+      .use(bodyParser.urlencoded({ extended: true }))
+      .use('/static/images', express.static(join(__dirname, 'static', 'images')))
       .use(initRoutes(db))
       .use((_, res, __) => {
         return res.status(404).json({
