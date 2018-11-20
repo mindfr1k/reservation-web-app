@@ -1,21 +1,24 @@
 const { Router } = require('express')
 const { ObjectId } = require('mongodb')
 
-const validate = require('../services/validator')
 const { postCatalog, getCatalog, patchCatalog } = require('../schemas/crudCatalog')
+const validate = require('../services/validator')
+const upload = require('../services/uploader')
+const deleteFile = require('../services/file-deleter')
 
 module.exports = db => Router()
-  .post('/', validate(postCatalog), async (req, res) => {
+  .post('/', upload('image'), validate(postCatalog), async (req, res) => {
     const { title, preview, description } = req.payload
-    const savedAnimal = (await db.collection('soils').insertOne({
+    const createdSoil = (await db.collection('soils').insertOne({
       title,
+      image: req.file.path,
       preview,
       description
     })).ops[0]
 
     return res.status(201).json({
       message: 'Soil was created successfully',
-      savedAnimal
+      createdSoil
     })
   })
   .get('/', validate(getCatalog), async (req, res) => {
@@ -27,8 +30,15 @@ module.exports = db => Router()
       .toArray()
     )
   })
-  .patch('/:id', validate(patchCatalog), async (req, res) => {
+  .patch('/:id', upload('image'), validate(patchCatalog), async (req, res) => {
     const { id } = req.params
+    if (req.file) {
+      const soil = (await db.collection('soils')
+      .find({
+        _id: ObjectId(id)
+      }).toArray())[0]
+      deleteFile(soil.image)
+    }
     await db.collection('soils')
     .updateOne({
       _id: ObjectId(id)
@@ -41,6 +51,11 @@ module.exports = db => Router()
   })
   .delete('/:id', async (req, res) => {
     const { id } = req.params
+    const soil = (await db.collection('soils')
+    .find({
+      _id: ObjectId(id)
+    }).toArray())[0]
+    deleteFile(soil.image)
     await db.collection('soils')
     .deleteOne({
       _id: ObjectId(id)

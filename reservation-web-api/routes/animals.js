@@ -4,11 +4,12 @@ const { ObjectId } = require('mongodb')
 const { postCatalog, getCatalog, patchCatalog } = require('../schemas/crudCatalog')
 const validate = require('../services/validator')
 const upload = require('../services/uploader')
+const deleteFile = require('../services/file-deleter')
 
 module.exports = db => Router()
   .post('/', upload('image'), validate(postCatalog), async (req, res) => {
     const { title, preview, description } = req.payload
-    const savedAnimal = (await db.collection('animals').insertOne({
+    const createdAnimal = (await db.collection('animals').insertOne({
       title,
       image: req.file.path,
       preview,
@@ -17,7 +18,7 @@ module.exports = db => Router()
 
     return res.status(201).json({
       message: 'Animal was created successfully',
-      savedAnimal
+      createdAnimal
     })
   })
   .get('/', validate(getCatalog), async (req, res) => {
@@ -29,8 +30,15 @@ module.exports = db => Router()
       .toArray()
     )
   })
-  .patch('/:id', validate(patchCatalog), async (req, res) => {
+  .patch('/:id', upload('image'), validate(patchCatalog), async (req, res) => {
     const { id } = req.params
+    if (req.file) {
+      const animal = (await db.collection('animals')
+      .find({
+        _id: ObjectId(id)
+      }).toArray())[0]
+      deleteFile(animal.image)
+    }
     await db.collection('animals')
     .updateOne({
       _id: ObjectId(id)
@@ -43,6 +51,11 @@ module.exports = db => Router()
   })
   .delete('/:id', async (req, res) => {
     const { id } = req.params
+    const animal = (await db.collection('animals')
+    .find({
+      _id: ObjectId(id)
+    }).toArray())[0]
+    deleteFile(animal.image)
     await db.collection('animals')
     .deleteOne({
       _id: ObjectId(id)

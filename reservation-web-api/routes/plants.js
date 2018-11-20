@@ -1,21 +1,24 @@
 const { Router } = require('express')
 const { ObjectId } = require('mongodb')
 
-const validate = require('../services/validator')
 const { postCatalog, getCatalog, patchCatalog } = require('../schemas/crudCatalog')
+const validate = require('../services/validator')
+const upload = require('../services/uploader')
+const deleteFile = require('../services/file-deleter')
 
 module.exports = db => Router()
-  .post('/', validate(postCatalog), async (req, res) => {
+  .post('/', upload('image'), validate(postCatalog), async (req, res) => {
     const { title, preview, description } = req.payload
-    const savedAnimal = (await db.collection('plants').insertOne({
+    const createdPlant = (await db.collection('plants').insertOne({
       title,
+      image: req.file.path,
       preview,
       description
     })).ops[0]
 
     return res.status(201).json({
       message: 'Plant was created successfully',
-      savedAnimal
+      createdPlant
     })
   })
   .get('/', validate(getCatalog), async (req, res) => {
@@ -27,8 +30,15 @@ module.exports = db => Router()
       .toArray()
     )
   })
-  .patch('/:id', validate(patchCatalog), async (req, res) => {
+  .patch('/:id', upload('image'), validate(patchCatalog), async (req, res) => {
     const { id } = req.params
+    if (req.file) {
+      const plant = (await db.collection('plants')
+      .find({
+        _id: ObjectId(id)
+      }).toArray())[0]
+      deleteFile(plant.image)
+    }
     await db.collection('plants')
     .updateOne({
       _id: ObjectId(id)
@@ -41,6 +51,11 @@ module.exports = db => Router()
   })
   .delete('/:id', async (req, res) => {
     const { id } = req.params
+    const plant = (await db.collection('plants')
+    .find({
+      _id: ObjectId(id)
+    }).toArray())[0]
+    deleteFile(plant.image)
     await db.collection('plants')
     .deleteOne({
       _id: ObjectId(id)
