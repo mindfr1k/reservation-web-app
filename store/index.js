@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import superagent from 'superagent'
+
 import polygons from './polygons'
 import animals from './animals'
 import borderPolyline from './border/borderPolyline'
@@ -64,9 +66,11 @@ const initStore = () => new Vuex.Store({
       });
       commit('setRegionFilteredPolygon', filteredPolygon);
     },
-    filterAnimalsByPage({commit, state}, payload) {
+    async filterAnimalsByPage({commit}, payload) {
       payload = parseInt(payload);
-      commit('setFilteredAnimals', state.animals.slice((payload - 1) * 9, payload * 9));
+      const response = await superagent
+        .get(`http://${process.env.HOST}:${process.env.PORT}/animals?limit=9&skip=${(payload - 1) * 9}`)
+      commit('setFilteredAnimals', JSON.parse(response.text));
     },
     setAnimalPages({commit, state}) {
       const pages = Math.floor(state.animals.length / 9) + 1;

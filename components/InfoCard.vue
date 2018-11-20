@@ -15,7 +15,7 @@
 
       <div class="card-action center-align">
         <nuxt-link to="" class="btn-flat waves-effect waves-light activator">
-          <span class="btn-text activator">Подробнее</span>
+          <span class="activator">Детальніше</span>
         </nuxt-link>
       </div>
       <div class="card-reveal">
@@ -52,10 +52,10 @@ export default {
     margin-left: 1.6rem;
   }
   a:hover {
-    background-color: #ffd17c;
+    background-color: #ffab40;
   }
-  .btn-text {
-    color: #ffab40;
+  .card .card-action a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating):hover {
+    color: #ffffff;
   }
   .card-content {
     border-radius: 0 0 0 2px;

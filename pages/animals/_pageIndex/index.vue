@@ -44,7 +44,7 @@ export default {
   },
   computed: {
     filteredAnimals() {
-      return this.$store.state.filteredAnimals;
+      return this.$store.state.filteredAnimals
     },
     reservationCategories() {
       return this.$store.state.reservationCategories;

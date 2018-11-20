@@ -96,5 +96,8 @@ export default {
   }
   ul:not(.browser-default) {
     padding-left: 1.5rem;
-}
+  }
+  p {
+    font-size: 1.5rem;
+  }
 </style>
