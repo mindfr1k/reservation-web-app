@@ -3,15 +3,26 @@
     <nuxt-link to="" class="btn-flat waves-effect waves-light editButton">
       Редагувати
     </nuxt-link>
-    <nuxt-link to="" class="btn-flat waves-effect waves-light deleteButton">
+    <button class="btn-flat waves-effect waves-light deleteButton" @click="showDeletionModal = true">
       Видалити
-    </nuxt-link>
+    </button>
+
+    <DeletionModal v-if="showDeletionModal" @close="showDeletionModal = false"/>
   </div>
 </template>
 
 <script>
-export default {
+import DeletionModal from '@/components/DeletionModal'
 
+export default {
+  components: {
+    DeletionModal
+  },
+  data() {
+    return {
+      showDeletionModal: false
+    }
+  }
 }
 </script>
 
@@ -27,10 +38,10 @@ export default {
     background-color: #2196f3;
     color: #ffffff;
   }
-  .card .card-action a.deleteButton:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
+  .card .card-action button.deleteButton:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
     color: #ff0000;
   }
-  .card .card-action a.deleteButton:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating):hover {
+  .card .card-action button.deleteButton:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating):hover {
     background-color: #ff0000;
     color: #ffffff;
   }

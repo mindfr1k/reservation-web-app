@@ -44,11 +44,6 @@ import Pagination from '@/components/Pagination'
 import AddButton from '@/components/AddButton'
 
 export default {
-    head: {
-    script: [
-      { src: 'modal-engine.js', body: true }
-    ]
-  },
   components: {
     InfoCard,
     Pagination,
