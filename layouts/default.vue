@@ -49,7 +49,8 @@
 export default {
   head: {
     script: [
-      { src: 'button-collapse.js', body: true }
+      { src: 'button-collapse.js', body: true },
+      { src: 'modal-engine.js', body: true }
     ]
   },
   computed: {

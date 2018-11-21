@@ -92,6 +92,9 @@ const initStore = () => new Vuex.Store({
         result.push(...filteredPolygon)
       }
       commit('setCheckedPolygons', result);
+    },
+    isAdmin() {
+      return true
     }
   }
 });

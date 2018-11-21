@@ -11,10 +11,16 @@
       </div>
 
       <div class="col s12 m12 l10">
-        <InfoCard class="col s12 m6 l4" v-for="animal in filteredAnimals" :key="animal.title"
-        :img="animal.image"
-        :title="animal.title"
-        :description="animal.description" />
+        <div class="row flex">
+          <InfoCard class="col s12 m6 l4" v-for="animal in filteredAnimals" :key="animal.title"
+          :img="animal.image"
+          :title="animal.title"
+          :preview="animal.preview"
+          :description="animal.description"
+          :isAdmin="isAdmin" />
+
+          <AddButton v-if="isAdmin" class="col s12 m6 l4"/>
+        </div>
       </div>
 
       <div class="col l2 hide-on-med-and-down">
@@ -29,25 +35,34 @@
     </div>
 
     <Pagination />
-
   </div>
 </template>
 
 <script>
-import InfoCard from '@/components/InfoCard';
-import Pagination from '@/components/Pagination';
+import InfoCard from '@/components/InfoCard'
+import Pagination from '@/components/Pagination'
+import AddButton from '@/components/AddButton'
 
 export default {
+    head: {
+    script: [
+      { src: 'modal-engine.js', body: true }
+    ]
+  },
   components: {
     InfoCard,
-    Pagination
+    Pagination,
+    AddButton
   },
   computed: {
     filteredAnimals() {
       return this.$store.state.filteredAnimals
     },
     reservationCategories() {
-      return this.$store.state.reservationCategories;
+      return this.$store.state.reservationCategories
+    },
+    isAdmin() {
+      return this.$store.dispatch('isAdmin')
     }
   },
   mounted() {

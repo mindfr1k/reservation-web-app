@@ -6,9 +6,8 @@
   "private": true,
   "scripts": {
     "dev": "nuxt",
-    "backend": "nodemon reservation-web-api/server.js",
     "build": "nuxt build",
-    "start": "nuxt start",
+    "start": "nodemon reservation-web-api/server.js",
     "generate": "nuxt generate"
   },
   "dependencies": {
