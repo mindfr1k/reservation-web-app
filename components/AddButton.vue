@@ -1,16 +1,28 @@
 <template>
-  <div>
-    <nuxt-link to="" class="btn-flat waves-effect waves-light">
-      <div class="center-align">
-        <i class="material-icons">add</i>
-      </div>
-    </nuxt-link>
-  </div>
+<div>
+  <button class="btn-flat waves-effect waves-light"
+  @click="showCreationModal = true">
+    <div class="center-align">
+      <i class="material-icons">add</i>
+    </div>
+  </button>
+  <CreationModal v-if="showCreationModal"
+  @close="showCreationModal = false"/>
+</div>
 </template>
 
 <script>
+import CreationModal from '@/components/CreationModal'
+
 export default {
-  
+  components: {
+    CreationModal
+  },
+  data() {
+    return {
+      showCreationModal: false
+    }
+  }
 }
 </script>
 
@@ -19,11 +31,11 @@ export default {
     margin: .5rem 0 1rem 0;
     border-radius: 2px;
   }
-  a {
+  button {
     width: 100%;
     height: 100%;
   }
-  a:hover {
+  button:hover {
     background-color: #2196f3;
     color: #ffffff;
   }

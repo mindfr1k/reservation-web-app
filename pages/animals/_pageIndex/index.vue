@@ -2,8 +2,8 @@
   <div>
     <div class="row">
       <div class="col s12 m12 hide-on-large-only">
-          <button class="col s4 m4 btn-flat" v-for="(category, index) in reservationCategories" 
-          @click="setCurrentCategory(index)"
+          <button class="col s4 m4 btn-flat" v-for="category in reservationCategories" 
+          @click="setCurrentCategory(category.id)"
           :key="category.title">
             <i class="material-icons left">{{ category.icon }}</i>
             <span>{{ category.title }}</span>
@@ -11,14 +11,14 @@
       </div>
 
       <div class="col s12 m12 l10">
-        <InfoCard class="col s12 m6 l4" v-for="animal in filteredAnimals" :key="animal.title"
+        <InfoCard class="col s12 m6 l4" v-for="animal in filteredAnimals" :key="animal._id"
         :id="animal._id"
         :img="animal.image"
         :title="animal.title"
         :preview="animal.preview"
         :description="animal.description" />
 
-        <AddButton v-if="isAdmin" class="col s12 m6 l4"/>
+        <AddButton v-if="isAdmin" class="col s12 m6 l4" />
       </div>
 
       <div class="col l2 hide-on-med-and-down">
