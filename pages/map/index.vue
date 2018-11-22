@@ -7,7 +7,7 @@
           :key="category.title">
             <input type="checkbox" :id="`${category.title}-small`" @click="filterCheckedPolygons(index)" />
             <label :for="`${category.title}-small`">
-              <i class="material-icons left">{{ category.icon }}</i>
+              <i class="material-icons center">{{ category.icon }}</i>
               <span>{{ category.title }}</span>
             </label>
           </p>

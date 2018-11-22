@@ -2,14 +2,12 @@
   <div>
     <div class="row">
       <div class="col s12 m12 hide-on-large-only">
-        <p class="col s4 m4" v-for="category in reservationCategories" :key="category.title">
-          <button class="btn-flat adaptive" @click="setCurrentCategory(category.id)"> 
-            <nuxt-link :to="category.path">
-              <i class="material-icons">{{ category.icon }}</i>
-              {{ category.title }}
-            </nuxt-link>
+          <button class="col s4 m4 btn-flat" v-for="(category, index) in reservationCategories" 
+          @click="setCurrentCategory(index)"
+          :key="category.title">
+            <i class="material-icons left">{{ category.icon }}</i>
+            <span>{{ category.title }}</span>
           </button>
-        </p>
       </div>
 
       <div class="col s12 m12 l10">
@@ -24,16 +22,12 @@
       </div>
 
       <div class="col l2 hide-on-med-and-down">
-        <div class="column">
-          <p v-for="category in reservationCategories" :key="category.title">
-          <button class="btn-flat" @click="setCurrentCategory(category.id)"> 
-            <nuxt-link :to="category.path">
-              <i class="material-icons left">{{ category.icon }}</i>
-              {{ category.title }}
-            </nuxt-link>
-          </button>
-        </p>
-        </div>
+        <button class="col l12 btn-flat" v-for="category in reservationCategories" 
+        @click="setCurrentCategory(category.id)"
+        :key="category.title">
+          <i class="material-icons left">{{ category.icon }}</i>
+          {{ category.title }}
+        </button>   
       </div>
   
     </div>
@@ -65,8 +59,11 @@ export default {
     }
   },
   methods: {
-    setCurrentCategory(id) {
-      this.$store.dispatch('setCurrentCategory', id)
+    setCurrentCategory(index) {
+      this.$store.dispatch('setCurrentCategory', index)
+      this.$nuxt.$router.replace({ 
+        path: `/${this.$store.state.currentCategory}/${this.$route.params.pageIndex}`
+      })
       this.$store.dispatch('filterObjectsByPage', {
         category: this.$store.state.currentCategory,
         page: this.$route.params.pageIndex
@@ -83,14 +80,20 @@ export default {
 </script>
 
 <style scoped>
-  div a {
+  button {
     font-weight: 500;
-    color: rgba(0, 0, 0, 0.87);
-  }
-  .col.s4.m4 a {
     font-size: 1.3rem;
+    color: rgba(0, 0, 0, 0.87);
+    text-transform: none;
+    min-width: 33%;
   }
-  .adaptive {
-    margin-bottom: 2rem;
+  button.col.m4 {
+    padding: 0 0.5rem;
+  }
+  button.col.m4 i {
+    margin-right: 0;
+  }
+  button.col.l12 {
+    margin-bottom: 1rem;
   }
 </style>
