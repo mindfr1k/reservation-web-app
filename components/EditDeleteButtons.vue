@@ -3,11 +3,14 @@
     <nuxt-link to="" class="btn-flat waves-effect waves-light editButton">
       Редагувати
     </nuxt-link>
-    <button class="btn-flat waves-effect waves-light deleteButton" @click="showDeletionModal = true">
+    <button class="btn-flat waves-effect waves-light deleteButton" 
+    @click="showDeletionModal = true">
       Видалити
     </button>
 
-    <DeletionModal v-if="showDeletionModal" @close="showDeletionModal = false"/>
+    <DeletionModal v-if="showDeletionModal"
+    :id="id"
+    @close="showDeletionModal = false" />
   </div>
 </template>
 
@@ -15,6 +18,9 @@
 import DeletionModal from '@/components/DeletionModal'
 
 export default {
+  props: [
+    'id'
+  ],
   components: {
     DeletionModal
   },

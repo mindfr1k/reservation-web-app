@@ -17,7 +17,7 @@
         <nuxt-link to="" class="btn-flat waves-effect waves-light activator">
           <span class="activator">Детальніше</span>
         </nuxt-link>
-        <EditDeleteButtons v-if="isAdmin"/>
+        <EditDeleteButtons v-if="isAdmin" :id="id"/>
       </div>
 
 
@@ -40,14 +40,16 @@ export default {
     EditDeleteButtons
   },
   props: [
+    'id',
     'img',
     'title',
     'preview',
-    'description',
-    'isAdmin'
+    'description'
   ],
   computed: {
-
+    isAdmin() {
+      return this.$store.state.isAdmin
+    }
   }
 }
 </script>

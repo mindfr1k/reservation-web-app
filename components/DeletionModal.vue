@@ -16,10 +16,12 @@
 
           <div class="modal-footer">
             <slot name="footer">
-              <button class="btn-flat waves-effect waves-light abortButton" @click="$emit('close')">
+              <button class="btn-flat waves-effect waves-light abortButton" 
+              @click="$emit('close')">
                 Ні
               </button>
-              <button class="btn-flat waves-effect waves-light confirmButton">
+              <button class="btn-flat waves-effect waves-light confirmButton" 
+              @click="$emit('close'); deleteObject(id)">
                 Так
               </button>
             </slot>
@@ -33,9 +35,13 @@
 
 <script>
 export default {
+  props: [
+    'id'
+  ],
   methods: {
-    test() {
-      console.log('NaiS')
+    deleteObject(id) {
+      this.$store.dispatch('deleteFromDb', this.id)
+      location.reload(true)
     }
   }
 }

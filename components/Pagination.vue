@@ -92,7 +92,7 @@
 export default {
   computed: {
     pages() {
-      return this.$store.state.animalPages;
+      return this.$store.state.categoryPages;
     },
     currentPage() {
       return parseInt(this.$route.params.pageIndex);
@@ -126,7 +126,7 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch('setAnimalPages');
+    this.$store.dispatch('setCategoryPages');
   }
 }
 </script>
