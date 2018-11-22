@@ -2,47 +2,98 @@
   <div>
     <div class="row">
       <div class="col s12 m12 hide-on-large-only">
-        <p class="col s4 m4" v-for="category in reservationCategories" :key="category.title">
-          <nuxt-link :to="category.path">
+          <button class="col s4 m4 btn-flat" v-for="(category, index) in reservationCategories" 
+          @click="setCurrentCategory(index)"
+          :key="category.title">
             <i class="material-icons left">{{ category.icon }}</i>
-            {{ category.title }}
-          </nuxt-link>
-        </p>
+            <span>{{ category.title }}</span>
+          </button>
       </div>
 
       <div class="col s12 m12 l10">
-        ТЕСТ ПОЧВЫ
+        <InfoCard class="col s12 m6 l4" v-for="animal in filteredAnimals" :key="animal.title"
+        :id="animal._id"
+        :img="animal.image"
+        :title="animal.title"
+        :preview="animal.preview"
+        :description="animal.description" />
+
+        <AddButton v-if="isAdmin" class="col s12 m6 l4"/>
       </div>
 
       <div class="col l2 hide-on-med-and-down">
-        <p v-for="category in reservationCategories" :key="category.title">
-          <nuxt-link :to="category.path">
-            <i class="material-icons left">{{ category.icon }}</i>
-            {{ category.title }}
-          </nuxt-link>
-        </p>
+        <button class="col l12 btn-flat" v-for="category in reservationCategories" 
+        @click="setCurrentCategory(category.id)"
+        :key="category.title">
+          <i class="material-icons left">{{ category.icon }}</i>
+          {{ category.title }}
+        </button>   
       </div>
-
+  
     </div>
+
+    <Pagination />
   </div>
 </template>
 
 <script>
+import InfoCard from '@/components/InfoCard'
+import Pagination from '@/components/Pagination'
+import AddButton from '@/components/AddButton'
+
 export default {
+  components: {
+    InfoCard,
+    Pagination,
+    AddButton
+  },
   computed: {
+    filteredAnimals() {
+      return this.$store.state.filteredObjects
+    },
     reservationCategories() {
-      return this.$store.state.reservationCategories;
+      return this.$store.state.reservationCategories
+    },
+    isAdmin() {
+      return this.$store.state.isAdmin
     }
+  },
+  methods: {
+    setCurrentCategory(index) {
+      this.$store.dispatch('setCurrentCategory', index)
+      this.$nuxt.$router.replace({ 
+        path: `/${this.$store.state.currentCategory}/${this.$route.params.pageIndex}`
+      })
+      this.$store.dispatch('filterObjectsByPage', {
+        category: this.$store.state.currentCategory,
+        page: this.$route.params.pageIndex
+      })
+    }
+  },
+  mounted() {
+    this.$store.dispatch('filterObjectsByPage', {
+      category: this.$store.state.currentCategory,
+      page: this.$route.params.pageIndex
+    })
   }
 }
 </script>
 
 <style scoped>
-  p a {
+  button {
     font-weight: 500;
-    color: rgba(0, 0, 0, 0.87);
-  }
-  .col.s4.m4 a {
     font-size: 1.3rem;
+    color: rgba(0, 0, 0, 0.87);
+    text-transform: none;
+    min-width: 33%;
+  }
+  button.col.m4 {
+    padding: 0 0.5rem;
+  }
+  button.col.m4 i {
+    margin-right: 0;
+  }
+  button.col.l12 {
+    margin-bottom: 1rem;
   }
 </style>

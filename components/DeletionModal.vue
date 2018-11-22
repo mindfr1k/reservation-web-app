@@ -39,8 +39,8 @@ export default {
     'id'
   ],
   methods: {
-    async deleteObject(id) {
-      await this.$store.dispatch('deleteFromDb', this.id)
+    deleteObject(id) {
+      this.$store.dispatch('deleteFromDb', this.id)
       location.reload(true)
     }
   }
