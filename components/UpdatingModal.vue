@@ -92,14 +92,14 @@ export default {
         this.errors.push('Детальний опис повинен містити не більше 500 символів.')
       }
       if (!this.errors.length) {
-        const body = {}
+        const body = new FormData()
         for (let prop in this._data) {
           if (this._data[prop]) {
-            body[prop] = this._data[prop]
+            body.append(prop, this._data[prop])
           }
         }
         if (this.$refs.file.files[0]) {
-          body.image = this.$refs.file.files[0]
+          body.append('image', this.$refs.file.files[0])
         }
         delete body.errors
         await this.$store.dispatch('patchObject', {
