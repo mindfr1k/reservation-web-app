@@ -2,14 +2,14 @@ const Joi = require('joi')
 
 module.exports = schema => {
   return (req, res, next) => {
-    const { body, query } = req
-    const image = req.file === undefined ? null : req.file.path
+    const { body, query, file = {} } = req
     const { error, value } = Joi.validate({
       ...body,
       ...query,
-      image
+      ...file
     }, schema, {
-      stripUnknown: true
+      stripUnknown: true,
+      allowUnknown: true
     })
     if (error) {
       return res.status(400).json(

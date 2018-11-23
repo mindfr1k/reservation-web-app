@@ -11,7 +11,7 @@ module.exports = db => Router()
     const { title, preview, description } = req.payload
     const createdPlant = (await db.collection('plants').insertOne({
       title,
-      image: req.file.path,
+      path: req.file.path,
       preview,
       description
     })).ops[0]

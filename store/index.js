@@ -81,6 +81,14 @@ const initStore = () => new Vuex.Store({
         .field('description', payload.description)
         .attach('image', payload.image)
     },
+    async patchObject({}, payload) {
+      const { image, ...rest } = payload.body
+      await superagent
+        .patch(`http://${process.env.HOST}:${process.env.PORT}/${payload.category}/${payload.id}`)
+        .type('application/x-www-form-urlencoded')
+        .send(payload.body)
+        //.attach('image', image)
+    },
     isAdmin({commit}) {
       commit('setIsAdmin', false)
     },

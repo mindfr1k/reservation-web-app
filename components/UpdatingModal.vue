@@ -65,6 +65,9 @@
 
 <script>
 export default {
+  props: [
+    'id'
+  ],
   data() {
     return {
       errors: [],
@@ -99,14 +102,12 @@ export default {
           body.image = this.$refs.file.files[0]
         }
         delete body.errors
-        /*await this.$store.dispatch('postObject', {
+        await this.$store.dispatch('patchObject', {
           category: this.$store.state.currentCategory,
-          title: this.title,
-          image: this.$refs.file.files[0],
-          preview: this.preview,
-          description: this.description
+          id: this.id,
+          body
         })
-        location.reload(true)*/
+        location.reload(true)
       }
     }
   },

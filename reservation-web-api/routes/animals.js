@@ -11,7 +11,7 @@ module.exports = db => Router()
     const { title, preview, description } = req.payload
     const createdAnimal = (await db.collection('animals').insertOne({
       title,
-      image: req.file.path,
+      path: req.file.path,
       preview,
       description
     })).ops[0]
@@ -37,8 +37,9 @@ module.exports = db => Router()
       .find({
         _id: ObjectId(id)
       }).toArray())[0]
-      deleteFile(animal.image)
+      deleteFile(animal.path)
     }
+
     await db.collection('animals')
     .updateOne({
       _id: ObjectId(id)
@@ -55,7 +56,7 @@ module.exports = db => Router()
     .find({
       _id: ObjectId(id)
     }).toArray())[0]
-    deleteFile(animal.image)
+    deleteFile(animal.path)
     await db.collection('animals')
     .deleteOne({
       _id: ObjectId(id)

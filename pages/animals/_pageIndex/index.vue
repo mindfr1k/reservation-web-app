@@ -15,7 +15,7 @@
           <div class="col s12 m6 l4" v-for="animal in filteredAnimals" :key="animal._id">
             <InfoCard
             :id="animal._id"
-            :img="animal.image"
+            :img="animal.path"
             :title="animal.title"
             :preview="animal.preview"
             :description="animal.description" />
