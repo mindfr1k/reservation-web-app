@@ -9,7 +9,7 @@ const deleteFile = require('../services/file-deleter')
 module.exports = db => Router()
   .post('/', upload('image'), validate(postCatalog), async (req, res) => {
     const { title, preview, description } = req.payload
-    const createdSoil = (await db.collection('soils').insertOne({
+    const createdAnimal = (await db.collection('soils').insertOne({
       title,
       path: req.file.path,
       preview,
@@ -18,7 +18,7 @@ module.exports = db => Router()
 
     return res.status(201).json({
       message: 'Soil was created successfully',
-      createdSoil
+      createdAnimal
     })
   })
   .get('/', validate(getCatalog), async (req, res) => {
@@ -33,12 +33,13 @@ module.exports = db => Router()
   .patch('/:id', upload('image'), validate(patchCatalog), async (req, res) => {
     const { id } = req.params
     if (req.file) {
-      const soil = (await db.collection('soils')
+      const animal = (await db.collection('soils')
       .find({
         _id: ObjectId(id)
       }).toArray())[0]
-      deleteFile(soil.image)
+      deleteFile(animal.path)
     }
+
     await db.collection('soils')
     .updateOne({
       _id: ObjectId(id)
@@ -51,11 +52,11 @@ module.exports = db => Router()
   })
   .delete('/:id', async (req, res) => {
     const { id } = req.params
-    const soil = (await db.collection('soils')
+    const animal = (await db.collection('soils')
     .find({
       _id: ObjectId(id)
     }).toArray())[0]
-    deleteFile(soil.image)
+    deleteFile(animal.path)
     await db.collection('soils')
     .deleteOne({
       _id: ObjectId(id)

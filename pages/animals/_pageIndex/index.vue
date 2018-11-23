@@ -65,17 +65,13 @@ export default {
   },
   methods: {
     setCurrentCategory(index) {
-      this.$store.dispatch('setCurrentCategory', index)
-      this.$nuxt.$router.replace({ 
-        path: `/${this.$store.state.currentCategory}/${this.$route.params.pageIndex}`
-      })
-      this.$store.dispatch('filterObjectsByPage', {
-        category: this.$store.state.currentCategory,
-        page: this.$route.params.pageIndex
+      this.$nuxt.$router.push({ 
+        path: `/${index}/${this.$route.params.pageIndex}`
       })
     }
   },
   mounted() {
+    this.$store.dispatch('setCurrentCategory', 'animals')
     this.$store.dispatch('filterObjectsByPage', {
       category: this.$store.state.currentCategory,
       page: this.$route.params.pageIndex
