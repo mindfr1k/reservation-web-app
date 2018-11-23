@@ -51,6 +51,9 @@ const initStore = () => new Vuex.Store({
     setCurrentCategory(state, payload) {
       state.currentCategory = payload
     },
+    setIsAdmin(state, payload) {
+      state.isAdmin = payload
+    },
     setCheckedProperty(state, payload) {
       const checkbox = state.reservationCategories[payload]
       checkbox.isChecked = !checkbox.isChecked
@@ -68,10 +71,18 @@ const initStore = () => new Vuex.Store({
     },
     async deleteFromDb({}, payload) {
       await superagent
-        .delete(`http://${process.env.HOST}:${process.env.PORT}/animals/${payload}`)
+        .delete(`http://${process.env.HOST}:${process.env.PORT}/${payload.category}/${payload.id}`)
     },
-    isAdmin() {
-      return true
+    async postObject({}, payload) {
+      await superagent
+        .post(`http://${process.env.HOST}:${process.env.PORT}/${payload.category}`)
+        .field('title', payload.title)
+        .field('preview', payload.preview)
+        .field('description', payload.description)
+        .attach('image', payload.image)
+    },
+    isAdmin({commit}) {
+      commit('setIsAdmin', false)
     },
     setCurrentCategory({commit}, payload) {
       commit('setCurrentCategory', payload)

@@ -1,12 +1,17 @@
 <template>
   <div>
-    <nuxt-link to="" class="btn-flat waves-effect waves-light editButton">
+    <button class="btn-flat waves-effect waves-light editButton"
+    @click="showUpdatingModal = true">
       Редагувати
-    </nuxt-link>
+    </button>
     <button class="btn-flat waves-effect waves-light deleteButton" 
     @click="showDeletionModal = true">
       Видалити
     </button>
+
+    <UpdatingModal v-if="showUpdatingModal"
+    :id="id"
+    @close="showUpdatingModal = false" />
 
     <DeletionModal v-if="showDeletionModal"
     :id="id"
@@ -15,6 +20,7 @@
 </template>
 
 <script>
+import UpdatingModal from '@/components/UpdatingModal'
 import DeletionModal from '@/components/DeletionModal'
 
 export default {
@@ -22,10 +28,12 @@ export default {
     'id'
   ],
   components: {
+    UpdatingModal,
     DeletionModal
   },
   data() {
     return {
+      showUpdatingModal: false,
       showDeletionModal: false
     }
   }
@@ -37,10 +45,10 @@ export default {
     padding-right: 2rem;
     margin-left: 1.6rem;
   }
-  .card .card-action a.editButton:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
+  .card .card-action button.editButton:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
     color: #2196f3;
   }
-  .card .card-action a.editButton:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating):hover {
+  .card .card-action button.editButton:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating):hover {
     background-color: #2196f3;
     color: #ffffff;
   }

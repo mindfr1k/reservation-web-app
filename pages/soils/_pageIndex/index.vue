@@ -2,8 +2,8 @@
   <div>
     <div class="row">
       <div class="col s12 m12 hide-on-large-only">
-          <button class="col s4 m4 btn-flat" v-for="(category, index) in reservationCategories" 
-          @click="setCurrentCategory(index)"
+          <button class="col s4 m4 btn-flat" v-for="category in reservationCategories" 
+          @click="setCurrentCategory(category.id)"
           :key="category.title">
             <i class="material-icons left">{{ category.icon }}</i>
             <span>{{ category.title }}</span>

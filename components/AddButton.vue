@@ -30,6 +30,7 @@ export default {
   div {
     margin: .5rem 0 1rem 0;
     border-radius: 2px;
+    height: 100%;
   }
   button {
     width: 100%;

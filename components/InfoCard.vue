@@ -1,33 +1,31 @@
 <template>
-  <div>
-    <div class="card">
-      <div class="card-image">
-        <img class="responsive-img" :src="img">
-      </div>
+  <div class="card">
+    <div class="card-image">
+      <img class="responsive-img" :src="img">
+    </div>
 
-      <span class="card-title">
-        <h5 class="center-align">{{ title }}</h5>
-      </span>
+    <span class="card-title">
+      <h5 class="center-align">{{ title }}</h5>
+    </span>
 
-      <div class="card-content">
-        <p class="left-align">{{ preview }}</p>
-      </div>
+    <div class="card-content">
+      <p class="left-align">{{ preview }}</p>
+    </div>
 
-      <div class="card-action center-align">
-        <nuxt-link to="" class="btn-flat waves-effect waves-light activator">
-          <span class="activator">Детальніше</span>
-        </nuxt-link>
-        <EditDeleteButtons v-if="isAdmin" :id="id"/>
-      </div>
+    <div class="card-action center-align">
+      <nuxt-link to="" class="btn-flat waves-effect waves-light activator">
+        <span class="activator">Детальніше</span>
+      </nuxt-link>
+      <EditDeleteButtons v-if="isAdmin" :id="id"/>
+    </div>
 
 
-      <div class="card-reveal">
-        <span class="card-title center-align">
-          <i class="material-icons right">close</i>
-          {{ title }}
-          </span>
-        <p>{{ description }}</p>
-      </div>
+    <div class="card-reveal">
+      <span class="card-title center-align">
+        <i class="material-icons right">close</i>
+        {{ title }}
+        </span>
+      <p>{{ description }}</p>
     </div>
   </div>
 </template>
@@ -56,8 +54,11 @@ export default {
 
 
 <style scoped>
+  .card {
+    height: 100%;
+  }
   img {
-    height: 40vh;
+    height: 30vh;
   }
   h5 {
     margin-bottom: 0;

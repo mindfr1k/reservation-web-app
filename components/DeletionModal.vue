@@ -21,7 +21,7 @@
                 Ні
               </button>
               <button class="btn-flat waves-effect waves-light confirmButton" 
-              @click="$emit('close'); deleteObject(id)">
+              @click="deleteObject(id)">
                 Так
               </button>
             </slot>
@@ -39,8 +39,11 @@ export default {
     'id'
   ],
   methods: {
-    deleteObject(id) {
-      this.$store.dispatch('deleteFromDb', this.id)
+    async deleteObject(id) {
+      await this.$store.dispatch('deleteFromDb', {
+        category: this.$store.state.currentCategory,
+        id: this.id
+      })
       location.reload(true)
     }
   }

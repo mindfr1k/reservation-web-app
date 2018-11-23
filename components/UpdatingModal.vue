@@ -5,21 +5,20 @@
         <div class="modal-container">
           <div class="row">
             <div class="col s12 modal-header">
-              <h5>Створення елементу</h5>
+              <h5>Редагування елементу</h5>
             </div>
             <div class="col s12 modal-body">
               <slot name="body">
                 <form @submit.prevent="checkForm()">
                   <div class="input-field col s12">
                     <input id="title" type="text" class="validate" data-length="100" 
-                    v-model="title"
-                    required />
-                    <label for="title" class="inputLabel">Назва*</label>
+                    v-model="title" />
+                    <label for="title" class="inputLabel">Назва</label>
                   </div>
                   <div class="file-field input-field col s12">
                     <div class="btn fileButton">
                       <span>Файл</span>
-                      <input id="image" type="file" ref="file" required />
+                      <input id="image" type="file" ref="file" />
                     </div>
                     <div class="file-path-wrapper">
                       <input type="text" class="file-path validate" placeholder="Зображення"/>
@@ -28,16 +27,14 @@
                   <div class="input-field col s12">
                     <textarea id="preview" type="text" class="validate materialize-textarea" 
                     data-length="200"
-                    v-model="preview"
-                    required />
-                    <label for="preview" class="inputLabel">Стислий опис*</label>
+                    v-model="preview" />
+                    <label for="preview" class="inputLabel">Стислий опис</label>
                   </div>
                   <div class="input-field col s12">
                     <textarea id="description" type="text" class="validate materialize-textarea" 
                     data-length="500"
-                    v-model="description"
-                    required />
-                    <label for="description" class="inputLabel">Детальна інформація*</label>
+                    v-model="description" />
+                    <label for="description" class="inputLabel">Детальна інформація</label>
                   </div>
                   <div class="col s12 error-container" v-if="errors.length">
                     <b>Будь ласка, виправте наступні помилки:</b>
@@ -79,27 +76,37 @@ export default {
   methods: {
     async checkForm(event) {
       this.errors = []
-      if (!this.title.match(/^[^0-9]+$/)) {
+      if (this.title && !this.title.match(/^[^0-9]+$/)) {
         this.errors.push('Назва не має містити цифр.')
       }
-      if (this.title.length > 100) {
+      if (this.title && this.title.length > 100) {
         this.errors.push('Назва повинна містити не більше 100 символів.')
       }
-      if (this.preview.length > 200) {
+      if (this.preview && this.preview.length > 200) {
         this.errors.push('Стислий опис повинен містити не більше 200 символів.')
       }
-      if (this.description.length > 500) {
+      if (this.description && this.description.length > 500) {
         this.errors.push('Детальний опис повинен містити не більше 500 символів.')
       }
       if (!this.errors.length) {
-        await this.$store.dispatch('postObject', {
+        const body = {}
+        for (let prop in this._data) {
+          if (this._data[prop]) {
+            body[prop] = this._data[prop]
+          }
+        }
+        if (this.$refs.file.files[0]) {
+          body.image = this.$refs.file.files[0]
+        }
+        delete body.errors
+        /*await this.$store.dispatch('postObject', {
           category: this.$store.state.currentCategory,
           title: this.title,
           image: this.$refs.file.files[0],
           preview: this.preview,
           description: this.description
         })
-        location.reload(true)
+        location.reload(true)*/
       }
     }
   },
