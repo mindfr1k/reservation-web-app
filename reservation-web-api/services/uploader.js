@@ -6,7 +6,8 @@ const storage = multer.diskStorage({
     cb(null, join('reservation-web-api', 'static', 'images'))
   },
   filename: (req, file, cb) => {
-    cb(null, `${new Date().toISOString()}-${file.originalname}`)
+    const timestamp = new Date().toISOString().replace(/:/g, '-')
+    cb(null, `${timestamp}-${file.originalname}`)
   }
 })
 
