@@ -20,7 +20,7 @@ const setupNuxt = require('./services/setup-nuxt')
       .disable('x-powered-by')
       .use(bodyParser.json())
       .use(bodyParser.urlencoded({ extended: true }))
-      .use('/reservation-web-api/static/images', express.static(join(__dirname, 'static', 'images')))
+      .use('/reservation-web-api/static/images', express.static(join('reservation-web-api', 'static', 'images')))
       .use(initRoutes(db))
       .use('/', setupNuxt)
       .use((_, res, __) => {
