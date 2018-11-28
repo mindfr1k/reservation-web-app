@@ -25,6 +25,7 @@ module.exports = db => Router()
   .get('/', validate(getCatalog), async (req, res) => {
     const { categoryName } = req.query
     const { skip, limit } = req.payload
+    
     return res.status(200).json(await db.collection(categoryName)
       .find()
       .skip(parseInt(skip))
@@ -39,7 +40,8 @@ module.exports = db => Router()
       const object = (await db.collection(categoryName)
       .find({
         _id: ObjectId(id)
-      }).toArray())[0]
+      })
+      .toArray())[0]
       deleteFile(object.path)
     }
 
@@ -54,17 +56,20 @@ module.exports = db => Router()
     })
   })
   .delete('/:id', async (req, res) => {
+    const { categoryName } = req.body
     const { id } = req.params
-    const animal = (await db.collection('animals')
+    const object = (await db.collection(categoryName)
     .find({
       _id: ObjectId(id)
-    }).toArray())[0]
-    deleteFile(animal.path)
-    await db.collection('animals')
+    })
+    .toArray())[0]
+    deleteFile(object.path)
+
+    await db.collection(categoryName)
     .deleteOne({
       _id: ObjectId(id)
     })
     return res.status(200).json({
-      message: 'Animal was deleted successfully'
+      message: 'Object was deleted successfully'
     })
   })

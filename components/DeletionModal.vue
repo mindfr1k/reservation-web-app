@@ -3,29 +3,28 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
-
-          <div class="modal-header">
-            <h5>Видалення елементу</h5>
-          </div>
-
-          <div class="modal-body">
-            <slot name="body">
-              Ви впевнені, що хочете видалити цей елемент?
-            </slot>
-          </div>
-
-          <div class="modal-footer">
-            <slot name="footer">
-              <button class="btn-flat waves-effect waves-light abortButton" 
-              @click="$emit('close')">
-                Ні
-              </button>
-              <button class="btn-flat waves-effect waves-light confirmButton" 
-              @click="deleteObject(id)">
-                Так
-              </button>
-            </slot>
-          </div>
+          <div class="row">
+            <div class="col s12 modal-header">
+              <h5>Видалення елементу</h5>
+            </div>
+            <div class="col s12 modal-body">
+              <slot name="body">
+                Ви впевнені, що хочете видалити цей елемент?
+              </slot>
+            </div>
+            <div class="col s12 modal-footer">
+              <slot name="footer">
+                <button class="btn-flat waves-effect waves-light abortButton" 
+                @click="$emit('close')">
+                  Ні
+                </button>
+                <button class="btn-flat waves-effect waves-light confirmButton" 
+                @click="checkForm">
+                  Так
+                </button>
+              </slot>
+            </div>
+          </div> 
 
         </div>
       </div>
@@ -39,10 +38,12 @@ export default {
     'id'
   ],
   methods: {
-    async deleteObject(id) {
-      await this.$store.dispatch('deleteFromDb', {
-        category: this.$store.state.currentCategory,
-        id: this.id
+    async checkForm() {
+      await this.$store.dispatch('deleteObject', {
+        id: this.id,
+        body: {
+          categoryName: this.$store.state.currentCategory
+        }
       })
       location.reload(true)
     }

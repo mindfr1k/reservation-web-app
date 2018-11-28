@@ -42,7 +42,7 @@
                       <li v-for="error in errors" :key="error">{{ error }}</li>
                     </ul>
                   </div>
-                  <div class="col s12 enter-align">
+                  <div class="col s12 center-align">
                     <button class="btn-flat waves-effect waves-light abortButton" 
                     @click="$emit('close')">
                       Скасувати

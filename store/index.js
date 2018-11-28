@@ -69,9 +69,10 @@ const initStore = () => new Vuex.Store({
         .get(`http://${process.env.HOST}:${process.env.PORT}/categories?categoryName=${payload.categoryName}&limit=9&skip=${(payload.page - 1) * 9}`)
       commit('setFilteredObjects', JSON.parse(response.text))
     },
-    async deleteFromDb({}, payload) {
+    async deleteObject({}, payload) {
       await superagent
-        .delete(`http://${process.env.HOST}:${process.env.PORT}/${payload.category}/${payload.id}`)
+        .delete(`http://${process.env.HOST}:${process.env.PORT}/categories/${payload.id}`)
+        .send(payload.body)
     },
     async postObject({}, payload) {
       await superagent
