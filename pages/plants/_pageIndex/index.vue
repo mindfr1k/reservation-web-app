@@ -73,7 +73,7 @@ export default {
   mounted() {
     this.$store.dispatch('setCurrentCategory', 'plants')
     this.$store.dispatch('filterObjectsByPage', {
-      category: this.$store.state.currentCategory,
+      categoryName: this.$store.state.currentCategory,
       page: this.$route.params.pageIndex
     })
   }

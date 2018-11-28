@@ -66,7 +66,7 @@ const initStore = () => new Vuex.Store({
     async filterObjectsByPage({commit}, payload) {
       payload.page = parseInt(payload.page)
       const response = await superagent
-        .get(`http://${process.env.HOST}:${process.env.PORT}/${payload.category}?limit=9&skip=${(payload.page - 1) * 9}`)
+        .get(`http://${process.env.HOST}:${process.env.PORT}/categories?categoryName=${payload.categoryName}&limit=9&skip=${(payload.page - 1) * 9}`)
       commit('setFilteredObjects', JSON.parse(response.text))
     },
     async deleteFromDb({}, payload) {

@@ -1,10 +1,6 @@
 const { Router } = require('express')
 
-const animalRoutes = require('./animals')
-const plantRoutes = require('./plants')
-const soilRoutes = require('./soils')
+const catalogRoutes = require('./catalog')
 
 module.exports = db => Router()
-  .use('/animals', animalRoutes(db))
-  .use('/plants', plantRoutes(db))
-  .use('/soils', soilRoutes(db))
+  .use('/categories', catalogRoutes(db))
