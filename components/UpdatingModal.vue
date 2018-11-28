@@ -101,9 +101,9 @@ export default {
         if (this.$refs.file.files[0]) {
           body.append('image', this.$refs.file.files[0])
         }
+        body.append('categoryName', this.$store.state.currentCategory)
         delete body.errors
         await this.$store.dispatch('patchObject', {
-          category: this.$store.state.currentCategory,
           id: this.id,
           body
         })

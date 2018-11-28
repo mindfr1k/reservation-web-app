@@ -33,23 +33,24 @@ module.exports = db => Router()
     )
   })
   .patch('/:id', upload('image'), validate(patchCatalog), async (req, res) => {
+    const { categoryName } = req.body
     const { id } = req.params
     if (req.file) {
-      const animal = (await db.collection('animals')
+      const object = (await db.collection(categoryName)
       .find({
         _id: ObjectId(id)
       }).toArray())[0]
-      deleteFile(animal.path)
+      deleteFile(object.path)
     }
 
-    await db.collection('animals')
+    await db.collection(categoryName)
     .updateOne({
       _id: ObjectId(id)
     }, {
       $set: req.payload
     })
     return res.status(200).json({
-      message: 'Animal was updated successfully'
+      message: 'Object was updated successfully'
     })
   })
   .delete('/:id', async (req, res) => {
