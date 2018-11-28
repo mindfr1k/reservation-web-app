@@ -93,7 +93,7 @@ export default {
       }
       if (!this.errors.length) {
         await this.$store.dispatch('postObject', {
-          category: this.$store.state.currentCategory,
+          categoryName: this.$store.state.currentCategory,
           title: this.title,
           image: this.$refs.file.files[0],
           preview: this.preview,

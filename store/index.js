@@ -75,7 +75,8 @@ const initStore = () => new Vuex.Store({
     },
     async postObject({}, payload) {
       await superagent
-        .post(`http://${process.env.HOST}:${process.env.PORT}/${payload.category}`)
+        .post(`http://${process.env.HOST}:${process.env.PORT}/categories`)
+        .field('categoryName', payload.categoryName)
         .field('title', payload.title)
         .field('preview', payload.preview)
         .field('description', payload.description)
