@@ -11,6 +11,9 @@
 
     <UpdatingModal v-if="showUpdatingModal"
     :id="id"
+    :objectTitle="title"
+    :objectPreview="preview"
+    :objectDescription="description"
     @close="showUpdatingModal = false" />
 
     <DeletionModal v-if="showDeletionModal"
@@ -25,7 +28,10 @@ import DeletionModal from '@/components/DeletionModal'
 
 export default {
   props: [
-    'id'
+    'id',
+    'title',
+    'preview',
+    'description'
   ],
   components: {
     UpdatingModal,

@@ -9,7 +9,7 @@
             </div>
             <div class="col s12 modal-body">
               <slot name="body">
-                <form @submit.prevent="checkForm()">
+                <form @submit.prevent>
                   <div class="input-field col s12">
                     <input id="title" type="text" class="validate" data-length="100" 
                     v-model="title"
@@ -51,7 +51,7 @@
                       Скасувати
                     </button>
                     <button class="btn-flat waves-effect waves-light confirmButton" 
-                    type="submit">
+                    @click="checkForm">
                       Підтвердити
                     </button>
                   </div>
@@ -77,7 +77,7 @@ export default {
     }
   },
   methods: {
-    async checkForm(event) {
+    async checkForm() {
       this.errors = []
       if (!this.title.match(/^[^0-9]+$/)) {
         this.errors.push('Назва не має містити цифр.')

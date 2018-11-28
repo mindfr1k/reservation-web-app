@@ -16,7 +16,11 @@
       <nuxt-link to="" class="btn-flat waves-effect waves-light activator">
         <span class="activator">Детальніше</span>
       </nuxt-link>
-      <EditDeleteButtons v-if="isAdmin" :id="id"/>
+      <EditDeleteButtons v-if="isAdmin" 
+      :id="id"
+      :title="title"
+      :preview="preview"
+      :description="description"/>
     </div>
 
 

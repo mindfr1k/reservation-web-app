@@ -9,10 +9,10 @@
             </div>
             <div class="col s12 modal-body">
               <slot name="body">
-                <form @submit.prevent="checkForm()">
+                <form @submit.prevent>
                   <div class="input-field col s12">
                     <input id="title" type="text" class="validate" data-length="100" 
-                    v-model="title" />
+                    v-model="title" ref="title" />
                     <label for="title" class="inputLabel">Назва</label>
                   </div>
                   <div class="file-field input-field col s12">
@@ -27,13 +27,15 @@
                   <div class="input-field col s12">
                     <textarea id="preview" type="text" class="validate materialize-textarea" 
                     data-length="200"
-                    v-model="preview" />
+                    v-model="preview" 
+                    ref="preview" />
                     <label for="preview" class="inputLabel">Стислий опис</label>
                   </div>
                   <div class="input-field col s12">
                     <textarea id="description" type="text" class="validate materialize-textarea" 
                     data-length="500"
-                    v-model="description" />
+                    v-model="description"
+                    ref="description" />
                     <label for="description" class="inputLabel">Детальна інформація</label>
                   </div>
                   <div class="col s12 error-container" v-if="errors.length">
@@ -48,7 +50,7 @@
                       Скасувати
                     </button>
                     <button class="btn-flat waves-effect waves-light confirmButton" 
-                    type="submit">
+                    @click="checkForm">
                       Підтвердити
                     </button>
                   </div>
@@ -66,29 +68,32 @@
 <script>
 export default {
   props: [
-    'id'
+    'id',
+    'objectTitle',
+    'objectPreview',
+    'objectDescription'
   ],
   data() {
     return {
       errors: [],
-      title: null,
-      preview: null,
-      description: null
+      title: this.objectTitle,
+      preview: this.objectPreview,
+      description: this.objectDescription
     }
   },
   methods: {
-    async checkForm(event) {
+    async checkForm() {
       this.errors = []
-      if (this.title && !this.title.match(/^[^0-9]+$/)) {
+      if (this.objectTitle && !this.objectTitle.match(/^[^0-9]+$/)) {
         this.errors.push('Назва не має містити цифр.')
       }
-      if (this.title && this.title.length > 100) {
+      if (this.objectTitle && this.objectTitle.length > 100) {
         this.errors.push('Назва повинна містити не більше 100 символів.')
       }
-      if (this.preview && this.preview.length > 200) {
+      if (this.objectPreview && this.objectPreview.length > 200) {
         this.errors.push('Стислий опис повинен містити не більше 200 символів.')
       }
-      if (this.description && this.description.length > 500) {
+      if (this.objectDescription && this.objectDescription.length > 500) {
         this.errors.push('Детальний опис повинен містити не більше 500 символів.')
       }
       if (!this.errors.length) {
@@ -112,6 +117,9 @@ export default {
     }
   },
   mounted() {
+    this.$refs.title.focus()
+    this.$refs.preview.focus()
+    this.$refs.description.focus()
     $(document).ready(function() {
       $('input#title, textarea#preview, textarea#description').characterCounter();
     })
