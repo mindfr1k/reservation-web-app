@@ -58,9 +58,6 @@ export default {
 
 
 <style scoped>
-  .card {
-    height: 100%;
-  }
   img {
     height: 30vh;
   }

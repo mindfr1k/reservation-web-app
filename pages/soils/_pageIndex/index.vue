@@ -11,8 +11,8 @@
       </div>
 
       <div class="col s12 m12 l10">
-        <div class="row">
-          <div class="col s12 m6 l4" v-for="animal in filteredAnimals" :key="animal._id">
+        <div class="catalogRow">
+          <div class="catalogCol" v-for="animal in filteredAnimals" :key="animal._id">
             <InfoCard
             :id="animal._id"
             :img="animal.path"
@@ -21,7 +21,9 @@
             :description="animal.description" />
           </div>
 
-          <AddButton v-if="isAdmin" class="col s12 m6 l4" />
+          <div class="catalogCol">
+            <AddButton v-if="isAdmin" />
+          </div>
         </div>
       </div>
 
@@ -81,6 +83,29 @@ export default {
 </script>
 
 <style scoped>
+  .catalogRow {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .catalogCol {
+    display: flex;
+    flex-direction: column;
+    flex: 0 1 33%;
+    padding: 0rem 0.8rem;
+  }
+  @media screen and (max-width: 1158px) {
+    .myCol {
+      flex: 0 1 50%;
+    }
+  }
+  @media screen and (max-width: 600px) {
+    .myCol {
+      flex: 0 1 100%;
+    }
+  }
+  .card {
+    flex: 1;
+  }
   button {
     font-weight: 500;
     font-size: 1.3rem;
