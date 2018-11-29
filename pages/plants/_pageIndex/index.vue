@@ -97,12 +97,12 @@ export default {
     padding: 0rem 0.8rem;
   }
   @media screen and (max-width: 1158px) {
-    .myCol {
+    .catalogCol {
       flex: 0 1 50%;
     }
   }
   @media screen and (max-width: 600px) {
-    .myCol {
+    .catalogCol {
       flex: 0 1 100%;
     }
   }
