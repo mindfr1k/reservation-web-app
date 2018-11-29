@@ -124,9 +124,6 @@ export default {
         ? 'active'
         : 'waves-effect'
     }
-  },
-  mounted() {
-    this.$store.dispatch('setCategoryPages', 2);
   }
 }
 </script>
