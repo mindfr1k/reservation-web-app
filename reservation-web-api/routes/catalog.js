@@ -75,7 +75,6 @@ module.exports = db => Router()
   })
   .get('/amount', async (req, res) => {
     const { categoryName } = req.query
-    console.log(categoryName)
     return res.status(200).json((await db.collection(categoryName)
       .aggregate([
         {
