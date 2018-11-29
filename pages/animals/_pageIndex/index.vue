@@ -66,9 +66,9 @@ export default {
     }
   },
   methods: {
-    setCurrentCategory(index) {
+    setCurrentCategory(category) {
       this.$nuxt.$router.push({ 
-        path: `/${index}/${this.$route.params.pageIndex}`
+        path: `/${category}/1`
       })
     }
   },
