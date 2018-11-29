@@ -84,10 +84,17 @@ export default {
       suppressUndo: true
     });
     mapBorder.setMap(this.map)
-    mapBorder.addListener('click', event => {
+    /*mapBorder.addListener('click', event => {
       console.log(this.getGoogleShapeCoords(mapBorder.getPath().getArray()))
-    })
+    })*/
 
+    for (let coord of path) {
+      const { lat, lng } = coord;
+      const position = new google.maps.LatLng(lat - 0.01, lng);
+      this.map.fitBounds(this.bounds.extend(position));
+    }
+  },
+  beforeUpdate() {
     this.zonePolylines.forEach(zone => {
       const { strokeColor, path } = zone
       const zonePolyline = new google.maps.Polyline({
@@ -99,18 +106,12 @@ export default {
         suppressUndo: true
       })
       zonePolyline.setMap(this.map)
-      zonePolyline.addListener('click', event => {
+      /*zonePolyline.addListener('click', event => {
         console.log(this.getGoogleShapeCoords(zonePolyline.getPath().getArray()))
-      })
+      })*/
     })
 
-    for (let coord of path) {
-      const { lat, lng } = coord;
-      const position = new google.maps.LatLng(lat - 0.01, lng);
-      this.map.fitBounds(this.bounds.extend(position));
-    }
-  },
-  beforeUpdate() {
+
     this.previousPolygons.forEach(polygon => {
       polygon.setMap(null);
     });

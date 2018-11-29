@@ -32,7 +32,7 @@ const initStore = () => new Vuex.Store({
     },
 
     borderPolyline,
-    zonePolylines,
+    zonePolylines: [],
 
     polygons,
     checkedPolygons: [],
@@ -60,6 +60,9 @@ const initStore = () => new Vuex.Store({
     },
     setCheckedPolygons(state, payload) {
       state.checkedPolygons = payload
+    },
+    setZonePolylines(state, payload) {
+      state.zonePolylines = payload;
     }
   },
   actions: {
@@ -113,6 +116,14 @@ const initStore = () => new Vuex.Store({
         result.push(...filteredPolygon)
       }
       commit('setCheckedPolygons', result)
+    },
+    triggerMenuSelected({commit}, payload) {
+      if (payload) {
+        commit('setZonePolylines', zonePolylines)
+      }
+      else {
+        commit('setZonePolylines', [])
+      }
     }
   }
 })
