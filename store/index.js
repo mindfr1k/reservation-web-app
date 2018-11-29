@@ -39,7 +39,7 @@ const initStore = () => new Vuex.Store({
     filteredPolygon: null,
 
     filteredObjects: null,
-    categoryPages: null
+    categoryPages: 1
   },
   mutations: {
     setFilteredObjects(state, payload) {
@@ -97,8 +97,8 @@ const initStore = () => new Vuex.Store({
     setCurrentCategory({commit}, payload) {
       commit('setCurrentCategory', payload)
     },
-    setCategoryPages({commit}) {
-      commit('setCategoryPages', 2)
+    setCategoryPages({commit}, payload) {
+      commit('setCategoryPages', payload)
     },
     filterCheckboxes({commit}, payload) {
       commit('setCheckedProperty', payload)

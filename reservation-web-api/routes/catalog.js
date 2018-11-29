@@ -73,3 +73,15 @@ module.exports = db => Router()
       message: 'Object was deleted successfully'
     })
   })
+  .get('/amount', async (req, res) => {
+    const { categoryName } = req.query
+    console.log(categoryName)
+    return res.status(200).json((await db.collection(categoryName)
+      .aggregate([
+        {
+          $count: 'categoryAmount'
+        }
+      ])
+      .toArray())[0]
+    )
+  })

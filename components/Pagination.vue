@@ -126,7 +126,7 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch('setCategoryPages');
+    this.$store.dispatch('setCategoryPages', 2);
   }
 }
 </script>
