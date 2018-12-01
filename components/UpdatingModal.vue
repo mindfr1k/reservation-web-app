@@ -26,14 +26,14 @@
                   </div>
                   <div class="input-field col s12">
                     <textarea id="preview" type="text" class="validate materialize-textarea" 
-                    data-length="200"
+                    data-length="500"
                     v-model="preview" 
                     ref="preview" />
                     <label for="preview" class="inputLabel">Стислий опис</label>
                   </div>
                   <div class="input-field col s12">
                     <textarea id="description" type="text" class="validate materialize-textarea" 
-                    data-length="500"
+                    data-length="1500"
                     v-model="description"
                     ref="description" />
                     <label for="description" class="inputLabel">Детальна інформація</label>
@@ -90,11 +90,11 @@ export default {
       if (this.objectTitle && this.objectTitle.length > 100) {
         this.errors.push('Назва повинна містити не більше 100 символів.')
       }
-      if (this.objectPreview && this.objectPreview.length > 200) {
-        this.errors.push('Стислий опис повинен містити не більше 200 символів.')
+      if (this.objectPreview && this.objectPreview.length > 500) {
+        this.errors.push('Стислий опис повинен містити не більше 500 символів.')
       }
-      if (this.objectDescription && this.objectDescription.length > 500) {
-        this.errors.push('Детальний опис повинен містити не більше 500 символів.')
+      if (this.objectDescription && this.objectDescription.length > 1500) {
+        this.errors.push('Детальний опис повинен містити не більше 1500 символів.')
       }
       if (!this.errors.length) {
         const body = new FormData()

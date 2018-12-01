@@ -27,14 +27,14 @@
                   </div>
                   <div class="input-field col s12">
                     <textarea id="preview" type="text" class="validate materialize-textarea" 
-                    data-length="200"
+                    data-length="500"
                     v-model="preview"
                     required />
                     <label for="preview" class="inputLabel">Стислий опис*</label>
                   </div>
                   <div class="input-field col s12">
                     <textarea id="description" type="text" class="validate materialize-textarea" 
-                    data-length="500"
+                    data-length="1500"
                     v-model="description"
                     required />
                     <label for="description" class="inputLabel">Детальна інформація*</label>
@@ -85,11 +85,11 @@ export default {
       if (this.title.length > 100) {
         this.errors.push('Назва повинна містити не більше 100 символів.')
       }
-      if (this.preview.length > 200) {
-        this.errors.push('Стислий опис повинен містити не більше 200 символів.')
+      if (this.preview.length > 500) {
+        this.errors.push('Стислий опис повинен містити не більше 500 символів.')
       }
-      if (this.description.length > 500) {
-        this.errors.push('Детальний опис повинен містити не більше 500 символів.')
+      if (this.description.length > 1500) {
+        this.errors.push('Детальний опис повинен містити не більше 1500 символів.')
       }
       if (!this.errors.length) {
         await this.$store.dispatch('postObject', {
