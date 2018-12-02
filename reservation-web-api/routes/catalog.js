@@ -16,9 +16,8 @@ module.exports = db => Router()
       preview,
       description
     })).ops[0]
-
     return res.status(201).json({
-      message: 'Object was created successfully',
+      message: 'Object was created successfully.',
       createdObject
     })
   })
@@ -52,7 +51,7 @@ module.exports = db => Router()
       $set: req.payload
     })
     return res.status(200).json({
-      message: 'Object was updated successfully'
+      message: 'Object was updated successfully.'
     })
   })
   .delete('/:id', async (req, res) => {
@@ -70,7 +69,7 @@ module.exports = db => Router()
       _id: ObjectId(id)
     })
     return res.status(200).json({
-      message: 'Object was deleted successfully'
+      message: 'Object was deleted successfully.'
     })
   })
   .get('/amount', async (req, res) => {
