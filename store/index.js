@@ -70,15 +70,15 @@ const initStore = () => new Vuex.Store({
       const response = await superagent
         .get(`http://${process.env.HOST}:${process.env.PORT}/categories/amount?categoryName=${payload.categoryName}`)
       const amount = JSON.parse(response.text).categoryAmount
-      const flooredAmount = amount % 9 === 0
-        ? ~~(amount / 9)
-        : ~~(amount / 9) + 1
+      const flooredAmount = amount % 12 === 0
+        ? ~~(amount / 12)
+        : ~~(amount / 12) + 1
       commit('setCategoryPages', flooredAmount)
     },
     async filterObjectsByPage({commit}, payload) {
       payload.page = parseInt(payload.page)
       const response = await superagent
-        .get(`http://${process.env.HOST}:${process.env.PORT}/categories?categoryName=${payload.categoryName}&limit=9&skip=${(payload.page - 1) * 9}`)
+        .get(`http://${process.env.HOST}:${process.env.PORT}/categories?categoryName=${payload.categoryName}&limit=12&skip=${(payload.page - 1) * 12}`)
       commit('setFilteredObjects', JSON.parse(response.text))
     },
     async deleteObject({}, payload) {

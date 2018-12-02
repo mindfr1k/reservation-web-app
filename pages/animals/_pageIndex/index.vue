@@ -93,8 +93,13 @@ export default {
   .catalogCol {
     display: flex;
     flex-direction: column;
-    flex: 0 1 33%;
+    flex: 0 1 25%;
     padding: 0rem 0.8rem;
+  }
+  @media screen and (max-width: 1413px) {
+    .catalogCol {
+      flex: 0 1 33%;
+    }
   }
   @media screen and (max-width: 1158px) {
     .catalogCol {
