@@ -1,7 +1,7 @@
 const { Router } = require('express')
 const { ObjectId } = require('mongodb')
 
-const { postCatalog, getCatalog, patchCatalog } = require('../schemas/crudCatalog')
+const { postCatalog, getCatalog, patchCatalog } = require('../schemas/crud-catalog')
 const validate = require('../services/validator')
 const upload = require('../services/uploader')
 const deleteFile = require('../services/file-deleter')

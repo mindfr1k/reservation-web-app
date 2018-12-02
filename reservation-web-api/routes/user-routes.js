@@ -2,9 +2,11 @@ const { Router } = require('express')
 const { ObjectId } = require('mongodb')
 
 const { protectField } = require('../services/field-protector')
+const { userProfile } = require('../schemas/user-handling')
+const validate = require('../services/validator')
 
 module.exports = db => Router()
-  .post('/signup', async (req, res) => {
+  .post('/signup', validate(userProfile), async (req, res) => {
     const { username, password, adminKey } = req.body
     const user = (await db.collection('users')
     .find({
