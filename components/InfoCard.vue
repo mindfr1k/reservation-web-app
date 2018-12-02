@@ -59,7 +59,8 @@ export default {
 
 <style scoped>
   img {
-    height: 30vh;
+    height: 40vh;
+    max-width: 55vh;
   }
   h5 {
     margin-bottom: 0;
