@@ -69,9 +69,6 @@ export default {
     menuItems() {
       return this.$store.state.menuItems;
     }
-  },
-  mounted() {
-    this.$store.dispatch('getAdminTools')
   }
 }
 </script>
