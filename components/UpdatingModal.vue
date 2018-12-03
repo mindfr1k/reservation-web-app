@@ -84,16 +84,16 @@ export default {
   methods: {
     async checkForm() {
       this.errors = []
-      if (this.objectTitle && !this.objectTitle.match(/^[^0-9]+$/)) {
+      if (this.title && !this.title.match(/^[^0-9]+$/)) {
         this.errors.push('Назва не має містити цифр.')
       }
-      if (this.objectTitle && this.objectTitle.length > 100) {
+      if (this.title && this.title.length > 100) {
         this.errors.push('Назва повинна містити не більше 100 символів.')
       }
-      if (this.objectPreview && this.objectPreview.length > 500) {
+      if (this.preview && this.preview.length > 500) {
         this.errors.push('Стислий опис повинен містити не більше 500 символів.')
       }
-      if (this.objectDescription && this.objectDescription.length > 1500) {
+      if (this.description && this.description.length > 1500) {
         this.errors.push('Детальний опис повинен містити не більше 1500 символів.')
       }
       if (!this.errors.length) {

@@ -12,12 +12,13 @@ module.exports = db => Router()
     try {
       const { categoryName } = req.body
       const { title, preview, description } = req.payload
-      const createdObject = (await db.collection(categoryName).insertOne({
-        title,
-        path: req.file.path,
-        preview,
-        description
-      })).ops[0]
+      const createdObject = (await db.collection(categoryName)
+        .insertOne({
+          title,
+          path: req.file.path,
+          preview,
+          description
+        })).ops[0]
       return res.status(201).json({
         message: 'Object was created successfully.',
         createdObject
@@ -53,18 +54,18 @@ module.exports = db => Router()
       const { id } = req.params
       if (req.file) {
         const { path } = (await db.collection(categoryName)
-        .find({
-          _id: ObjectId(id)
-        })
-        .toArray())[0]
+          .find({
+            _id: ObjectId(id)
+          })
+          .toArray())[0]
         deleteFile(path)
       }
       await db.collection(categoryName)
-      .updateOne({
-        _id: ObjectId(id)
-      }, {
-        $set: req.payload
-      })
+        .updateOne({
+          _id: ObjectId(id)
+        }, {
+          $set: req.payload
+        })
       return res.status(200).json({
         message: 'Object was updated successfully.'
       })
@@ -80,16 +81,16 @@ module.exports = db => Router()
       const { categoryName } = req.body
       const { id } = req.params
       const { path } = (await db.collection(categoryName)
-      .find({
-        _id: ObjectId(id)
-      })
-      .toArray())[0]
+        .find({
+          _id: ObjectId(id)
+        })
+        .toArray())[0]
       deleteFile(path)
 
       await db.collection(categoryName)
-      .deleteOne({
-        _id: ObjectId(id)
-      })
+        .deleteOne({
+          _id: ObjectId(id)
+        })
       return res.status(200).json({
         message: 'Object was deleted successfully.'
       })

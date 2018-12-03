@@ -85,7 +85,7 @@ export default {
   .material-icons.center {
     margin: -0.6rem 0 0 0;
   }
-  .brand-logo, a {
+  .brand-logo, a, button {
     color: rgba(0, 0, 0, 0.87);
     font-weight: 500;
   }
@@ -99,7 +99,7 @@ export default {
   ul.right {
    margin: 0 1.5rem;
   }
-  ul.right li a {
+  ul.right li a, ul.right button {
     font-size: 0.9rem;
     text-transform: uppercase;
   }

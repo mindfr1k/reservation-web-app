@@ -8,24 +8,25 @@ const { signUp, signIn } = require('../schemas/user-handling')
 const validate = require('../services/validator')
 
 module.exports = db => Router()
-  .post('/signup', validate(signUp), async (req, res) => {
+  .post('/signup', checkAuth, validate(signUp), async (req, res) => {
     try {
       const { username, password, adminKey } = req.payload
       const user = (await db.collection('users')
-      .find({
-        username
-      }).toArray())[0]
+        .find({
+          username
+        })
+        .toArray())[0]
       if (user) {
         return res.status(422).json({
           message: 'Such user already exists.'
         })
       }
       await db.collection('users')
-      .insertOne({
-        username,
-        password: protectField(password),
-        adminKey: protectField(adminKey)
-      })
+        .insertOne({
+          username,
+          password: protectField(password),
+          adminKey: protectField(adminKey)
+        })
       return res.status(201).json({
         message: 'User was created successfully.'
       })
@@ -40,9 +41,10 @@ module.exports = db => Router()
     try {
       const { username, password } = req.payload
       const user = (await db.collection('users')
-      .find({
-        username
-      }).toArray())[0]
+        .find({
+          username
+        })
+        .toArray())[0]
       if (!user) {
         return res.status(401).json({
           message: 'This user is not authorized.'
@@ -69,15 +71,15 @@ module.exports = db => Router()
       })
     }
   })
-  .get('/', async (_, res) => {
+  .get('/', checkAuth, async (_, res) => {
     try {
       return res.status(200).json(await db.collection('users')
-      .find()
-      .project({
-        password: 0,
-        adminKey: 0
-      })
-      .toArray()
+        .find()
+        .project({
+          password: 0,
+          adminKey: 0
+        })
+        .toArray()
       )
     }
     catch (err) {
@@ -86,13 +88,13 @@ module.exports = db => Router()
       })
     }
   })
-  .delete('/:id', async (req, res) => {
+  .delete('/:id', checkAuth, async (req, res) => {
     try {
       const { id } = req.params
       await db.collection('users')
-      .deleteOne({
-        _id: ObjectId(id)
-      })
+        .deleteOne({
+          _id: ObjectId(id)
+        })
       return res.status(200).json({
         message: 'User was deleted successfully.'
       })

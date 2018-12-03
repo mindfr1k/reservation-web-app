@@ -14,7 +14,8 @@ const initStore = () => new Vuex.Store({
     appTitle: 'Головна',
     menuItems: [
       { title: 'Мапа', path: '/map', icon: 'map' },
-      { title: 'Каталог', path: '/animals/1', icon: 'info' }
+      { title: 'Каталог', path: '/animals/1', icon: 'info' },
+      { title: 'Вийти', path: '/logout', icon: 'exit_to_app' }
     ],
     reservationCategories: [
       { id: 'animals', title: 'Тварини', icon: 'bug_report', path: '/animals/1' },
@@ -51,9 +52,6 @@ const initStore = () => new Vuex.Store({
     setCurrentCategory(state, payload) {
       state.currentCategory = payload
     },
-    setIsAdmin(state, payload) {
-      state.isAdmin = payload
-    },
     setCheckedProperty(state, payload) {
       const checkbox = state.reservationCategories[payload]
       checkbox.isChecked = !checkbox.isChecked
@@ -84,11 +82,13 @@ const initStore = () => new Vuex.Store({
     async deleteObject({}, payload) {
       await superagent
         .delete(`http://${process.env.HOST}:${process.env.PORT}/categories/${payload.id}`)
+        .set('Authorization', `Bearer ${localStorage.getItem('token')}`)
         .send(payload.body)
     },
     async postObject({}, payload) {
       await superagent
         .post(`http://${process.env.HOST}:${process.env.PORT}/categories`)
+        .set('Authorization', `Bearer ${localStorage.getItem('token')}`)
         .field('categoryName', payload.categoryName)
         .field('title', payload.title)
         .field('preview', payload.preview)
@@ -98,10 +98,17 @@ const initStore = () => new Vuex.Store({
     async patchObject({}, payload) {
       await superagent
         .patch(`http://${process.env.HOST}:${process.env.PORT}/categories/${payload.id}`)
+        .set('Authorization', `Bearer ${localStorage.getItem('token')}`)
         .send(payload.body)
     },
-    isAdmin({commit}) {
-      commit('setIsAdmin', false)
+    async signIn({}, payload) {
+      const response = await superagent
+        .post(`http://${process.env.HOST}:${process.env.PORT}/users/signin`)
+        .send(payload)
+      localStorage.setItem('token', response.body.token)
+    },
+    async signOut({}) {
+      localStorage.removeItem('token')
     },
     setCurrentCategory({commit}, payload) {
       commit('setCurrentCategory', payload)
