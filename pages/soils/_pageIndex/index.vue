@@ -22,7 +22,7 @@
           </div>
 
           <div class="catalogCol">
-            <AddButton v-if="isAdmin" />
+            <AddButton v-if="$store.state.isSignedIn" />
           </div>
         </div>
       </div>

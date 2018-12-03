@@ -14,8 +14,7 @@ const initStore = () => new Vuex.Store({
     appTitle: 'Головна',
     menuItems: [
       { title: 'Мапа', path: '/map', icon: 'map' },
-      { title: 'Каталог', path: '/animals/1', icon: 'info' },
-      { title: 'Вийти', path: '/logout', icon: 'exit_to_app' }
+      { title: 'Каталог', path: '/animals/1', icon: 'info' }
     ],
     reservationCategories: [
       { id: 'animals', title: 'Тварини', icon: 'bug_report', path: '/animals/1' },
@@ -24,7 +23,7 @@ const initStore = () => new Vuex.Store({
     ],
     currentCategory: 'animals',
 
-    isAdmin: true,
+    isSignedIn: false,
 
     mapId: 'regionMap',
     mapOptions: {
@@ -60,7 +59,10 @@ const initStore = () => new Vuex.Store({
       state.checkedPolygons = payload
     },
     setZonePolylines(state, payload) {
-      state.zonePolylines = payload;
+      state.zonePolylines = payload
+    },
+    setIsSignedIn(state, payload) {
+      state.isSignedIn = payload
     }
   },
   actions: {
@@ -107,8 +109,20 @@ const initStore = () => new Vuex.Store({
         .send(payload)
       localStorage.setItem('token', response.body.token)
     },
-    async signOut({}) {
+    signOut({commit}) {
       localStorage.removeItem('token')
+      commit('setIsSignedIn', false)
+    },
+    async getAdminTools({commit}) {
+      try {
+        const response = await superagent
+          .get(`http://${process.env.HOST}:${process.env.PORT}/users/adminTools`)
+          .set('Authorization', `Bearer ${localStorage.getItem('token')}`)
+        commit('setIsSignedIn', response.text === 'true')
+      }
+      catch (err) {
+        commit('setIsSignedIn', false)
+      }
     },
     setCurrentCategory({commit}, payload) {
       commit('setCurrentCategory', payload)

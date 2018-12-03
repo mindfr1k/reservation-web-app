@@ -88,6 +88,24 @@ module.exports = db => Router()
       })
     }
   })
+  .get('/adminTools', checkAuth, async (req, res) => {
+    try {
+      const { username } = req.user
+      const user = await db.collection('users')
+        .find({
+          username
+        })
+      if (user) {
+        return res.status(200).send(true)
+      }
+      return res.status(404).json(false)
+    }
+    catch (err) {
+      return res.status(500).json({
+        error: err
+      })
+    }
+  })
   .delete('/:id', checkAuth, async (req, res) => {
     try {
       const { id } = req.params

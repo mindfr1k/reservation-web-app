@@ -63,6 +63,7 @@ export default {
           username: this.username,
           password: this.password,
         })
+        this.$store.commit('setIsSignedIn', true)
         this.$nuxt.$router.push({
           path: `/animals/1`
         })

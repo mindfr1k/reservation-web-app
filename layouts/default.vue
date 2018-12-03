@@ -7,6 +7,11 @@
           <i class="material-icons left">{{ item.icon }}</i>{{ item.title }}
         </nuxt-link>
       </li>
+      <li v-if="$store.state.isSignedIn"> 
+        <nuxt-link to="/logout" class="waves-effect waves-light">
+          <i class="material-icons left">exit_to_app</i>Вийти
+        </nuxt-link>
+      </li>
     </ul>
 
     <div class="navbar-fixed">
@@ -24,6 +29,11 @@
             :key="item.title">
               <nuxt-link :to="item.path" class="waves-effect waves-light">
                 <i class="material-icons left">{{ item.icon }}</i>{{ item.title }}
+              </nuxt-link>
+            </li>
+            <li v-if="$store.state.isSignedIn"> 
+              <nuxt-link to="/logout" class="waves-effect waves-light">
+                <i class="material-icons left">exit_to_app</i>Вийти
               </nuxt-link>
             </li>
           </ul>

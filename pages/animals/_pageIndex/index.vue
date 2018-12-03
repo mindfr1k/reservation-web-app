@@ -22,7 +22,7 @@
           </div>
 
           <div class="catalogCol">
-            <AddButton v-if="isAdmin" />
+            <AddButton v-if="$store.state.isSignedIn" />
           </div>
         </div>
       </div>
@@ -60,9 +60,6 @@ export default {
     },
     reservationCategories() {
       return this.$store.state.reservationCategories
-    },
-    isAdmin() {
-      return this.$store.state.isAdmin
     }
   },
   methods: {
