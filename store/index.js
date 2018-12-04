@@ -113,10 +113,10 @@ const initStore = () => new Vuex.Store({
       localStorage.removeItem('token')
       commit('setIsSignedIn', false)
     },
-    async getAdminTools({commit}) {
+    async checkAuth({commit}) {
       try {
         const response = await superagent
-          .get(`http://${process.env.HOST}:${process.env.PORT}/users/adminTools`)
+          .get(`http://${process.env.HOST}:${process.env.PORT}/users/checkAccess`)
           .set('Authorization', `Bearer ${localStorage.getItem('token')}`)
         commit('setIsSignedIn', response.text === 'true')
       }

@@ -3,6 +3,7 @@ const { ObjectId } = require('mongodb')
 const jwt = require('jsonwebtoken')
 
 const checkAuth = require('../services/auth-checker')
+const checkSign = require('../services/sign-checker')
 const { protectField, checkField } = require('../services/field-protector')
 const { signUp, signIn } = require('../schemas/user-handling')
 const validate = require('../services/validator')
@@ -88,24 +89,6 @@ module.exports = db => Router()
       })
     }
   })
-  .get('/adminTools', checkAuth, async (req, res) => {
-    try {
-      const { username } = req.user
-      const user = await db.collection('users')
-        .find({
-          username
-        })
-      if (user) {
-        return res.status(200).send(true)
-      }
-      return res.status(404).json(false)
-    }
-    catch (err) {
-      return res.status(500).json({
-        error: err
-      })
-    }
-  })
   .delete('/:id', checkAuth, async (req, res) => {
     try {
       const { id } = req.params
@@ -116,6 +99,24 @@ module.exports = db => Router()
       return res.status(200).json({
         message: 'User was deleted successfully.'
       })
+    }
+    catch (err) {
+      return res.status(500).json({
+        error: err
+      })
+    }
+  })
+  .get('/checkAccess', checkSign, async (req, res) => {
+    try {
+      const { username } = req.user
+      const user = await db.collection('users')
+        .find({
+          username
+        })
+      if (user) {
+        return res.status(200).json(true)
+      }
+      return res.status(404).json(false)
     }
     catch (err) {
       return res.status(500).json({
