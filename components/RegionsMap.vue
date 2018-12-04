@@ -57,29 +57,34 @@ export default {
     this.bounds = new google.maps.LatLngBounds();
     this.map = new google.maps.Map(document.getElementById(this.mapId), this.mapOptions);
 
-    /*const drawingManager = new google.maps.drawing.DrawingManager({
+    const drawingManager = new google.maps.drawing.DrawingManager({
       drawingControl: true,
       drawingControlOptions: {
         position: google.maps.ControlPosition.TOP_CENTER,
-        drawingModes: [ 'polyline']
+        drawingModes: [ 'polygon']
       },
       polylineOptions: {
         strokeColor: '#ffff00',
         strokeOpacity: 1,
         strokeWeight: 3
+      },
+      polygonOptions: {
+        strokeColor: '#00ff00',
+        strokeOpacity: 2,
+        strokeWeight: 4
       }
     })
     drawingManager.setMap(this.map)
 
-    drawingManager.addListener('polylinecomplete', event => {
+    drawingManager.addListener('polygoncomplete', event => {
       console.log(this.getGoogleShapeCoords(event.getPath().getArray()))
-    })*/
+    })
 
     const { strokeColor, path } = this.borderPolyline;
     const mapBorder = new google.maps.Polyline({
       path,
       strokeColor,
-      strokeOpacity: 1,
+      strokeOpacity: 0.99,
       strokeWeight: 3,
       //editable: true,
       suppressUndo: true
@@ -106,15 +111,15 @@ export default {
       const zonePolyline = new google.maps.Polyline({
         path,
         strokeColor,
-        strokeOpacity: 1,
+        strokeOpacity: 0.99,
         strokeWeight: 3,
         //editable: true,
         suppressUndo: true
       })
       zonePolyline.setMap(this.map)
-      /*zonePolyline.addListener('click', event => {
+      zonePolyline.addListener('click', event => {
         console.log(this.getGoogleShapeCoords(zonePolyline.getPath().getArray()))
-      })*/
+      })
       this.previousZonePolylines.push(zonePolyline)
     })
 
@@ -132,34 +137,35 @@ export default {
         paths: coords,
         strokeColor: fillColor,
         strokeOpacity: 1,
-        strokeWeight: 3,
+        strokeWeight: 5,
         fillColor,
+        //editable: true,
+        supressUndo: true,
         fillOpacity: 0.3
-      });
+      })
 
-      mapPolygon.setMap(this.map);
+      mapPolygon.setMap(this.map)
 
       mapPolygon.addListener('click', function(event) {
         const contentString = `
-          <div style="text-align: left;">
-            <h1 style="font-size: 2rem;
-            line-height: 2rem;">${previewTitle}</h1>
-            <br/>
-            </div>
-            <div style="text-align: center;"
-              <i><a style="text-decoration: underline;" 
-              href="/regions${pageLink}">подробнее...</a></i>
-            </div>`;
+          <div style="text-align: center;"
+            <i><a style="text-decoration: underline;" 
+            href="/animals/1">подробнее...</a></i>
+          </div>`
 
 
-        infoWindow.setContent(contentString);
-        infoWindow.setPosition(event.latLng);
+        infoWindow.setContent(contentString)
+        infoWindow.setPosition(event.latLng)
 
-        infoWindow.open(this.map);
-      });
+        infoWindow.open(this.map)
+      })
 
-      this.previousPolygons.push(mapPolygon);
-    });
+      mapPolygon.addListener('click', event => {
+        console.log(this.getGoogleShapeCoords(mapPolygon.getPath().getArray()))
+      })
+
+      this.previousPolygons.push(mapPolygon)
+    })
   }
 }
 </script>
