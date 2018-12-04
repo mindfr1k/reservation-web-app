@@ -15,7 +15,8 @@ export default {
     return {
       bounds: {},
       map: {},
-      previousPolygons: []
+      previousPolygons: [],
+      previousZonePolylines: []
     }
   },
   computed: {
@@ -95,6 +96,11 @@ export default {
     }
   },
   beforeUpdate() {
+    this.previousZonePolylines.forEach(zone => {
+      zone.setMap(null)
+    })
+    this.previousZonePolylines = []
+
     this.zonePolylines.forEach(zone => {
       const { strokeColor, path } = zone
       const zonePolyline = new google.maps.Polyline({
@@ -109,13 +115,13 @@ export default {
       /*zonePolyline.addListener('click', event => {
         console.log(this.getGoogleShapeCoords(zonePolyline.getPath().getArray()))
       })*/
+      this.previousZonePolylines.push(zonePolyline)
     })
 
-
     this.previousPolygons.forEach(polygon => {
-      polygon.setMap(null);
-    });
-    this.previousPolygons = [];
+      polygon.setMap(null)
+    })
+    this.previousPolygons = []
 
     const infoWindow = new google.maps.InfoWindow;
 

@@ -147,12 +147,15 @@ const initStore = () => new Vuex.Store({
       }
       commit('setCheckedPolygons', result)
     },
-    triggerMenuSelected({commit}, payload) {
-      if (payload) {
-        commit('setZonePolylines', zonePolylines)
+    filterZonePolylines({commit, state}) {
+      const filteredBoxes = state.reservationCategories.filter(box => {
+        return box.isChecked === true
+      })
+      if (filteredBoxes.length < 1) {
+        commit('setZonePolylines', [])
       }
       else {
-        commit('setZonePolylines', [])
+        commit('setZonePolylines', zonePolylines)
       }
     }
   }

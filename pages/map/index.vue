@@ -42,9 +42,9 @@ export default {
   },
   methods: {
     filterCheckedPolygons(index) {
-      this.$store.dispatch('triggerMenuSelected', true)
       this.$store.dispatch('filterCheckboxes', index)
       this.$store.dispatch('filterCheckedPolygons')
+      this.$store.dispatch('filterZonePolylines')
     }
   }
 }
