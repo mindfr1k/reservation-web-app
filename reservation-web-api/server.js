@@ -11,8 +11,8 @@ const setupNuxt = require('./services/setup-nuxt')
 
 ;(async () => {
   try {
-    const { PORT, PROD_MONGO_URI, PROD_DB_NAME } = process.env
-    const db = await setupConnection(PROD_MONGO_URI, PROD_DB_NAME)
+    const { PORT, MONGO_URI, DB_NAME } = process.env
+    const db = await setupConnection(MONGO_URI, DB_NAME)
 
     express()
       .use(morgan('dev'))
