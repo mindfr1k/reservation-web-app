@@ -32,6 +32,7 @@ module.exports = db => Router()
   })
   .get('/', validate(getCatalog), async (req, res) => {
     try {
+      console.log('\nROFL\n')
       const { categoryName } = req.query
       const { skip, limit } = req.payload
       
