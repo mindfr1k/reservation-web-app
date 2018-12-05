@@ -132,7 +132,7 @@ export default {
       const { fillColor, coords } = polygon;
       let mapPolygon;
 
-      if (polygon.fillColor === '#FF99FF') {
+      if (polygon.fillColor === '#FFA500') {
         mapPolygon = new google.maps.Polygon({
           paths: coords,
           strokeColor: fillColor,
