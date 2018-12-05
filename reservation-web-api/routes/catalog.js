@@ -33,10 +33,8 @@ module.exports = db => Router()
   .get('/', validate(getCatalog), async (req, res) => {
     try {
       const { categoryName } = req.query
-      for (let item of categoryName) {
-        console.log(`\n${item}`)
-      }
       const { skip, limit } = req.payload
+      console.log(`\n${skip}\n${limit}\n`)
       
       return res.status(200).json(await db.collection(categoryName)
         .find()
