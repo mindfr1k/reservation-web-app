@@ -15,7 +15,8 @@
       </div>
 
       <div class="col s12 m12 l10">
-        <RegionsMap />
+        <RegionsMap 
+        @invoke="createInfoModal"/>
       </div>
 
       <div class="col l2 hide-on-med-and-down">
@@ -30,21 +31,35 @@
         </form>
       </div>
     </div>
+
+    <InfoModal v-if="showInfoModal"
+    @close="showInfoModal = false" />
   </div>
 </template>
 
 <script>
-import RegionsMap from '@/components/RegionsMap';
+import RegionsMap from '@/components/RegionsMap'
+import InfoModal from '@/components/InfoModal'
 
 export default {
   components: {
-    RegionsMap
+    RegionsMap,
+    InfoModal
+  },
+  data() {
+    return {
+      showInfoModal: false
+    }
   },
   methods: {
     filterCheckedPolygons(index) {
       this.$store.dispatch('filterCheckboxes', index)
       this.$store.dispatch('filterCheckedPolygons')
       this.$store.dispatch('filterZonePolylines')
+    },
+    createInfoModal() {
+      console.log('works!')
+      this.showInfoModal = true
     }
   }
 }

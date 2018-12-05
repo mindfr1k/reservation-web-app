@@ -128,8 +128,6 @@ export default {
     })
     this.previousPolygons = []
 
-    const infoWindow = new google.maps.InfoWindow;
-
     this.polygons.forEach(polygon => {
       const { fillColor, previewTitle, pageLink, coords } = polygon;
       let mapPolygon;
@@ -158,24 +156,13 @@ export default {
 
       mapPolygon.setMap(this.map)
 
-      mapPolygon.addListener('click', function(event) {
-        const contentString = `
-          <div style="text-align: center;"
-            <i><a style="text-decoration: underline;" 
-            href="/animals/1">подробнее...</a></i>
-          </div>`
-
-
-        infoWindow.setContent(contentString)
-        infoWindow.setPosition(event.latLng)
-
-        infoWindow.open(this.map)
-      })
-
       mapPolygon.addListener('click', event => {
-        console.log(this.getGoogleShapeCoords(mapPolygon.getPath().getArray()))
+        this.$emit('invoke')
       })
 
+      /*mapPolygon.addListener('click', event => {
+        console.log(this.getGoogleShapeCoords(mapPolygon.getPath().getArray()))
+      })*/
       this.previousPolygons.push(mapPolygon)
     })
   }
