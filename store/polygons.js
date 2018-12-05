@@ -28,8 +28,8 @@ export default [
     type: 'plants',
     fillColor: '#00FF00',
     inhabitants: [
-      'Зелений контент №1',
-      'Зелений контент №2'
+      'Річія плаваюча (Riccia fluitans)',
+      'Сальвінія плаваюча (Salvinia natans)'
     ],
     coords: [
       { lat: 48.50951205177469, lng: 34.865361613110736 },
@@ -85,11 +85,9 @@ export default [
     type: 'plants',
     fillColor: '#FF0000',
     inhabitants: [
-      'Червоний контент №1',
-      'Червоний контент №2',
-      'Червоний контент №3',
-      'Червоний контент №4',
-      'Червоний контент №5'
+      'Теліптеріс болотний (Thelypteris palustris Schott)',
+      'Аїр звичайний (Acorus calamus)',
+      'Водяний різак алоєвидний (Stratiotes aloides)'
     ],
     coords: [
       { lat: 48.48752308951591, lng: 34.80111095560062 },
@@ -128,11 +126,8 @@ export default [
     type: 'plants',
     fillColor: '#0000FF',
     inhabitants: [
-      'Синій контент №1',
-      'Синій контент №2',
-      'Синій контент №3',
-      'Синій контент №4',
-      'Синій контент №5'
+      'Вольфія безкоренева (Wolffia arrhiza)',
+      'Калюжниця болотна (Caltha palustris)'
     ],
     coords: [
       { lat: 48.50616600253232, lng: 34.80206793017351 },
