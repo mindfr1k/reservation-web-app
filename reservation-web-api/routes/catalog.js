@@ -26,7 +26,7 @@ module.exports = db => Router()
     }
     catch (err) {
       return res.status(500).json({
-        error: err
+        error: err.message
       })
     }
   })
@@ -44,7 +44,7 @@ module.exports = db => Router()
     }
     catch (err) {
       return res.status(500).json({
-        error: err
+        error: err.message
       })
     }
   })
@@ -72,7 +72,7 @@ module.exports = db => Router()
     }
     catch (err) {
       return res.status(500).json({
-        error: err
+        error: err.message
       })
     }
   })
@@ -97,7 +97,7 @@ module.exports = db => Router()
     }
     catch (err) {
       return res.status(500).json({
-        error: err
+        error: err.message
       })
     }
   })
@@ -115,7 +115,7 @@ module.exports = db => Router()
     }
     catch (err) {
       return res.status(500).json({
-        error: err
+        error: err.message
       })
     }
   })
