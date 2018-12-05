@@ -57,7 +57,7 @@ export default {
     this.bounds = new google.maps.LatLngBounds();
     this.map = new google.maps.Map(document.getElementById(this.mapId), this.mapOptions);
 
-    const drawingManager = new google.maps.drawing.DrawingManager({
+    /*const drawingManager = new google.maps.drawing.DrawingManager({
       drawingControl: true,
       drawingControlOptions: {
         position: google.maps.ControlPosition.TOP_CENTER,
@@ -78,7 +78,7 @@ export default {
 
     drawingManager.addListener('polygoncomplete', event => {
       console.log(this.getGoogleShapeCoords(event.getPath().getArray()))
-    })
+    })*/
 
     const { strokeColor, path } = this.borderPolyline;
     const mapBorder = new google.maps.Polyline({
@@ -117,9 +117,9 @@ export default {
         suppressUndo: true
       })
       zonePolyline.setMap(this.map)
-      zonePolyline.addListener('click', event => {
+      /*zonePolyline.addListener('click', event => {
         console.log(this.getGoogleShapeCoords(zonePolyline.getPath().getArray()))
-      })
+      })*/
       this.previousZonePolylines.push(zonePolyline)
     })
 
@@ -132,17 +132,29 @@ export default {
 
     this.polygons.forEach(polygon => {
       const { fillColor, previewTitle, pageLink, coords } = polygon;
+      let mapPolygon;
 
-      const mapPolygon = new google.maps.Polygon({
-        paths: coords,
-        strokeColor: fillColor,
-        strokeOpacity: 1,
-        strokeWeight: 5,
-        fillColor,
-        //editable: true,
-        supressUndo: true,
-        fillOpacity: 0.3
-      })
+      if (polygon.fillColor === '#0000FF') {
+        mapPolygon = new google.maps.Polygon({
+          paths: coords,
+          strokeColor: fillColor,
+          strokeOpacity: 1,
+          strokeWeight: 5,
+          fillColor,
+          //editable: true,
+          fillOpacity: 0.3
+        })
+      }
+      else {
+        mapPolygon = new google.maps.Polygon({
+          paths: coords,
+          strokeColor: fillColor,
+          strokeOpacity: 1,
+          strokeWeight: 5,
+          fillColor,
+          fillOpacity: 0.3
+        })
+      }
 
       mapPolygon.setMap(this.map)
 

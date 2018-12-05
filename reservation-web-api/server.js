@@ -29,7 +29,7 @@ const setupNuxt = require('./services/setup-nuxt')
         })
       })
       .listen(PORT, () => {
-        console.log(`Server runs on port ${PORT}`)
+        console.log(`\nServer runs on port ${PORT}\n`)
       })
   }
   catch (err) {
