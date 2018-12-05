@@ -381,7 +381,6 @@ export default [
       'Глечики жовті (Nuphar lutea)',
       'Латаття біле (Nymphaea alba)',
       'Анемона жовтецева (Anemonoides ranunculoides)',
-      'Водяний жовтець ріона (Batrachium rionii)',
       'Верба козяча (Salix caprea)'
     ],
     coords: [
@@ -504,7 +503,8 @@ export default [
     fillColor: '#00FF00',
     inhabitants: [
       'Річія плаваюча (Riccia fluitans)',
-      'Сальвінія плаваюча (Salvinia natans)'
+      'Сальвінія плаваюча (Salvinia natans)',
+      'Водяний жовтець ріона (Batrachium rionii)'
     ],
     coords: [
       { lat: 48.50951205177469, lng: 34.865361613110736 },

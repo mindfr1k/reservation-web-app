@@ -57,7 +57,7 @@ export default {
     this.bounds = new google.maps.LatLngBounds();
     this.map = new google.maps.Map(document.getElementById(this.mapId), this.mapOptions);
 
-    const drawingManager = new google.maps.drawing.DrawingManager({
+    /*const drawingManager = new google.maps.drawing.DrawingManager({
       drawingControl: true,
       drawingControlOptions: {
         position: google.maps.ControlPosition.TOP_CENTER,
@@ -78,7 +78,7 @@ export default {
 
     drawingManager.addListener('polygoncomplete', event => {
       console.log(this.getGoogleShapeCoords(event.getPath().getArray()))
-    })
+    })*/
 
     const { strokeColor, path } = this.borderPolyline;
     const mapBorder = new google.maps.Polyline({
