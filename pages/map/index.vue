@@ -33,6 +33,7 @@
     </div>
 
     <InfoModal v-if="showInfoModal"
+    :content="content"
     @close="showInfoModal = false" />
   </div>
 </template>
@@ -48,7 +49,8 @@ export default {
   },
   data() {
     return {
-      showInfoModal: false
+      showInfoModal: false,
+      content: []
     }
   },
   methods: {
@@ -57,10 +59,13 @@ export default {
       this.$store.dispatch('filterCheckedPolygons')
       this.$store.dispatch('filterZonePolylines')
     },
-    createInfoModal() {
-      console.log('works!')
+    createInfoModal(event) {
+      this.content = event
       this.showInfoModal = true
     }
+  },
+  mounted() {
+    this.$store.commit('initCheckedProperty')
   }
 }
 </script>

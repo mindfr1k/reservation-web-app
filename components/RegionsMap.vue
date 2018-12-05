@@ -129,7 +129,7 @@ export default {
     this.previousPolygons = []
 
     this.polygons.forEach(polygon => {
-      const { fillColor, previewTitle, pageLink, coords } = polygon;
+      const { fillColor, coords } = polygon;
       let mapPolygon;
 
       if (polygon.fillColor === '#0000FF') {
@@ -156,8 +156,9 @@ export default {
 
       mapPolygon.setMap(this.map)
 
+      const { inhabitants } = polygon
       mapPolygon.addListener('click', event => {
-        this.$emit('invoke')
+        this.$emit('invoke', inhabitants)
       })
 
       /*mapPolygon.addListener('click', event => {

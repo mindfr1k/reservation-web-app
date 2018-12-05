@@ -55,6 +55,11 @@ const initStore = () => new Vuex.Store({
       const checkbox = state.reservationCategories[payload]
       checkbox.isChecked = !checkbox.isChecked
     },
+    initCheckedProperty(state) {
+      for (let checkbox of state.reservationCategories) {
+        delete checkbox.isChecked
+      }
+    },
     setCheckedPolygons(state, payload) {
       state.checkedPolygons = payload
     },

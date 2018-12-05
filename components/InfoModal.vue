@@ -4,57 +4,21 @@
       <div class="modal-wrapper">
         <div class="modal-container">
           <div class="row">
-            <div class="col s12 modal-header">
-              <h5>Редагування елементу</h5>
-            </div>
             <div class="col s12 modal-body">
               <slot name="body">
-                <form @submit.prevent>
-                  <div class="input-field col s12">
-                    <input id="title" type="text" class="validate" data-length="100" 
-                    v-model="title" ref="title" />
-                    <label for="title" class="inputLabel">Назва</label>
-                  </div>
-                  <div class="file-field input-field col s12">
-                    <div class="btn fileButton">
-                      <span>Файл</span>
-                      <input id="image" type="file" ref="file" />
-                    </div>
-                    <div class="file-path-wrapper">
-                      <input type="text" class="file-path validate" placeholder="Зображення"/>
-                    </div>
-                  </div>
-                  <div class="input-field col s12">
-                    <textarea id="preview" type="text" class="validate materialize-textarea" 
-                    data-length="500"
-                    v-model="preview" 
-                    ref="preview" />
-                    <label for="preview" class="inputLabel">Стислий опис</label>
-                  </div>
-                  <div class="input-field col s12">
-                    <textarea id="description" type="text" class="validate materialize-textarea" 
-                    data-length="1500"
-                    v-model="description"
-                    ref="description" />
-                    <label for="description" class="inputLabel">Детальна інформація</label>
-                  </div>
-                  <div class="col s12 error-container" v-if="errors.length">
-                    <b>Будь ласка, виправте наступні помилки:</b>
-                    <ul>
-                      <li v-for="error in errors" :key="error">{{ error }}</li>
-                    </ul>
-                  </div>
-                  <div class="col s12 center-align">
-                    <button class="btn-flat waves-effect waves-light abortButton" 
-                    @click="$emit('close')">
-                      Скасувати
-                    </button>
-                    <button class="btn-flat waves-effect waves-light confirmButton" 
-                    @click="checkForm">
-                      Підтвердити
-                    </button>
-                  </div>
-                </form>
+                <div v-for="contentItem in content" :key="contentItem" class="input-field col s12">
+                  <p>{{ contentItem }}</p>
+                </div>
+                <div class="col s12 center-align">
+                  <button class="btn-flat waves-effect waves-light abortButton" 
+                  @click="$emit('close')">
+                    Закрити
+                  </button>
+                  <button class="btn-flat waves-effect waves-light confirmButton" 
+                  @click="toCatalog">
+                    Каталог
+                  </button>
+                </div>
               </slot>
             </div>
           </div>
@@ -68,61 +32,15 @@
 <script>
 export default {
   props: [
-    'id',
-    'objectTitle',
-    'objectPreview',
-    'objectDescription'
+    'content'
   ],
-  data() {
-    return {
-      errors: [],
-      title: this.objectTitle,
-      preview: this.objectPreview,
-      description: this.objectDescription
-    }
-  },
   methods: {
-    async checkForm() {
-      this.errors = []
-      if (this.title && !this.title.match(/^[^0-9]+$/)) {
-        this.errors.push('Назва не має містити цифр.')
-      }
-      if (this.title && this.title.length > 100) {
-        this.errors.push('Назва повинна містити не більше 100 символів.')
-      }
-      if (this.preview && this.preview.length > 500) {
-        this.errors.push('Стислий опис повинен містити не більше 500 символів.')
-      }
-      if (this.description && this.description.length > 1500) {
-        this.errors.push('Детальний опис повинен містити не більше 1500 символів.')
-      }
-      if (!this.errors.length) {
-        const body = new FormData()
-        for (let prop in this._data) {
-          if (this._data[prop]) {
-            body.append(prop, this._data[prop])
-          }
-        }
-        if (this.$refs.file.files[0]) {
-          body.append('image', this.$refs.file.files[0])
-        }
-        body.append('categoryName', this.$store.state.currentCategory)
-        delete body.errors
-        await this.$store.dispatch('patchObject', {
-          id: this.id,
-          body
-        })
-        location.reload(true)
-      }
+    toCatalog() {
+      this.$emit('close')
+      this.$nuxt.$router.push({
+        path: `/animals/1`
+      })
     }
-  },
-  mounted() {
-    this.$refs.title.focus()
-    this.$refs.preview.focus()
-    this.$refs.description.focus()
-    $(document).ready(function() {
-      $('input#title, textarea#preview, textarea#description').characterCounter();
-    })
   }
 }
 </script>
@@ -158,10 +76,6 @@ export default {
     font-family: Helvetica, Arial, sans-serif;
   }
 
-  .modal-header {
-    text-align: center;
-  }
-
   .modal-body {
     margin: 20px 0;
     text-align: center;
@@ -181,53 +95,26 @@ export default {
     transform: scale(1.1);
   }
 
-   .input-field input[type=text]:focus + label,
-   .input-field textarea[type=text]:focus + label {
-     color: #2196f3;
-   }
-
-  .input-field input[type=text]:focus,
-  .input-field textarea[type=text]:focus {
-    border-bottom: 1px solid #2196f3;
-    box-shadow: 0 1px 0 0 #2196f3;
-  }
-
-  .inputLabel {
-    font-size: 1.5rem;
-  }
-
-  ::placeholder {
-    font-size: 1.2rem;
-  }
-
-  .fileButton {
-    background-color: #2196f3;
-  }
-
   button {
     padding: 0 2rem;
     min-width: 40%;
   }
+
   button.confirmButton:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
     color: #2196f3;
-}
+  }
+
   button.confirmButton:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating):hover {
     background-color: #2196f3;
     color: #ffffff;
   }
+
   button.abortButton:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
     color: #ff0000;
   }
+
   button.abortButton:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating):hover {
     background-color: #ff0000;
     color: #ffffff;
   }
-
-  .error-container {
-    background-color: #ff0000;
-    color: #ffffff;
-    margin: 2rem 0;
-    font-size: 1.5rem;
-  }
-
 </style>
