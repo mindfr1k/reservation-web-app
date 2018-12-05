@@ -32,8 +32,10 @@ module.exports = db => Router()
   })
   .get('/', validate(getCatalog), async (req, res) => {
     try {
-      console.log('\nROFL\n')
       const { categoryName } = req.query
+      for (let item of categoryName) {
+        console.log(`\n${item}`)
+      }
       const { skip, limit } = req.payload
       
       return res.status(200).json(await db.collection(categoryName)
