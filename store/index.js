@@ -74,10 +74,12 @@ const initStore = () => new Vuex.Store({
     async getPagesAmount({commit}, payload) {
       const response = await superagent
         .get(`http://${process.env.HOST}:${process.env.PORT}/categories/amount?categoryName=${payload.categoryName}`)
-      const amount = JSON.parse(response.text).categoryAmount
+      const amount = response.text 
+        ? JSON.parse(response.text).categoryAmount 
+        : 1
       const flooredAmount = amount % 12 === 0
-        ? ~~(amount / 12)
-        : ~~(amount / 12) + 1
+      ? ~~(amount / 12)
+      : ~~(amount / 12) + 1
       commit('setCategoryPages', flooredAmount)
     },
     async filterObjectsByPage({commit}, payload) {
