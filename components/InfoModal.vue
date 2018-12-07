@@ -6,7 +6,7 @@
           <div class="row">
             <div class="col s12 modal-body">
               <slot name="body">
-                <div v-for="contentItem in content" :key="contentItem" class="input-field col s12">
+                <div v-for="contentItem in content" :key="contentItem" class="input-field col s12 m6">
                   <p>{{ contentItem }}</p>
                 </div>
                 <div class="col s12 center-align">
@@ -54,19 +54,19 @@ export default {
     top: 0;
     left: 0;
     width: 100%;
-    min-height: 100%;
+    height: 100%;
     background-color: rgba(0, 0, 0, .5);
     display: table;
     transition: opacity .3s ease;
   }
 
   .modal-wrapper {
-    display: block;
+    display: table-cell;
+    vertical-align: middle;
   }
 
   .modal-container {
-    max-height: 30rem;
-    overflow-y: auto;
+    max-height: 80vh;
     width: 80%;
     margin: 2rem auto 0 auto;
     padding: 20px 30px;
