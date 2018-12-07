@@ -16,7 +16,8 @@ export default {
       bounds: {},
       map: {},
       previousPolygons: [],
-      previousZonePolylines: []
+      previousZonePolylines: [],
+      areZonesSet: false
     }
   },
   computed: {
@@ -101,27 +102,25 @@ export default {
     }
   },
   beforeUpdate() {
-    this.previousZonePolylines.forEach(zone => {
-      zone.setMap(null)
-    })
-    this.previousZonePolylines = []
-
-    this.zonePolylines.forEach(zone => {
-      const { strokeColor, path } = zone
-      const zonePolyline = new google.maps.Polyline({
-        path,
-        strokeColor,
-        strokeOpacity: 0.99,
-        strokeWeight: 3,
-        //editable: true,
-        suppressUndo: true
+    if (!this.areZonesSet) {
+      this.areZonesSet = true
+      this.zonePolylines.forEach(zone => {
+        const { strokeColor, path } = zone
+        const zonePolyline = new google.maps.Polyline({
+          path,
+          strokeColor,
+          strokeOpacity: 0.99,
+          strokeWeight: 3,
+          //editable: true,
+          //suppressUndo: true
+        })
+        zonePolyline.setMap(this.map)
+        /*zonePolyline.addListener('click', event => {
+          console.log(this.getGoogleShapeCoords(zonePolyline.getPath().getArray()))
+        })*/
+        this.previousZonePolylines.push(zonePolyline)
       })
-      zonePolyline.setMap(this.map)
-      /*zonePolyline.addListener('click', event => {
-        console.log(this.getGoogleShapeCoords(zonePolyline.getPath().getArray()))
-      })*/
-      this.previousZonePolylines.push(zonePolyline)
-    })
+    }
 
     this.previousPolygons.forEach(polygon => {
       polygon.setMap(null)
@@ -154,16 +153,14 @@ export default {
         })
       }
 
-      mapPolygon.setMap(this.map)
-
       const { inhabitants } = polygon
       mapPolygon.addListener('click', event => {
         this.$emit('invoke', inhabitants)
       })
-
-      mapPolygon.addListener('click', event => {
+      mapPolygon.setMap(this.map)
+      /*mapPolygon.addListener('click', event => {
         console.log(this.getGoogleShapeCoords(mapPolygon.getPath().getArray()))
-      })
+      })*/
       this.previousPolygons.push(mapPolygon)
     })
   }

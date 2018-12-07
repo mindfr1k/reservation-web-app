@@ -41,6 +41,7 @@
     </div>
 
     <InfoModal v-if="showInfoModal"
+    :type="$store.state.checkedPolygons[0].type"
     :content="content"
     @close="showInfoModal = false" />
   </div>
@@ -59,14 +60,17 @@ export default {
     return {
       showInfoModal: false,
       content: [],
-      picked: []
+      picked: [],
+      isChecked: false
     }
   },
   methods: {
     filterCheckedPolygons(index) {
-      this.$store.dispatch('filterCategories', index)
-      this.$store.dispatch('filterZonePolylines')
-      this.$store.dispatch('filterCheckedPolygons')
+      if (!this.isChecked) {
+        this.isChecked = true
+        this.$store.dispatch('showZonePolylines')
+      }
+      this.$store.dispatch('filterCheckedPolygons', index)
     },
     createInfoModal(event) {
       this.content = event

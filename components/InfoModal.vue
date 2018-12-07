@@ -32,13 +32,14 @@
 <script>
 export default {
   props: [
-    'content'
+    'content',
+    'type'
   ],
   methods: {
     toCatalog() {
       this.$emit('close')
       this.$nuxt.$router.push({
-        path: `/animals/1`
+        path: `/${this.type}/1`
       })
     }
   }
