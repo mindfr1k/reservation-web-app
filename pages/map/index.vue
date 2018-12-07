@@ -5,7 +5,11 @@
         <form>
           <p class="col s4 m4" v-for="(category, index) in $store.state.reservationCategories" 
           :key="category.title">
-            <input type="checkbox" :id="`${category.title}-small`" @click="filterCheckedPolygons(index)" />
+            <input type="radio" 
+            v-model="picked"
+            :id="`${category.title}-small`" 
+            :value="`${category.title}-small`"
+            @click="filterCheckedPolygons(index)" />
             <label :for="`${category.title}-small`">
               <i class="material-icons center">{{ category.icon }}</i>
               <span>{{ category.title }}</span>
@@ -22,7 +26,11 @@
       <div class="col l2 hide-on-med-and-down">
         <form>
           <p v-for="(category, index) in $store.state.reservationCategories" :key="category.title">
-            <input type="checkbox" :id="category.title" @click="filterCheckedPolygons(index)" />
+            <input type="radio" 
+            v-model="picked"
+            :id="category.title" 
+            :value="category.title"
+            @click="filterCheckedPolygons(index)" />
             <label :for="category.title">
               <i class="material-icons left">{{ category.icon }}</i>
               <span>{{ category.title }}</span>
@@ -50,30 +58,28 @@ export default {
   data() {
     return {
       showInfoModal: false,
-      content: []
+      content: [],
+      picked: []
     }
   },
   methods: {
     filterCheckedPolygons(index) {
-      this.$store.dispatch('filterCheckboxes', index)
-      this.$store.dispatch('filterCheckedPolygons')
+      this.$store.dispatch('filterCategories', index)
       this.$store.dispatch('filterZonePolylines')
+      this.$store.dispatch('filterCheckedPolygons')
     },
     createInfoModal(event) {
       this.content = event
       this.showInfoModal = true
     }
-  },
-  mounted() {
-    this.$store.commit('initCheckedProperty')
   }
 }
 </script>
 
 <style scoped>
-  [type="checkbox"]:checked+label:before {
-    border-right: 2px solid #ffab40;
-    border-bottom: 2px solid #ffab40; 
+  [type="radio"]:checked+label:after, [type="radio"].with-gap:checked+label:after {
+    background-color: #ffab40;
+    border: 2px solid #ffab40;
   }
   label {
     font-weight: 500;

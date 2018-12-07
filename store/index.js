@@ -52,12 +52,13 @@ const initStore = () => new Vuex.Store({
       state.currentCategory = payload
     },
     setCheckedProperty(state, payload) {
-      const checkbox = state.reservationCategories[payload]
-      checkbox.isChecked = !checkbox.isChecked
-    },
-    initCheckedProperty(state) {
-      for (let checkbox of state.reservationCategories) {
-        delete checkbox.isChecked
+      for (let category in state.reservationCategories) {
+        if (+category === payload) {
+          state.reservationCategories[category].isChecked = true
+        }
+        else {
+          state.reservationCategories[category].isChecked = false
+        }
       }
     },
     setCheckedPolygons(state, payload) {
@@ -137,7 +138,7 @@ const initStore = () => new Vuex.Store({
     setCategoryPages({commit}, payload) {
       commit('setCategoryPages', payload)
     },
-    filterCheckboxes({commit}, payload) {
+    filterCategories({commit}, payload) {
       commit('setCheckedProperty', payload)
     },
     filterCheckedPolygons({commit, state}) {
