@@ -2,8 +2,8 @@
   <div>
     <div class="map-container" :id="mapId"></div>
     <ul class="hide">
-      <li v-for="polygon in polygons" :key="polygon.previewTitle">
-        {{ polygon.previewTitle }}
+      <li v-for="polygon in polygons" :key="polygon.fillColor">
+        {{ polygon.fillColor }}
       </li>
     </ul>
   </div>
