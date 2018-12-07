@@ -52,12 +52,13 @@ const initStore = () => new Vuex.Store({
     },
     setCheckedProperty(state, payload) {
       for (let category in state.reservationCategories) {
+        const box = state.reservationCategories[category]
         if (+category === payload) {
-          state.reservationCategories[category].isChecked = true
+          box.isChecked = !box.isChecked
         }
-        else {
-          state.reservationCategories[category].isChecked = false
-        }
+      }
+      for (let category of state.reservationCategories) {
+        console.log(category.isChecked)
       }
     },
     setCheckedPolygons(state, payload) {
@@ -75,7 +76,7 @@ const initStore = () => new Vuex.Store({
       const response = await superagent
         .get(`http://${process.env.HOST}:${process.env.PORT}/categories/amount?categoryName=${payload.categoryName}`)
       const amount = response.text 
-        ? JSON.parse(response.text).categoryAmount 
+        ? JSON.parse(response.text).categoryAmount
         : 1
       const flooredAmount = amount % 12 === 0
       ? ~~(amount / 12)
@@ -137,10 +138,9 @@ const initStore = () => new Vuex.Store({
     setCategoryPages({commit}, payload) {
       commit('setCategoryPages', payload)
     },
-    filterCategories({commit}, payload) {
-      commit('setCheckedProperty', payload)
-    },
     filterCheckedPolygons({commit, state}, payload) {
+      commit('setCheckedProperty', payload)
+
       const result = []
       const filteredPolygons = state.polygons.filter(polygon => {
         return polygon.type === state.reservationCategories[payload].id
