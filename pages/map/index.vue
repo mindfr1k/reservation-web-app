@@ -5,7 +5,7 @@
         <form>
           <p class="col s4 m4" v-for="(category, index) in $store.state.reservationCategories" 
           :key="category.title">
-            <input type="radio" 
+            <input type="radio"
             v-model="picked"
             :id="`${category.title}-small`" 
             :value="`${category.title}-small`"

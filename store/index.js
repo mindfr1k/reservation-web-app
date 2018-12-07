@@ -56,9 +56,9 @@ const initStore = () => new Vuex.Store({
         if (+category === payload) {
           box.isChecked = !box.isChecked
         }
-      }
-      for (let category of state.reservationCategories) {
-        console.log(category.isChecked)
+        else {
+          box.isChecked = false
+        }
       }
     },
     setCheckedPolygons(state, payload) {
@@ -140,7 +140,6 @@ const initStore = () => new Vuex.Store({
     },
     filterCheckedPolygons({commit, state}, payload) {
       commit('setCheckedProperty', payload)
-
       const result = []
       const filteredPolygons = state.polygons.filter(polygon => {
         return polygon.type === state.reservationCategories[payload].id
@@ -148,8 +147,17 @@ const initStore = () => new Vuex.Store({
       result.push(...filteredPolygons)
       commit('setCheckedPolygons', result)
     },
-    showZonePolylines({commit}) {
-      commit('setZonePolylines', zonePolylines)
+    showZonePolylines({commit, state}) {
+      const filteredCategories = state.reservationCategories.filter(category => {
+        return category.isChecked === true
+      })
+      if (filteredCategories.length < 1) {
+        commit('setZonePolylines', [])
+        commit('setCheckedPolygons', [])
+      }
+      else {
+        commit('setZonePolylines', zonePolylines)
+      }
     }
   }
 })

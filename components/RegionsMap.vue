@@ -102,25 +102,27 @@ export default {
     }
   },
   beforeUpdate() {
-    if (!this.areZonesSet) {
-      this.areZonesSet = true
-      this.zonePolylines.forEach(zone => {
-        const { strokeColor, path } = zone
-        const zonePolyline = new google.maps.Polyline({
-          path,
-          strokeColor,
-          strokeOpacity: 0.99,
-          strokeWeight: 3,
-          //editable: true,
-          //suppressUndo: true
-        })
-        zonePolyline.setMap(this.map)
-        /*zonePolyline.addListener('click', event => {
-          console.log(this.getGoogleShapeCoords(zonePolyline.getPath().getArray()))
-        })*/
-        this.previousZonePolylines.push(zonePolyline)
+    this.previousZonePolylines.forEach(zone => {
+      zone.setMap(null)
+    })
+    this.previousZonePolylines = []
+    
+    this.zonePolylines.forEach(zone => {
+      const { strokeColor, path } = zone
+      const zonePolyline = new google.maps.Polyline({
+        path,
+        strokeColor,
+        strokeOpacity: 0.99,
+        strokeWeight: 3,
+        //editable: true,
+        //suppressUndo: true
       })
-    }
+      zonePolyline.setMap(this.map)
+      /*zonePolyline.addListener('click', event => {
+        console.log(this.getGoogleShapeCoords(zonePolyline.getPath().getArray()))
+      })*/
+      this.previousZonePolylines.push(zonePolyline)
+    })
 
     this.previousPolygons.forEach(polygon => {
       polygon.setMap(null)
