@@ -10,6 +10,8 @@
           </button>
       </div>
 
+      <Pagination class="col s12"/>
+
       <div class="col s12 m12 l10">
         <div class="catalogRow">
           <div class="catalogCol" v-for="animal in filteredAnimals" :key="animal._id">
