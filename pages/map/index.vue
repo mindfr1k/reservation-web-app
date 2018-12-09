@@ -67,7 +67,7 @@ export default {
   methods: {
     filterCheckedPolygons(index) {
       this.$store.dispatch('filterCheckedPolygons', index)
-      this.$store.dispatch('showZonePolylines')
+      //this.$store.dispatch('showZonePolylines')
     },
     createInfoModal(event) {
       this.content = event
