@@ -5,7 +5,7 @@
           <button class="col s4 m4 btn-flat" v-for="category in reservationCategories" 
           @click="setCurrentCategory(category.id)"
           :key="category.title">
-            <i class="material-icons">{{ category.icon }}</i>
+            <i class="material-icons left">{{ category.icon }}</i>
             <span>{{ category.title }}</span>
           </button>
       </div>
@@ -30,12 +30,20 @@
       </div>
 
       <div class="col l2 hide-on-med-and-down">
-        <button class="col l12 btn-flat" v-for="category in reservationCategories" 
-        @click="setCurrentCategory(category.id)"
-        :key="category.title">
-          <i class="material-icons left">{{ category.icon }}</i>
-          {{ category.title }}
-        </button>   
+        <div class="navbar-fixed">
+          <nav>
+            <ul>
+              <li>
+              <button class="col l12 btn-flat" v-for="category in reservationCategories" 
+              @click="setCurrentCategory(category.id)"
+              :key="category.title">
+              <i class="material-icons left menuIcon">{{ category.icon }}</i>
+              <div class="menuTitle">{{ category.title }}</div>
+            </button>  
+              </li>
+            </ul>
+          </nav>
+        </div>
       </div>
 
       <Pagination class="col s12"/>
@@ -88,6 +96,18 @@ export default {
 </script>
 
 <style scoped>
+  nav {
+    color: #000000;
+    background-color: #ffffff;
+    box-shadow: none;
+    height: 0px;
+  }
+  .menuTitle {
+    margin-left: -5rem;
+  }
+  .menuIcon {
+    margin-top: -0.5rem;
+  }
  .catalogRow {
     display: flex;
     flex-wrap: wrap;
