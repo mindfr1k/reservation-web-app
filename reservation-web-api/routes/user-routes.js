@@ -77,8 +77,7 @@ module.exports = db => Router()
       return res.status(200).json(await db.collection('users')
         .find()
         .project({
-          password: 0,
-          adminKey: 0
+          password: 0
         })
         .toArray()
       )
