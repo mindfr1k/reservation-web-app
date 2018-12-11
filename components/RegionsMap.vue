@@ -22,19 +22,19 @@ export default {
   },
   computed: {
     mapId() {
-      return this.$store.state.mapId;
+      return this.$store.state.mapId
     },
     mapOptions() {
-      return this.$store.state.mapOptions;
+      return this.$store.state.mapOptions
     },
     borderPolyline() {
-      return this.$store.state.borderPolyline;
+      return this.$store.state.borderPolyline
     },
     zonePolylines() {
-      return this.$store.state.zonePolylines;
+      return this.$store.state.zonePolylines
     },
     polygons() {
-      return this.$store.state.checkedPolygons;
+      return this.$store.state.checkedPolygons
     }
   },
   methods: {
@@ -157,7 +157,7 @@ export default {
 
       const { inhabitants } = polygon
       mapPolygon.addListener('click', event => {
-        this.$emit('invoke', inhabitants)
+        this.$emit('rofl', inhabitants)
       })
       mapPolygon.setMap(this.map)
       /*mapPolygon.addListener('click', event => {
