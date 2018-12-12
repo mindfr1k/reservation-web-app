@@ -7,7 +7,8 @@
             <div class="col s12 modal-body">
               <slot name="body">
                 <div v-for="contentItem in content" :key="contentItem" class="col s12 m6">
-                  <p>{{ contentItem }}</p>
+                  <img class="responsive-img" :src="contentItem.path">
+                  <p>{{ contentItem.title }}</p>
                 </div>
                 <div class="col s12 center-align">
                   <button class="btn-flat waves-effect waves-light abortButton" 
@@ -48,6 +49,10 @@ export default {
 
 
 <style scoped>
+  img {
+    height: 30vh;
+    width: 42vh;
+  }
   .modal-mask {
     position: fixed;
     z-index: 9998;

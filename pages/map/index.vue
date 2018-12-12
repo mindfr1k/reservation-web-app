@@ -20,8 +20,7 @@
 
       <div class="col s12 m12 l10">
         <RegionsMap 
-        @invoke="createInfoModal"
-        @rofl="createTestModal" />
+        @invoke="createInfoModal" />
       </div>
 
       <div class="col l2 hide-on-med-and-down">
@@ -46,28 +45,21 @@
     :content="content"
     @close="showInfoModal = false" />
 
-    <TestModal v-if="showTestModal"
-    :type="$store.state.checkedPolygons[0].type"
-    :content="content"
-    @close="showTestModal = false" />
   </div>
 </template>
 
 <script>
 import RegionsMap from '@/components/RegionsMap'
 import InfoModal from '@/components/InfoModal'
-import TestModal from '@/components/TestModal'
 
 export default {
   components: {
     RegionsMap,
-    InfoModal,
-    TestModal
+    InfoModal
   },
   data() {
     return {
       showInfoModal: false,
-      showTestModal: false,
       content: [],
       picked: []
     }
@@ -79,10 +71,6 @@ export default {
     createInfoModal(event) {
       this.content = event
       this.showInfoModal = true
-    },
-    createTestModal(event) {
-      this.content = event
-      this.showTestModal = true
     }
   }
 }

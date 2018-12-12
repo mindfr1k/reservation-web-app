@@ -157,7 +157,7 @@ export default {
 
       const { inhabitants } = polygon
       mapPolygon.addListener('click', event => {
-        this.$emit('rofl', inhabitants)
+        this.$emit('invoke', inhabitants)
       })
       mapPolygon.setMap(this.map)
       /*mapPolygon.addListener('click', event => {

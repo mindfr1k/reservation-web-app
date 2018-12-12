@@ -2,10 +2,10 @@ const multer = require('multer')
 const { join } = require('path')
 
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
+  destination: (_, __, cb) => {
     cb(null, join('reservation-web-api', 'static', 'images'))
   },
-  filename: (req, file, cb) => {
+  filename: (_, file, cb) => {
     const timestamp = new Date().toISOString().replace(/:/g, '-')
     cb(null, `${timestamp}-${file.originalname}`)
   }

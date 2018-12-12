@@ -5,15 +5,15 @@ export default [
     inhabitants: [
       {
         title: 'Орлан-білохвіст (Haliaeetus albicilla)',
-        img: '/rofl.jpg'
+        path: '/rofl.jpg'
       },
       {
         title: 'Ку́мка червоночере́ва, або звича́йна, або джерля́нка червоночере́ва (Bombina bombina)',
-        img: '/rofl.jpg'
+        path: '/rofl.jpg'
       },
       {
         title: 'Тритон звичайний (Triturus vulgaris або Lissotriton vulgaris)',
-        img: '/rofl.jpg'
+        path: '/rofl.jpg'
       }
     ],
     coords: [
