@@ -11,7 +11,7 @@ const validate = require('../services/validator')
 module.exports = db => Router()
   .post('/signup', checkAuth, validate(signUp), async (req, res) => {
     try {
-      const { username, password, adminKey } = req.payload
+      const { username, password } = req.payload
       const user = (await db.collection('users')
         .find({
           username
