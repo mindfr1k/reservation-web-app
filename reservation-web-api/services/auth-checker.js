@@ -8,7 +8,7 @@ module.exports = (req, res, next) => {
   }
   catch (err) {
     return res.status(401).json({
-      message: 'Token authorization failed.'
+      message: 'Authorization has failed.'
     })
   }
 }

@@ -15,9 +15,7 @@ export default {
     return {
       bounds: {},
       map: {},
-      previousPolygons: [],
-      previousZonePolylines: [],
-      areZonesSet: false
+      previousPolygons: []
     }
   },
   computed: {
@@ -29,9 +27,6 @@ export default {
     },
     borderPolyline() {
       return this.$store.state.borderPolyline
-    },
-    zonePolylines() {
-      return this.$store.state.zonePolylines
     },
     polygons() {
       return this.$store.state.checkedPolygons
@@ -102,59 +97,32 @@ export default {
     }
   },
   beforeUpdate() {
-    this.previousZonePolylines.forEach(zone => {
-      zone.setMap(null)
-    })
-    this.previousZonePolylines = []
-    
-    this.zonePolylines.forEach(zone => {
-      const { strokeColor, path } = zone
-      const zonePolyline = new google.maps.Polyline({
-        path,
-        strokeColor,
-        strokeOpacity: 0.99,
-        strokeWeight: 3,
-        //editable: true,
-        //suppressUndo: true
-      })
-      zonePolyline.setMap(this.map)
-      /*zonePolyline.addListener('click', event => {
-        console.log(this.getGoogleShapeCoords(zonePolyline.getPath().getArray()))
-      })*/
-      this.previousZonePolylines.push(zonePolyline)
-    })
-
     this.previousPolygons.forEach(polygon => {
       polygon.setMap(null)
     })
     this.previousPolygons = []
 
     this.polygons.forEach(polygon => {
-      const { fillColor, coords } = polygon;
-      let mapPolygon;
+      const { fillColor, coords } = polygon
 
-      if (polygon.fillColor === '#FFA500') {
-        mapPolygon = new google.maps.Polygon({
-          paths: coords,
-          strokeColor: fillColor,
-          strokeOpacity: 1,
-          strokeWeight: 5,
-          fillColor,
-          //editable: true,
-          fillOpacity: 0.3
-        })
-      }
-      else {
-        mapPolygon = new google.maps.Polygon({
-          paths: coords,
-          strokeColor: fillColor,
-          strokeOpacity: 1,
-          strokeWeight: 5,
-          fillColor,
-          fillOpacity: 0.3
-        })
-      }
+      const numberedCoords = coords.map(coord => {
+        const { lat, lng } = coord
+        return {
+          lat: parseFloat(lat),
+          lng: parseFloat(lng)
+        }
+      })
 
+      const mapPolygon = new google.maps.Polygon({
+        paths: numberedCoords,
+        strokeColor: fillColor,
+        strokeOpacity: 1,
+        strokeWeight: 5,
+        fillColor,
+        //editable: true,
+        fillOpacity: 0.3
+      })
+      
       const { inhabitants } = polygon
       mapPolygon.addListener('click', event => {
         this.$emit('invoke', inhabitants)

@@ -3,9 +3,7 @@ import Vuex from 'vuex'
 
 import superagent from 'superagent'
 
-import polygons from './polygons'
 import borderPolyline from './border/borderPolyline'
-import zonePolylines from './border/zonePolylines'
 
 Vue.use(Vuex)
 
@@ -32,9 +30,8 @@ const initStore = () => new Vuex.Store({
     },
 
     borderPolyline,
-    zonePolylines: [],
 
-    polygons,
+    polygons: [],
     checkedPolygons: [],
 
     filteredObjects: null,
@@ -64,11 +61,11 @@ const initStore = () => new Vuex.Store({
     setCheckedPolygons(state, payload) {
       state.checkedPolygons = payload
     },
-    setZonePolylines(state, payload) {
-      state.zonePolylines = payload
-    },
     setIsSignedIn(state, payload) {
       state.isSignedIn = payload
+    },
+    setPolygons(state, payload) {
+      state.polygons = payload
     }
   },
   actions: {
@@ -132,6 +129,12 @@ const initStore = () => new Vuex.Store({
         commit('setIsSignedIn', false)
       }
     },
+    async getPolygons({commit}) {
+      const response = await superagent
+        .get(`http://${process.env.HOST}:${process.env.PORT}/polygons`)
+        .set('Authorization', `Bearer ${localStorage.getItem('token')}`)
+      commit('setPolygons', JSON.parse(response.text))
+    },
     setCurrentCategory({commit}, payload) {
       commit('setCurrentCategory', payload)
     },
@@ -146,18 +149,6 @@ const initStore = () => new Vuex.Store({
       })
       result.push(...filteredPolygons)
       commit('setCheckedPolygons', result)
-    },
-    showZonePolylines({commit, state}) {
-      const filteredCategories = state.reservationCategories.filter(category => {
-        return category.isChecked === true
-      })
-      if (filteredCategories.length < 1) {
-        commit('setZonePolylines', [])
-        commit('setCheckedPolygons', [])
-      }
-      else {
-        commit('setZonePolylines', zonePolylines)
-      }
     }
   }
 })
