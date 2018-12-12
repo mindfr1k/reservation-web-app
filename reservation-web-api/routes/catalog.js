@@ -34,18 +34,12 @@ module.exports = db => Router()
     try {
       const { categoryName } = req.query
       const { skip, limit } = req.payload
-      
-      try {
-        return res.status(200).json(await db.collection(categoryName)
+      return res.status(200).json(await db.collection(categoryName)
         .find()
         .skip(parseInt(skip))
         .limit(parseInt(limit))
         .toArray()
       )
-      }
-      catch (err) {
-        console.log('\nROFL\n')
-      }
     }
     catch (err) {
       return res.status(500).json({

@@ -25,8 +25,7 @@ module.exports = db => Router()
       await db.collection('users')
         .insertOne({
           username,
-          password: protectField(password),
-          adminKey: protectField(adminKey)
+          password: protectField(password)
         })
       return res.status(201).json({
         message: 'User was created successfully.'
