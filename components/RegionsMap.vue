@@ -44,7 +44,7 @@ export default {
 
       let coordString = ''
       normalizedCoords.forEach(coord => {
-        coordString += `{ lat: ${coord.lat}, lng: ${coord.lng} },\n`
+        coordString += `{ "lat": "${coord.lat}", "lng": "${coord.lng}" },\n`
       })
       return coordString
     }
@@ -53,7 +53,7 @@ export default {
     this.bounds = new google.maps.LatLngBounds();
     this.map = new google.maps.Map(document.getElementById(this.mapId), this.mapOptions);
 
-    /*const drawingManager = new google.maps.drawing.DrawingManager({
+    const drawingManager = new google.maps.drawing.DrawingManager({
       drawingControl: true,
       drawingControlOptions: {
         position: google.maps.ControlPosition.TOP_CENTER,
@@ -74,7 +74,7 @@ export default {
 
     drawingManager.addListener('polygoncomplete', event => {
       console.log(this.getGoogleShapeCoords(event.getPath().getArray()))
-    })*/
+    })
 
     const { strokeColor, path } = this.borderPolyline;
     const mapBorder = new google.maps.Polyline({
@@ -119,7 +119,7 @@ export default {
         strokeOpacity: 1,
         strokeWeight: 5,
         fillColor,
-        //editable: true,
+        editable: fillColor === '#' ? true : false,
         fillOpacity: 0.3
       })
       
@@ -128,9 +128,9 @@ export default {
         this.$emit('invoke', inhabitants)
       })
       mapPolygon.setMap(this.map)
-      /*mapPolygon.addListener('click', event => {
+      mapPolygon.addListener('click', event => {
         console.log(this.getGoogleShapeCoords(mapPolygon.getPath().getArray()))
-      })*/
+      })
       this.previousPolygons.push(mapPolygon)
     })
   }
