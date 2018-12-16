@@ -35,17 +35,32 @@
 <script>
 export default {
   props: [
-    'id'
+    'id',
+    'title',
+    'image',
+    'isInhabitant'
   ],
   methods: {
     async checkForm() {
-      await this.$store.dispatch('deleteObject', {
-        id: this.id,
-        body: {
-          categoryName: this.$store.state.currentCategory
-        }
-      })
-      location.reload(true)
+      if (this.isInhabitant) {
+        await this.$store.dispatch('deleteInhabitant', {
+          id: this.id,
+          body: {
+            title: this.title,
+            path: this.image
+          }
+        })
+        location.reload(true)
+      }
+      else {
+        await this.$store.dispatch('deleteObject', {
+          id: this.id,
+          body: {
+            categoryName: this.$store.state.currentCategory
+          }
+        })
+        location.reload(true)
+      }
     }
   }
 }
@@ -97,19 +112,18 @@ export default {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
-
-.card .card-action button.confirmButton:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
+.confirmButton:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
   color: #2196f3;
   margin-left: 1rem;
 }
-.card .card-action button.confirmButton:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating):hover {
+.confirmButton:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating):hover {
   background-color: #2196f3;
   color: #ffffff;
 }
-.card .card-action button.abortButton:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
+.abortButton:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
   color: #ff0000;
 }
-.card .card-action button.abortButton:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating):hover {
+.abortButton:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating):hover {
   background-color: #ff0000;
   color: #ffffff;
 }

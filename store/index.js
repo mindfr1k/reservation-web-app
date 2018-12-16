@@ -92,6 +92,12 @@ const initStore = () => new Vuex.Store({
         .set('Authorization', `Bearer ${localStorage.getItem('token')}`)
         .send(payload.body)
     },
+    async deleteInhabitant({}, payload) {
+      await superagent
+        .delete(`http://${process.env.HOST}:${process.env.PORT}/polygons/${payload.id}/inhabitants`)
+        .set('Authorization', `Bearer ${localStorage.getItem('token')}`)
+        .send(payload.body)
+    },
     async postObject({}, payload) {
       await superagent
         .post(`http://${process.env.HOST}:${process.env.PORT}/categories`)

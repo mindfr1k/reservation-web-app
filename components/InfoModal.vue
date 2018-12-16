@@ -6,11 +6,17 @@
           <div class="row">
             <div class="col s12 modal-body">
               <slot name="body">
-                <div v-for="contentItem in polygon.inhabitants" :key="contentItem.title" class="col s12 m6">
+                <div v-for="contentItem in polygon.inhabitants" :key="contentItem.title" class="col s12 m6 contentHolder">
                   <img class="responsive-img" :src="contentItem.path">
                   <p>{{ contentItem.title }}</p>
+                  <EditDeleteButtons v-if="$store.state.isSignedIn" 
+                  :id="polygon._id"
+                  :title="contentItem.title"
+                  :preview="contentItem.path"
+                  :description="null"
+                  :isInhabitant="true"/>
                 </div>
-                <div class="col s12 m6">
+                <div class="col s12 m6 addButtonHolder">
                   <AddButton v-if="$store.state.isSignedIn"
                   :isInhabitant="true" />
                 </div>
@@ -36,10 +42,12 @@
 
 <script>
 import AddButton from '@/components/AddButton'
+import EditDeleteButtons from '@/components/EditDeleteButtons'
 
 export default {
   components: {
-    AddButton
+    AddButton,
+    EditDeleteButtons
   },
   props: [
     'polygon',
@@ -61,6 +69,9 @@ export default {
   img {
     height: 30vh;
     width: 42vh;
+  }
+  .contentHolder {
+    margin-bottom: 1rem;
   }
   .modal-mask {
     position: fixed;

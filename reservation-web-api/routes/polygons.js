@@ -78,7 +78,7 @@ module.exports = db => Router()
   .post('/:id/inhabitants', checkAuth, validate(postInhabitant), async (req, res) => {
     try {
       const { id } = req.params
-      const { title, path } = req.body
+      const { title, path } = req.payload
       await db.collection('polygons')
         .updateOne({
           _id: ObjectId(id)

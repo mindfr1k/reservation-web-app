@@ -16,8 +16,11 @@
     :objectDescription="description"
     @close="showUpdatingModal = false" />
 
-    <DeletionModal v-if="showDeletionModal && !isInhabitant"
+    <DeletionModal v-if="showDeletionModal"
     :id="id"
+    :title="title"
+    :image="preview"
+    :isInhabitant="isInhabitant"
     @close="showDeletionModal = false" />
   </div>
 </template>
@@ -59,10 +62,10 @@ export default {
     background-color: #2196f3;
     color: #ffffff;
   }
-  .card .card-action button.deleteButton:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
+  .deleteButton:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
     color: #ff0000;
   }
-  .card .card-action button.deleteButton:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating):hover {
+  .deleteButton:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating):hover {
     background-color: #ff0000;
     color: #ffffff;
   }
