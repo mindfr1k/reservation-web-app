@@ -20,7 +20,8 @@
             :img="animal.path"
             :title="animal.title"
             :preview="animal.preview"
-            :description="animal.description" />
+            :description="animal.description"
+            :isSoil="false" />
           </div>
 
           <div class="catalogCol">

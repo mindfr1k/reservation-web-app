@@ -1,7 +1,8 @@
 <template>
   <div class="card">
     <div class="card-image">
-      <img class="responsive-img" :src="img">
+      <img v-if="isSoil" class="responsive-img soilImg" :src="img">
+      <img v-else class="responsive-img regularImg" :src="img">
     </div>
 
     <span class="card-title">
@@ -47,15 +48,20 @@ export default {
     'img',
     'title',
     'preview',
-    'description'
+    'description',
+    'isSoil'
   ]
 }
 </script>
 
 
 <style scoped>
-  img {
+  .regularImg {
     height: 30vh;
+    width: 42vh;
+  }
+  .soilImg {
+    height: 60vh;
     width: 42vh;
   }
   h5 {
