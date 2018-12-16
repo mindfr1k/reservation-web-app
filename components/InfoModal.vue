@@ -18,6 +18,7 @@
                 </div>
                 <div class="col s12 m6 addButtonHolder">
                   <AddButton v-if="$store.state.isSignedIn"
+                  :id="polygon._id"
                   :isInhabitant="true" />
                 </div>
                 <div class="col s12 center-align">

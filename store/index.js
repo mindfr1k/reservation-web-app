@@ -108,6 +108,12 @@ const initStore = () => new Vuex.Store({
         .field('description', payload.description)
         .attach('image', payload.image)
     },
+    async postInhabitant({}, payload) {
+      await superagent
+        .post(`http://${process.env.HOST}:${process.env.PORT}/polygons/${payload.id}/inhabitants`)
+        .set('Authorization', `Bearer ${localStorage.getItem('token')}`)
+        .send(payload.body)
+    },
     async patchObject({}, payload) {
       await superagent
         .patch(`http://${process.env.HOST}:${process.env.PORT}/categories/${payload.id}`)

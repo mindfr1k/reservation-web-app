@@ -33,7 +33,7 @@
                   </div>
                   <div class="input-field col s12">
                     <textarea id="description" type="text" class="validate materialize-textarea" 
-                    data-length="1500"
+                    data-length="3000"
                     v-model="description"
                     ref="description" />
                     <label for="description" class="inputLabel">Детальна інформація</label>
@@ -93,8 +93,8 @@ export default {
       if (this.preview && this.preview.length > 500) {
         this.errors.push('Стислий опис повинен містити не більше 500 символів.')
       }
-      if (this.description && this.description.length > 1500) {
-        this.errors.push('Детальний опис повинен містити не більше 1500 символів.')
+      if (this.description && this.description.length > 3000) {
+        this.errors.push('Детальний опис повинен містити не більше 3000 символів.')
       }
       if (!this.errors.length) {
         const body = new FormData()

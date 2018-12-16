@@ -25,16 +25,16 @@
                       <input type="text" class="file-path validate" placeholder="Зображення"/>
                     </div>
                   </div>
-                  <div class="input-field col s12">
+                  <div v-if="!isInhabitant" class="input-field col s12">
                     <textarea id="preview" type="text" class="validate materialize-textarea" 
                     data-length="500"
                     v-model="preview"
                     required />
                     <label for="preview" class="inputLabel">Стислий опис*</label>
                   </div>
-                  <div class="input-field col s12">
+                  <div v-if="!isInhabitant" class="input-field col s12">
                     <textarea id="description" type="text" class="validate materialize-textarea" 
-                    data-length="1500"
+                    data-length="3000"
                     v-model="description"
                     required />
                     <label for="description" class="inputLabel">Детальна інформація*</label>
@@ -68,6 +68,10 @@
 
 <script>
 export default {
+  props: [
+    'id',
+    'isInhabitant'
+  ],
   data() {
     return {
       errors: [],
@@ -85,21 +89,34 @@ export default {
       if (this.title.length > 100) {
         this.errors.push('Назва повинна містити не більше 100 символів.')
       }
-      if (this.preview.length > 500) {
+      if (this.preview && this.preview.length > 500) {
         this.errors.push('Стислий опис повинен містити не більше 500 символів.')
       }
-      if (this.description.length > 1500) {
-        this.errors.push('Детальний опис повинен містити не більше 1500 символів.')
+      if (this.description && this.description.length > 3000) {
+        this.errors.push('Детальний опис повинен містити не більше 3000 символів.')
       }
       if (!this.errors.length) {
-        await this.$store.dispatch('postObject', {
-          categoryName: this.$store.state.currentCategory,
-          title: this.title,
-          image: this.$refs.file.files[0],
-          preview: this.preview,
-          description: this.description
-        })
-        location.reload(true)
+        if (this.isInhabitant) {
+          const { name } = this.$refs.file.files[0]
+          await this.$store.dispatch('postInhabitant', {
+            id: this.id,
+            body: {
+              title: this.title,
+              path: `reservation-web-api\\static\\images\\${name}`
+            }
+          })
+          location.reload(true)
+        }
+        else {
+          await this.$store.dispatch('postObject', {
+            categoryName: this.$store.state.currentCategory,
+            title: this.title,
+            image: this.$refs.file.files[0],
+            preview: this.preview,
+            description: this.description
+            })
+          location.reload(true)
+        }
       }
     }
   },
