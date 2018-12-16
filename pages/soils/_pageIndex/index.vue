@@ -24,7 +24,8 @@
           </div>
 
           <div class="catalogCol">
-            <AddButton v-if="$store.state.isSignedIn" />
+            <AddButton v-if="$store.state.isSignedIn"
+            :isInhabitant="false" />
           </div>
         </div>
       </div>

@@ -1,11 +1,19 @@
 <template>
 <div>
-  <button class="btn-flat waves-effect waves-light"
+  <button v-if="isInhabitant" class="btn-flat waves-effect waves-light"
+  @click="showInhabitantCreationModal = true">
+    <div class="center-align">
+      <i class="material-icons">add</i>
+    </div>
+  </button>
+
+  <button v-else class="btn-flat waves-effect waves-light"
   @click="showCreationModal = true">
     <div class="center-align">
       <i class="material-icons">add</i>
     </div>
   </button>
+  
   <CreationModal v-if="showCreationModal"
   @close="showCreationModal = false"/>
 </div>
@@ -18,9 +26,13 @@ export default {
   components: {
     CreationModal
   },
+  props: [
+    'isInhabitant'
+  ],
   data() {
     return {
-      showCreationModal: false
+      showCreationModal: false,
+      showInhabitantCreationModal: false
     }
   }
 }

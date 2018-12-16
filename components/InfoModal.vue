@@ -6,7 +6,7 @@
           <div class="row">
             <div class="col s12 modal-body">
               <slot name="body">
-                <div v-for="contentItem in content" :key="contentItem" class="col s12 m6">
+                <div v-for="contentItem in polygon.inhabitants" :key="contentItem.title" class="col s12 m6">
                   <img class="responsive-img" :src="contentItem.path">
                   <p>{{ contentItem.title }}</p>
                 </div>
@@ -33,7 +33,7 @@
 <script>
 export default {
   props: [
-    'content',
+    'polygon',
     'type'
   ],
   methods: {

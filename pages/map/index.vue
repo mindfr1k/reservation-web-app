@@ -42,7 +42,7 @@
 
     <InfoModal v-if="showInfoModal"
     :type="$store.state.checkedPolygons[0].type"
-    :content="content"
+    :polygon="content"
     @close="showInfoModal = false" />
 
   </div>
