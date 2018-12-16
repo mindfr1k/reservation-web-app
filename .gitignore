@@ -15,6 +15,3 @@ dist
 
 # local dependencies
 .env
-
-#local images
-reservation-web-api/static/images
