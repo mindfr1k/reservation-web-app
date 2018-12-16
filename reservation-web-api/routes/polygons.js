@@ -8,12 +8,11 @@ const { postInhabitant}  = require('../schemas/crud-catalog')
 module.exports = db => Router()
   .post('/', checkAuth, async (req, res) => {
     try {
-      const { type, fillColor, inhabitants, coords } = req.body
+      const { type, fillColor, coords } = req.body
       const createdPolygon = (await db.collection('polygons')
         .insertOne({
           type,
           fillColor,
-          inhabitants,
           coords
         })).ops[0]
       return res.status(201).json({
