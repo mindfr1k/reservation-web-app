@@ -20,7 +20,8 @@
       :id="id"
       :title="title"
       :preview="preview"
-      :description="description"/>
+      :description="description"
+      :isInhabitant="false"/>
     </div>
 
 

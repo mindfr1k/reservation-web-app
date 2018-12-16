@@ -10,6 +10,10 @@
                   <img class="responsive-img" :src="contentItem.path">
                   <p>{{ contentItem.title }}</p>
                 </div>
+                <div class="col s12 m6">
+                  <AddButton v-if="$store.state.isSignedIn"
+                  :isInhabitant="true" />
+                </div>
                 <div class="col s12 center-align">
                   <button class="btn-flat waves-effect waves-light abortButton" 
                   @click="$emit('close')">
@@ -31,7 +35,12 @@
 </template>
 
 <script>
+import AddButton from '@/components/AddButton'
+
 export default {
+  components: {
+    AddButton
+  },
   props: [
     'polygon',
     'type'

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button class="btn-flat waves-effect waves-light editButton"
+    <button v-if="!isInhabitant" class="btn-flat waves-effect waves-light editButton"
     @click="showUpdatingModal = true">
       Редагувати
     </button>
@@ -16,7 +16,7 @@
     :objectDescription="description"
     @close="showUpdatingModal = false" />
 
-    <DeletionModal v-if="showDeletionModal"
+    <DeletionModal v-if="showDeletionModal && !isInhabitant"
     :id="id"
     @close="showDeletionModal = false" />
   </div>
@@ -31,7 +31,8 @@ export default {
     'id',
     'title',
     'preview',
-    'description'
+    'description',
+    'isInhabitant'
   ],
   components: {
     UpdatingModal,
