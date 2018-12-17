@@ -50,7 +50,13 @@ export default {
             path: this.image
           }
         })
-        location.reload(true)
+        this.$store.dispatch('getInhabitants', {
+          id: this.id
+        })
+        this.$emit('close')
+        this.$nuxt.$router.push({
+          path: `/map`
+        })
       }
       else {
         await this.$store.dispatch('deleteObject', {

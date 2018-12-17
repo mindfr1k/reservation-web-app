@@ -6,7 +6,7 @@
           <div class="row">
             <div class="col s12 modal-body">
               <slot name="body">
-                <div v-for="contentItem in polygon.inhabitants" :key="contentItem.title" class="col s12 m6 contentHolder">
+                <div v-for="contentItem in inhabitants.inhabitants" :key="contentItem.title" class="col s12 m6 contentHolder">
                   <img class="responsive-img" :src="contentItem.path">
                   <p>{{ contentItem.title }}</p>
                   <EditDeleteButtons v-if="$store.state.isSignedIn" 
@@ -19,7 +19,8 @@
                 <div class="col s12 m6 addButtonHolder">
                   <AddButton v-if="$store.state.isSignedIn"
                   :id="polygon._id"
-                  :isInhabitant="true" />
+                  :isInhabitant="true"
+                  @close="$emit('close')" />
                 </div>
                 <div class="col s12 center-align">
                   <button class="btn-flat waves-effect waves-light abortButton" 
@@ -54,6 +55,11 @@ export default {
     'polygon',
     'type'
   ],
+  computed: {
+    inhabitants() {
+      return this.$store.state.inhabitants
+    }
+  },
   methods: {
     toCatalog() {
       this.$emit('close')
@@ -61,6 +67,11 @@ export default {
         path: `/${this.type}/1`
       })
     }
+  },
+  mounted() {
+    this.$store.dispatch('getInhabitants', {
+      id: this.polygon._id
+    })
   }
 }
 </script>

@@ -33,6 +33,7 @@ const initStore = () => new Vuex.Store({
 
     polygons: [],
     checkedPolygons: [],
+    inhabitants: [],
 
     filteredObjects: null,
     categoryPages: 1
@@ -66,6 +67,9 @@ const initStore = () => new Vuex.Store({
     },
     setPolygons(state, payload) {
       state.polygons = payload
+    },
+    setInhabitants(state, payload) {
+      state.inhabitants = payload
     }
   },
   actions: {
@@ -144,8 +148,12 @@ const initStore = () => new Vuex.Store({
     async getPolygons({commit}) {
       const response = await superagent
         .get(`http://${process.env.HOST}:${process.env.PORT}/polygons`)
-        .set('Authorization', `Bearer ${localStorage.getItem('token')}`)
       commit('setPolygons', JSON.parse(response.text))
+    },
+    async getInhabitants({commit}, payload) {
+      const response = await superagent
+        .get(`http://${process.env.HOST}:${process.env.PORT}/polygons/${payload.id}/inhabitants`)
+      commit('setInhabitants', JSON.parse(response.text))
     },
     setCurrentCategory({commit}, payload) {
       commit('setCurrentCategory', payload)

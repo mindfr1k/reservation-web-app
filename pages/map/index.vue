@@ -43,6 +43,7 @@
     <InfoModal v-if="showInfoModal"
     :type="$store.state.checkedPolygons[0].type"
     :polygon="content"
+    @update="someMethod"
     @close="showInfoModal = false" />
 
   </div>
@@ -71,6 +72,9 @@ export default {
     createInfoModal(event) {
       this.content = event
       this.showInfoModal = true
+    },
+    someMethod() {
+      console.log('It works!')
     }
   }
 }

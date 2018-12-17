@@ -99,6 +99,24 @@ module.exports = db => Router()
       })
     }
   })
+  .get('/:id/inhabitants', async (req, res) => {
+    try {
+      const { id } = req.params
+      const { inhabitants } = (await db.collection('polygons')
+        .find({
+          _id: ObjectId(id)
+        })
+        .toArray())[0]
+      return res.status(200).json({
+        inhabitants
+      })
+    }
+    catch (err) {
+      return res.status(500).json({
+        error: err.message
+      })
+    }
+  })
   .delete('/:id/inhabitants', checkAuth, async (req, res) => {
     try {
       const { id } = req.params
