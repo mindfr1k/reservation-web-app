@@ -26,7 +26,7 @@ module.exports = db => Router()
       })
     }
   })
-  .get('/', checkAuth, async (_, res) => {
+  .get('/', async (_, res) => {
     try {
       return res.status(200).json(await db.collection('polygons')
         .find()

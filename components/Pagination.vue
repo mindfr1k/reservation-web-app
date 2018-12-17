@@ -136,7 +136,7 @@ export default {
     background-color: #ffd17c;
   }
   li a, span {
-    margin-right: 0.5rem;
+    margin-left: 0.1rem;
   }
   .pagination li.active {
     background-color: #fff;
