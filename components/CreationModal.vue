@@ -102,7 +102,7 @@ export default {
             id: this.id,
             body: {
               title: this.title,
-              path: `reservation-web-api\/static\/images\/${name}`
+              path: `reservation-web-api\\static\\images\\${name}`
             }
           })
           this.$store.dispatch('getInhabitants', {
