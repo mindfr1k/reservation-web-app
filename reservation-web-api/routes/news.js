@@ -103,7 +103,7 @@ module.exports = db => Router()
       return res.status(200).json((await db.collection('news')
         .aggregate([
           {
-            $count: 'categoryAmount'
+            $count: 'newsAmount'
           }
         ])
         .toArray())[0]

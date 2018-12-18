@@ -2,7 +2,7 @@
   <div>
     <ul id="slide-out" class="side-nav">
       <li>
-        <nuxt-link to="/news" class="waves-effect waves-light">
+        <nuxt-link to="/news/1" class="waves-effect waves-light">
           <i class="material-icons left">announcement</i>Новини
         </nuxt-link>
       </li>
@@ -31,7 +31,7 @@
           
           <ul class="left hide-on-small-only">
             <li>
-              <nuxt-link to="/news" class="waves-effect waves-light">
+              <nuxt-link to="/news/1" class="waves-effect waves-light">
                 <i class="material-icons left">announcement</i>Новини
               </nuxt-link>
             </li>

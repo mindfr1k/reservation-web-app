@@ -36,7 +36,10 @@ const initStore = () => new Vuex.Store({
     inhabitants: [],
 
     filteredObjects: null,
-    categoryPages: 1
+    categoryPages: 1,
+
+    filteredNews: null,
+    newsPages: 1
   },
   mutations: {
     setFilteredObjects(state, payload) {
@@ -44,6 +47,12 @@ const initStore = () => new Vuex.Store({
     },
     setCategoryPages(state, payload) {
       state.categoryPages = payload
+    },
+    setFilteredNews(state, payload) {
+      state.filteredNews = payload
+    },
+    setNewsPages(state, payload) {
+      state.newsPages = payload
     },
     setCurrentCategory(state, payload) {
       state.currentCategory = payload
@@ -84,11 +93,28 @@ const initStore = () => new Vuex.Store({
       : ~~(amount / 12) + 1
       commit('setCategoryPages', flooredAmount)
     },
+    async getNewsPagesAmount({commit}) {
+      const response = await superagent
+        .get(`http://${process.env.HOST}:${process.env.PORT}/news/amount`)
+      const amount = response.text 
+        ? JSON.parse(response.text).newsAmount
+        : 1
+      const flooredAmount = amount % 6 === 0
+      ? ~~(amount / 6)
+      : ~~(amount / 6) + 1
+      commit('setNewsPages', flooredAmount)
+    },
     async filterObjectsByPage({commit}, payload) {
       payload.page = parseInt(payload.page)
       const response = await superagent
         .get(`http://${process.env.HOST}:${process.env.PORT}/categories?categoryName=${payload.categoryName}&limit=12&skip=${(payload.page - 1) * 12}`)
       commit('setFilteredObjects', JSON.parse(response.text))
+    },
+    async filterNewsByPage({commit}, payload) {
+      payload.page = parseInt(payload.page)
+      const response = await superagent
+        .get(`http://${process.env.HOST}:${process.env.PORT}/news?limit=6&skip=${(payload.page - 1) * 6}`)
+      commit('setFilteredNews', JSON.parse(response.text))
     },
     async deleteObject({}, payload) {
       await superagent
