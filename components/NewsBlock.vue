@@ -11,6 +11,14 @@
     @click="showTruncated">
       Згорнути текст
     </button>
+    <EditDeleteButtons class="col s12 center-align" 
+    :id="id"
+    :title="title"
+    :image="img"
+    :preview="null"
+    :description="description"
+    :isInhabitant="false"
+    :isNews="true" />
   </div>
 </template>
 

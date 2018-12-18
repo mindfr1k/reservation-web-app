@@ -10,6 +10,7 @@
   <CreationModal v-if="showCreationModal"
   :id="id"
   :isInhabitant="isInhabitant"
+  :isNews="isNews"
   @close="showCreationModal = false"/>
 </div>
 </template>
@@ -23,7 +24,8 @@ export default {
   },
   props: [
     'id',
-    'isInhabitant'
+    'isInhabitant',
+    'isNews'
   ],
   data() {
     return {

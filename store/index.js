@@ -128,6 +128,12 @@ const initStore = () => new Vuex.Store({
         .set('Authorization', `Bearer ${localStorage.getItem('token')}`)
         .send(payload.body)
     },
+    async deleteNews({}, payload) {
+      await superagent
+      .delete(`http://${process.env.HOST}:${process.env.PORT}/news/${payload.id}`)
+      .set('Authorization', `Bearer ${localStorage.getItem('token')}`)
+      .send(payload.body)
+    },
     async postObject({}, payload) {
       await superagent
         .post(`http://${process.env.HOST}:${process.env.PORT}/categories`)
@@ -144,9 +150,23 @@ const initStore = () => new Vuex.Store({
         .set('Authorization', `Bearer ${localStorage.getItem('token')}`)
         .send(payload.body)
     },
+    async postNews({}, payload) {
+      await superagent
+        .post(`http://${process.env.HOST}:${process.env.PORT}/news`)
+        .set('Authorization', `Bearer ${localStorage.getItem('token')}`)
+        .field('title', payload.title)
+        .field('description', payload.description)
+        .attach('image', payload.image)
+    },
     async patchObject({}, payload) {
       await superagent
         .patch(`http://${process.env.HOST}:${process.env.PORT}/categories/${payload.id}`)
+        .set('Authorization', `Bearer ${localStorage.getItem('token')}`)
+        .send(payload.body)
+    },
+    async patchNews({}, payload) {
+      await superagent
+        .patch(`http://${process.env.HOST}:${process.env.PORT}/news/${payload.id}`)
         .set('Authorization', `Bearer ${localStorage.getItem('token')}`)
         .send(payload.body)
     },

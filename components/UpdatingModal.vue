@@ -24,7 +24,7 @@
                       <input type="text" class="file-path validate" placeholder="Зображення"/>
                     </div>
                   </div>
-                  <div class="input-field col s12">
+                  <div v-if="!isNews" class="input-field col s12">
                     <textarea id="preview" type="text" class="validate materialize-textarea" 
                     data-length="500"
                     v-model="preview" 
@@ -71,7 +71,8 @@ export default {
     'id',
     'objectTitle',
     'objectPreview',
-    'objectDescription'
+    'objectDescription',
+    'isNews'
   ],
   data() {
     return {
@@ -84,7 +85,7 @@ export default {
   methods: {
     async checkForm() {
       this.errors = []
-      if (this.title && !this.title.match(/^[^0-9]+$/)) {
+      if (this.title && !this.title.match(/^[^0-9]+$/) && !this.isNews) {
         this.errors.push('Назва не має містити цифр.')
       }
       if (this.title && this.title.length > 100) {
@@ -108,17 +109,27 @@ export default {
         }
         body.append('categoryName', this.$store.state.currentCategory)
         delete body.errors
-        await this.$store.dispatch('patchObject', {
-          id: this.id,
-          body
-        })
-        location.reload(true)
+        if (this.isNews) {
+          await this.$store.dispatch('patchNews', {
+            id: this.id,
+            body
+          })
+          location.reload(true)
+        }
+        else {
+          await this.$store.dispatch('patchObject', {
+            id: this.id,
+            body
+          })
+          location.reload(true)
+        }
       }
     }
   },
   mounted() {
     this.$refs.title.focus()
-    this.$refs.preview.focus()
+    if (this.preview) 
+      this.$refs.preview.focus()
     this.$refs.description.focus()
     $(document).ready(function() {
       $('input#title, textarea#preview, textarea#description').characterCounter();

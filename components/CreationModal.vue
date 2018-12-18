@@ -25,14 +25,14 @@
                       <input type="text" class="file-path validate" placeholder="Зображення"/>
                     </div>
                   </div>
-                  <div v-if="!isInhabitant" class="input-field col s12">
+                  <div v-if="!isInhabitant && !isNews" class="input-field col s12">
                     <textarea id="preview" type="text" class="validate materialize-textarea" 
                     data-length="500"
                     v-model="preview"
                     required />
                     <label for="preview" class="inputLabel">Стислий опис*</label>
                   </div>
-                  <div v-if="!isInhabitant" class="input-field col s12">
+                  <div v-if="!isInhabitant && isNews" class="input-field col s12">
                     <textarea id="description" type="text" class="validate materialize-textarea" 
                     data-length="3000"
                     v-model="description"
@@ -70,7 +70,8 @@
 export default {
   props: [
     'id',
-    'isInhabitant'
+    'isInhabitant',
+    'isNews'
   ],
   data() {
     return {
@@ -83,7 +84,7 @@ export default {
   methods: {
     async checkForm() {
       this.errors = []
-      if (!this.title.match(/^[^0-9]+$/)) {
+      if (!this.title.match(/^[^0-9]+$/) && !this.isNews) {
         this.errors.push('Назва не має містити цифр.')
       }
       if (this.title.length > 100) {
@@ -113,6 +114,14 @@ export default {
             path: `/map`
           })
         }
+        else if (this.isNews) {
+          await this.$store.dispatch('postNews', {
+            title: this.title,
+            image: this.$refs.file.files[0],
+            description: this.description
+            })
+          location.reload(true)
+        } 
         else {
           await this.$store.dispatch('postObject', {
             categoryName: this.$store.state.currentCategory,

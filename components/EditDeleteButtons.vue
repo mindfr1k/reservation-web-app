@@ -14,6 +14,7 @@
     :objectTitle="title"
     :objectPreview="preview"
     :objectDescription="description"
+    :isNews="isNews"
     @close="showUpdatingModal = false" />
 
     <DeletionModal v-if="showDeletionModal"
@@ -21,6 +22,7 @@
     :title="title"
     :image="preview"
     :isInhabitant="isInhabitant"
+    :isNews="isNews"
     @close="showDeletionModal = false" />
   </div>
 </template>
@@ -35,7 +37,8 @@ export default {
     'title',
     'preview',
     'description',
-    'isInhabitant'
+    'isInhabitant',
+    'isNews'
   ],
   components: {
     UpdatingModal,
@@ -55,10 +58,10 @@ export default {
     padding-right: 2rem;
     margin-left: 1.6rem;
   }
-  .card .card-action button.editButton:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
+  .editButton:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
     color: #2196f3;
   }
-  .card .card-action button.editButton:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating):hover {
+  editButton:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating):hover {
     background-color: #2196f3;
     color: #ffffff;
   }

@@ -38,7 +38,8 @@ export default {
     'id',
     'title',
     'image',
-    'isInhabitant'
+    'isInhabitant',
+    'isNews'
   ],
   methods: {
     async checkForm() {
@@ -58,6 +59,13 @@ export default {
           path: `/map`
         })
       }
+      else if (this.isNews) {
+        await this.$store.dispatch('deleteNews', {
+          id: this.id,
+          body: {}
+        })
+        location.reload(true)
+      } 
       else {
         await this.$store.dispatch('deleteObject', {
           id: this.id,

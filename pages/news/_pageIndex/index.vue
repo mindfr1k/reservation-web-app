@@ -3,12 +3,16 @@
     <div class="row">
       <NewsPagination class="col s12" />
 
+      <AddButton class="col s12" v-if="$store.state.isSignedIn"
+      :isInhabitant="false"
+      :isNews="true" />
+
       <div class="col s12" v-for="news in filteredNews" :key="news._id">
         <NewsBlock 
         :id="news._id"
         :title="news.title"
         :img="news.path"
-        :description="news.description"/>
+        :description="news.description" />
       </div>
 
       <NewsPagination class="col s12" />
@@ -19,11 +23,13 @@
 <script>
 import NewsPagination from '@/components/NewsPagination'
 import NewsBlock from '@/components/NewsBlock'
+import AddButton from '@/components/AddButton'
 
 export default {
   components: {
     NewsPagination,
-    NewsBlock
+    NewsBlock,
+    AddButton
   },
   computed: {
     filteredNews() {
