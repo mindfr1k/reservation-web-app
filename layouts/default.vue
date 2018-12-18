@@ -1,13 +1,18 @@
 <template>
   <div>
     <ul id="slide-out" class="side-nav">
+      <li>
+        <nuxt-link to="/news" class="waves-effect waves-light">
+          <i class="material-icons left">announcement</i>Новини
+        </nuxt-link>
+      </li>
       <li v-for="item in menuItems"
       :key="item.title">
         <nuxt-link :to="item.path">
           <i class="material-icons left">{{ item.icon }}</i>{{ item.title }}
         </nuxt-link>
       </li>
-      <li v-if="$store.state.isSignedIn"> 
+      <li v-if="$store.state.isSignedIn">
         <nuxt-link to="/logout" class="waves-effect waves-light">
           <i class="material-icons left">exit_to_app</i>Вийти
         </nuxt-link>
@@ -23,6 +28,14 @@
           </nuxt-link>
           <nuxt-link to="/" class="brand-logo text-black left hide-on-med-and-up ">{{ appTitle }}</nuxt-link>
           <nuxt-link to="/" class="brand-logo text-black left hide-on-small-only">{{ appTitle }}</nuxt-link>
+          
+          <ul class="left hide-on-small-only">
+            <li>
+              <nuxt-link to="/news" class="waves-effect waves-light">
+                <i class="material-icons left">announcement</i>Новини
+              </nuxt-link>
+            </li>
+          </ul>
 
           <ul class="right hide-on-small-only">
             <li v-for="item in menuItems"
@@ -113,7 +126,11 @@ export default {
   ul.right {
    margin: 0 1.5rem;
   }
-  ul.right li a, ul.right button {
+  ul.left {
+    margin-left: 7.5rem; 
+  }
+  ul.right li a, ul.right button,
+  ul.left li a, ul.left button {
     font-size: 0.9rem;
     text-transform: uppercase;
   }
