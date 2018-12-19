@@ -9,7 +9,7 @@
     <img v-if="!isTruncated" class="responsive-img regularImg" :src="img">
     <button v-if="!isTruncated" class="left-align col s12 btn-flat waves-effect waves-light"
     @click="showTruncated">
-      Згорнути текст
+      Згорнути новину
     </button>
     <EditDeleteButtons class="col s12 center-align" 
     :id="id"
@@ -62,10 +62,26 @@ export default {
     margin-bottom: 1rem;
   }
   .truncated {
-    width: 28rem;
-    white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
+    position: relative;
+    max-height: 6rem;
+    text-align: justify;
+    padding-right: 1rem;
+  }
+  .truncated:before {
+    content: '...';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+  .truncated:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    width: 1rem;
+    height: 1rem;
+    margin-top: 0.2rem;
+    background: #ffffff;
   }
   .notTruncated {
     width: auto;
