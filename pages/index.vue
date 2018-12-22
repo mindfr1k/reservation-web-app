@@ -1,6 +1,12 @@
 <template>
   <div class="row">
-    <div class="col s12 left-align">
+    <div class="col s12 mainPageNav">
+      ROFL
+    </div>
+    <div class="col m2 center-align hide-on-small-only">
+      
+    </div>
+    <div class="col s12 m8 left-align">
       <p>
         Заповідники виникли як організаційна форма охорони природи, 
         що мала на меті зберігати еталонні її ділянки для досліджень фундаментальних 
@@ -61,19 +67,8 @@
          на наявність заповідного режиму.
       </p>
     </div>
+    <div class="col m2 center-align hide-on-small-only">
 
-    <div class="col s12 center-align">
-      <h2>Звернутися до мапи ви можете, натиснувши на пункт в меню або
-        <nuxt-link to="/map">
-          <i>тут.</i>
-        </nuxt-link></h2>
-    </div>
-
-    <div class="col s12 center-align">
-      <h2>Звернутися до каталогу ви можете, натиснувши на пункт в меню або 
-        <nuxt-link to="/animals/1">
-          <i>тут.</i>
-        </nuxt-link></h2>
     </div>
   </div>
 </template>
@@ -85,6 +80,13 @@ export default {
 </script>
 
 <style scoped>
+  .container-fluid {
+    background-color: black;
+  }
+  .row {
+    background-color: #cccccc;
+    background-image: url('/mainPageNav.jpg');
+  }
   a {
     color: black;
     text-decoration: underline;
@@ -100,5 +102,9 @@ export default {
   }
   ul li {
     font-size: 1.5rem;
+  }
+  .mainPageNav {
+    min-height: 40vh;
+    width: 100%;
   }
 </style>

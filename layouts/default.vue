@@ -55,7 +55,7 @@
       </nav>
     </div>
 
-    <div class="container-fluid">
+    <div>
       <nuxt />
     </div>
 

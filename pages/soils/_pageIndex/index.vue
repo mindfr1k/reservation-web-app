@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container-fluid">
     <div class="row">
       <div class="col s12 m12 hide-on-large-only">
           <button class="col s4 m4 btn-flat" v-for="category in reservationCategories" 
@@ -98,6 +98,12 @@ export default {
 </script>
 
 <style scoped>
+  .container-fluid {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    margin: 1.5rem;
+  }
   nav {
     color: #000000;
     background-color: #ffffff;

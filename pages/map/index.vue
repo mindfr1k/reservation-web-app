@@ -77,6 +77,9 @@ export default {
 </script>
 
 <style scoped>
+  .row {
+    margin: 1.5rem;
+  }
   [type="radio"]:checked+label:after, [type="radio"].with-gap:checked+label:after {
     background-color: #ffab40;
     border: 2px solid #ffab40;

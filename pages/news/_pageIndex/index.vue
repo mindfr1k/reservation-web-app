@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container-fluid">
     <div class="row">
       <NewsPagination class="col s12" />
 
@@ -46,5 +46,10 @@ export default {
 </script>
 
 <style scoped>
-
+  .container-fluid {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    margin: 1.5rem;
+  }
 </style>
