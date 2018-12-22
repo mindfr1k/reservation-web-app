@@ -210,8 +210,12 @@ const initStore = () => new Vuex.Store({
     filterCheckedPolygons({commit, state}, payload) {
       commit('setCheckedProperty', payload)
       const result = []
+      const filteredCategory = state.reservationCategories.filter(category => {
+        return category.isChecked
+      })
+      const { id = '' } = filteredCategory[0] || {}
       const filteredPolygons = state.polygons.filter(polygon => {
-        return polygon.type === state.reservationCategories[payload].id
+        return polygon.type === id
       })
       result.push(...filteredPolygons)
       commit('setCheckedPolygons', result)
