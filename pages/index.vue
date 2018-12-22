@@ -1,12 +1,16 @@
 <template>
   <div class="row">
-    <div class="col s12 mainPageNav">
-      ROFL
+    <div class="row mainPageNav">
+      <div class="col s12 center-align">
+        <img src="/logo.png" class="responsive-img mainLogo">
+      </div>
+      <div class="col s12 center-align mainTitle">{{ $store.state.reservationTitle }}</div>
+      <div class="col s12 center-align mainInfo">{{ $store.state.reservationOwner }}</div>
     </div>
-    <div class="col m2 center-align hide-on-small-only">
+    <div class="col l2 center-align hide-on-med-and-down">
       
     </div>
-    <div class="col s12 m8 left-align">
+    <div class="col s12 m12 l8 left-align mainText">
       <p>
         Заповідники виникли як організаційна форма охорони природи, 
         що мала на меті зберігати еталонні її ділянки для досліджень фундаментальних 
@@ -67,7 +71,7 @@
          на наявність заповідного режиму.
       </p>
     </div>
-    <div class="col m2 center-align hide-on-small-only">
+    <div class="col l2 center-align hide-on-med-and-down">
 
     </div>
   </div>
@@ -80,12 +84,28 @@ export default {
 </script>
 
 <style scoped>
-  .container-fluid {
-    background-color: black;
-  }
   .row {
     background-color: #cccccc;
     background-image: url('/mainPageNav.jpg');
+    margin-bottom: 0;
+  }
+  .mainLogo {
+    max-height: 25vh;
+    margin-top: 1rem;
+  }
+  .mainTitle {
+    color: #ffffff;
+    font-size: 3rem;
+    font-weight: 700;
+  }
+  .mainInfo {
+    color: #999999;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .mainText {
+    background-color: #ffffff;
   }
   a {
     color: black;

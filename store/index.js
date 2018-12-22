@@ -10,6 +10,8 @@ Vue.use(Vuex)
 const initStore = () => new Vuex.Store({
   state: {
     appTitle: 'Головна',
+    reservationTitle: 'Природний заповідник "Дніпровсько-Орільський"',
+    reservationOwner: 'Державне агентство лісових ресурсів України',
     menuItems: [
       { title: 'Мапа', path: '/map', icon: 'map' },
       { title: 'Каталог', path: '/animals/1', icon: 'info' }
