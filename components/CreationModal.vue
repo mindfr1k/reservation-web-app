@@ -32,7 +32,7 @@
                     required />
                     <label for="preview" class="inputLabel">Стислий опис*</label>
                   </div>
-                  <div v-if="!isInhabitant && isNews" class="input-field col s12">
+                  <div v-if="!isInhabitant" class="input-field col s12">
                     <textarea id="description" type="text" class="validate materialize-textarea" 
                     data-length="3000"
                     v-model="description"
