@@ -110,6 +110,9 @@ export default {
     box-shadow: none;
     height: 0px;
   }
+  .navbar-fixed .btn-flat:focus {
+    background-color: #ffffff;
+  }
   .menuTitle {
     margin-left: -5rem;
   }

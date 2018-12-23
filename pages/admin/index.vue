@@ -79,6 +79,9 @@ export default {
 </script>
 
 <style scoped>
+  .row {
+    min-height: 100vh;
+  }
   .input-field input[type=text]:focus + label,
   .input-field input[type=password]:focus + label {
     color: #2196f3;

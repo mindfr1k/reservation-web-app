@@ -11,7 +11,7 @@
     @click="showTruncated">
       Згорнути новину
     </button>
-    <EditDeleteButtons class="col s12 center-align" 
+    <EditDeleteButtons class="col s12 center-align" v-if="$store.state.isSignedIn" 
     :id="id"
     :title="title"
     :image="img"
@@ -54,7 +54,7 @@ export default {
 
 <style scoped>
   .regularImg {
-    height: 40vh;
+    height: 52vh;
     width: 52vh;
   }
   h5 {

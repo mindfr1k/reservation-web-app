@@ -61,7 +61,7 @@ export default {
   .editButton:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
     color: #2196f3;
   }
-  editButton:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating):hover {
+  .editButton:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating):hover {
     background-color: #2196f3;
     color: #ffffff;
   }
