@@ -1,6 +1,39 @@
 <template>
   <div class="row">
     <div class="row mainPageHeader">
+      <div class="col s12 navbar-fixed">
+        <nav>
+          <div class="nav-wrapper blue darken-4 z-depth-1">
+            <ul class="left hide-on-small-only">
+              <li>
+                <nuxt-link to="/history" class="waves-effect waves-light">
+                  Історія створення заповідника
+                </nuxt-link>
+              </li>
+              <li>
+                <nuxt-link to="/environment" class="waves-effect waves-light">
+                  Інформація про довкілля
+                </nuxt-link>
+              </li>
+              <li>
+                <nuxt-link to="/legal" class="waves-effect waves-light">
+                  Нормативно-правові акти
+                </nuxt-link>
+              </li>
+              <li>
+                <nuxt-link to="/activities" class="waves-effect waves-light">
+                  Наукова та науково-технічна діяльність
+                </nuxt-link>
+              </li>
+              <li>
+                <nuxt-link to="/contacts" class="waves-effect waves-light">
+                  Контакти
+                </nuxt-link>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
       <div class="col s12 center-align">
         <img src="/logo.png" class="responsive-img mainLogo">
       </div>
@@ -42,7 +75,7 @@
       <p>
         &emsp;&emsp;&emsp;Для досягнення цієї цілі Заповідник має виконувати такі завдання:
       </p>
-      <ul>
+      <ul class="infoList">
         <li>охорона території Заповідника з усіма його природними комплексами та об’єктами;</li>
         <li>збереження біотичного екосистемного та ландшафтного різноманіття на його території;</li>
         <li>
@@ -60,7 +93,7 @@
           природно-заповідного фонду у регіоні;
         </li>
         <li>підтримання загального екологічного балансу у регіоні.</li>
-      </ul> 
+      </ul>
       <p>
         &emsp;&emsp;&emsp;Заповідник відіграє надзвичайно важливу роль як єдиний в умовах північної частини степового
          Придніпров’я осередок, де охороняється добре збережений комплекс долинно-терасового ландшафту 
@@ -161,20 +194,32 @@ export default {
     color: black;
     text-decoration: underline;
   }
-  ul li {
+  .infoList li {
     list-style-type: disc;
   }
-  ul:not(.browser-default) {
+  .infoList:not(.browser-default) {
     padding-left: 1.5rem;
   }
   p {
     font-size: 1.5rem;
   }
-  ul li {
+  .infoList li {
     font-size: 1.5rem;
   }
   .mainPageNav {
     min-height: 40vh;
     width: 100%;
+  }
+  .navbar-fixed {
+    padding: 0;
+  }
+  .nav-wrapper {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  }
+  a {
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
   }
 </style>

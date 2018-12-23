@@ -16,3 +16,9 @@ export default {
   ]
 }
 </script>
+
+<style scoped>
+  .center-align {
+    min-height: 100vh;
+  }
+</style>
