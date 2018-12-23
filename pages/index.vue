@@ -6,27 +6,27 @@
           <div class="nav-wrapper blue darken-4 z-depth-1">
             <ul class="left hide-on-small-only">
               <li>
-                <nuxt-link to="/history" class="waves-effect waves-light">
+                <nuxt-link to="/history">
                   Історія створення заповідника
                 </nuxt-link>
               </li>
               <li>
-                <nuxt-link to="/environment" class="waves-effect waves-light">
+                <nuxt-link to="/environment">
                   Інформація про довкілля
                 </nuxt-link>
               </li>
               <li>
-                <nuxt-link to="/legal" class="waves-effect waves-light">
+                <nuxt-link to="/legal">
                   Нормативно-правові акти
                 </nuxt-link>
               </li>
               <li>
-                <nuxt-link to="/activities" class="waves-effect waves-light">
+                <nuxt-link to="/activities">
                   Наукова та науково-технічна діяльність
                 </nuxt-link>
               </li>
               <li>
-                <nuxt-link to="/contacts" class="waves-effect waves-light">
+                <nuxt-link to="/contacts">
                   Контакти
                 </nuxt-link>
               </li>
@@ -200,10 +200,10 @@ export default {
   .infoList:not(.browser-default) {
     padding-left: 1.5rem;
   }
-  p {
+  .infoList li {
     font-size: 1.5rem;
   }
-  .infoList li {
+  p {
     font-size: 1.5rem;
   }
   .mainPageNav {
