@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="row mainPageHeader">
-      <div class="col s12 navbar-fixed">
+      <div class="col s12 hide-on-med-and-down navbar-fixed">
         <nav>
           <div class="nav-wrapper blue darken-4 z-depth-1">
             <ul class="left hide-on-small-only">

@@ -220,14 +220,4 @@ export default {
     font-weight: 500;
     text-decoration: none;
   }
-  .side-nav {
-    background-color: #0d47a1;
-    color: #ffffff;
-  }
-  .side-nav li > a {
-    color: #ffffff;
-  }
-  .button-collapse {
-    margin-left: 1.5rem;
-  }
 </style>

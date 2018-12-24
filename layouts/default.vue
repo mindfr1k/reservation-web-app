@@ -17,6 +17,32 @@
           <i class="material-icons left">exit_to_app</i>Вийти
         </nuxt-link>
       </li>
+      <li><div class="divider"></div></li>
+      <li>
+        <nuxt-link to="/history">
+          Історія створення заповідника
+        </nuxt-link>
+      </li>
+      <li>
+        <nuxt-link to="/environment">
+          Інформація про довкілля
+        </nuxt-link>
+      </li>
+      <li>
+        <nuxt-link to="/legal">
+          Нормативно-правові акти
+        </nuxt-link>
+      </li>
+      <li>
+        <nuxt-link to="/activities">
+          Наукова та наук.-тех. діяльність
+        </nuxt-link>
+      </li>
+      <li>
+        <nuxt-link to="/contacts">
+          Контакти
+        </nuxt-link>
+      </li>
     </ul>
 
     <div class="navbar-fixed">
