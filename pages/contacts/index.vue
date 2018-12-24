@@ -158,10 +158,6 @@ export default {
   .mainText {
     background-color: #ffffff;
   }
-  a {
-    color: #000000;
-    text-decoration: none;
-  }
   .mainText a:hover {
     color: #0000ff;
   }
@@ -180,8 +176,12 @@ export default {
   }
   nav a {
     color: #ffffff;
-    font-size: 1rem;
+    font-size: 0.93rem;
     font-weight: 500;
+    text-decoration: none;
+  }
+  a {
+    color: #000000;
     text-decoration: none;
   }
 </style>

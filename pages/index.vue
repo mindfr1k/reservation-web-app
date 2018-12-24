@@ -218,7 +218,7 @@ export default {
   }
   a {
     color: #ffffff;
-    font-size: 1rem;
+    font-size: 0.93rem;
     font-weight: 500;
     text-decoration: none;
   }
