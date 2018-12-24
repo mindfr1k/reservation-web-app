@@ -86,7 +86,7 @@ module.exports = db => Router()
           _id: ObjectId(id)
         })
         .toArray())[0]
-      //deleteFiles(images)
+      deleteFiles(images)
 
       await db.collection('news')
         .deleteOne({
