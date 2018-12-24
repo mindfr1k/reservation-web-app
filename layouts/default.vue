@@ -23,13 +23,13 @@
       <nav>
         <div class="nav-wrapper grey lighten-4 z-depth-1">
           <nuxt-link to="" data-activates="slide-out" class="button-collapse 
-          waves-effect waves-light valign-wrapper hide-on-med-and-up">
+          waves-effect waves-light valign-wrapper hide-on-large-only">
               <i class="material-icons center">menu</i>
           </nuxt-link>
-          <nuxt-link to="/" class="brand-logo text-black left hide-on-med-and-up ">{{ appTitle }}</nuxt-link>
-          <nuxt-link to="/" class="brand-logo text-black left hide-on-small-only">{{ appTitle }}</nuxt-link>
+          <nuxt-link to="/" class="brand-logo text-black left mobileLogo hide-on-large-only">{{ appTitle }}</nuxt-link>
+          <nuxt-link to="/" class="brand-logo text-black left hide-on-med-and-down">{{ appTitle }}</nuxt-link>
           
-          <ul class="left hide-on-small-only">
+          <ul class="left hide-on-med-and-down">
             <li>
               <nuxt-link to="/news/1" class="waves-effect waves-light">
                 <i class="material-icons left">announcement</i>Новини
@@ -37,7 +37,7 @@
             </li>
           </ul>
 
-          <ul class="right hide-on-small-only">
+          <ul class="right hide-on-med-and-down">
             <li v-for="item in menuItems"
             :key="item.title">
               <nuxt-link :to="item.path" class="waves-effect waves-light">
@@ -120,7 +120,7 @@ export default {
     font-size: 1.3rem;
     margin: 0 1.5rem 0 2rem;
   }
-  .brand-logo.hide-on-med-and-up {
+  .brand-logo.mobileLogo {
     margin: 0 1.5rem 0 5rem;
   }
   ul.right {

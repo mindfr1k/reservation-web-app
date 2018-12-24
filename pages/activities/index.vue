@@ -1,40 +1,9 @@
 <template>
   <div class="row">
-    <ul id="slide-out" class="side-nav">
-      <li>
-        <nuxt-link to="/history">
-          Історія створення заповідника
-        </nuxt-link>
-      </li>
-      <li>
-        <nuxt-link to="/environment">
-          Інформація про довкілля
-        </nuxt-link>
-      </li>
-      <li>
-        <nuxt-link to="/legal">
-          Нормативно-правові акти
-        </nuxt-link>
-      </li>
-      <li>
-        <nuxt-link class="activities-link" to="/activities">
-          Наукова та наук.-тех. діяльність
-        </nuxt-link>
-      </li>
-      <li>
-        <nuxt-link to="/contacts">
-          Контакти
-        </nuxt-link>
-      </li>
-    </ul>
     <div class="row mainPageHeader">
-      <div class="col s12 navbar-fixed">
+      <div class="col s12 hide-on-med-and-down navbar-fixed">
         <nav>
           <div class="nav-wrapper blue darken-4 z-depth-1">
-            <nuxt-link to="" data-activates="slide-out" class="button-collapse 
-            waves-effect waves-light valign-wrapper hide-on-large-only">
-              <i class="material-icons center">menu</i>
-            </nuxt-link>
             <ul class="left hide-on-med-and-down">
               <li>
                 <nuxt-link to="/history">
