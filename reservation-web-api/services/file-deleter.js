@@ -1,9 +1,20 @@
 const fs = require('fs')
 
-module.exports = file => {
-  fs.unlink(file, err => {
-    if (err) {
-      throw (err)
-    }
-  })
+module.exports = {
+  deleteFile(file) {
+    fs.unlink(file, err => {
+      if (err) {
+        throw (err.message)
+      }
+    })
+  },
+  deleteFiles(files) {
+    files.forEach(file => {
+      fs.unlink(file, err => {
+        if (err) {
+          throw (err.message)
+        }
+      })
+    })
+  }
 }

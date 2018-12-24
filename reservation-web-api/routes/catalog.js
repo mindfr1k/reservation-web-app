@@ -4,11 +4,11 @@ const { ObjectId } = require('mongodb')
 const checkAuth = require('../services/auth-checker')
 const { postCatalog, getCatalog, patchCatalog } = require('../schemas/crud-catalog')
 const validate = require('../services/validator')
-const upload = require('../services/uploader')
-const deleteFile = require('../services/file-deleter')
+const { uploadOne } = require('../services/uploader')
+const { deleteFile } = require('../services/file-deleter')
 
 module.exports = db => Router()
-  .post('/', checkAuth, upload('image'), validate(postCatalog), async (req, res) => {
+  .post('/', checkAuth, uploadOne('image'), validate(postCatalog), async (req, res) => {
     try {
       const { categoryName } = req.body
       const { title, preview, description } = req.payload
@@ -47,7 +47,7 @@ module.exports = db => Router()
       })
     }
   })
-  .patch('/:id', checkAuth, upload('image'), validate(patchCatalog), async (req, res) => {
+  .patch('/:id', checkAuth, uploadOne('images'), validate(patchCatalog), async (req, res) => {
     try {
       const { categoryName } = req.body
       const { id } = req.params

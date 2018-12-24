@@ -16,10 +16,19 @@
                     required />
                     <label for="title" class="inputLabel">Назва*</label>
                   </div>
-                  <div class="file-field input-field col s12">
+                  <div v-if="!isNews" class="file-field input-field col s12">
                     <div class="btn fileButton">
                       <span>Файл</span>
                       <input id="image" type="file" ref="file" required />
+                    </div>
+                    <div class="file-path-wrapper">
+                      <input type="text" class="file-path validate" placeholder="Зображення"/>
+                    </div>
+                  </div>
+                  <div v-if="isNews" class="file-field input-field col s12">
+                    <div class="btn fileButton">
+                      <span>Файл</span>
+                      <input id="image" type="file" ref="file" required multiple/>
                     </div>
                     <div class="file-path-wrapper">
                       <input type="text" class="file-path validate" placeholder="Зображення"/>
@@ -115,10 +124,18 @@ export default {
           })
         }
         else if (this.isNews) {
+          const body = new FormData()
+          for (let prop in this._data) {
+            if (this._data[prop]) {
+              body.append(prop, this._data[prop])
+            }
+          }
+          for (let prop of this.$refs.file.files) {
+            body.append('images', prop)
+          }
+          delete body.errors
           await this.$store.dispatch('postNews', {
-            title: this.title,
-            image: this.$refs.file.files[0],
-            description: this.description
+            body
             })
           location.reload(true)
         } 
@@ -126,9 +143,9 @@ export default {
           await this.$store.dispatch('postObject', {
             categoryName: this.$store.state.currentCategory,
             title: this.title,
-            image: this.$refs.file.files[0],
             preview: this.preview,
-            description: this.description
+            description: this.description,
+            image: this.$refs.file.files[0]
             })
           location.reload(true)
         }

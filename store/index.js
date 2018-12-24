@@ -156,9 +156,7 @@ const initStore = () => new Vuex.Store({
       await superagent
         .post(`http://${process.env.HOST}:${process.env.PORT}/news`)
         .set('Authorization', `Bearer ${localStorage.getItem('token')}`)
-        .field('title', payload.title)
-        .field('description', payload.description)
-        .attach('image', payload.image)
+        .send(payload.body)
     },
     async patchObject({}, payload) {
       await superagent

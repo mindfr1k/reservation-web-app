@@ -11,7 +11,7 @@
         <NewsBlock 
         :id="news._id"
         :title="news.title"
-        :img="news.path"
+        :img="news.images"
         :description="news.description" />
       </div>
 

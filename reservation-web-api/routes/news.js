@@ -4,17 +4,21 @@ const { ObjectId } = require('mongodb')
 const checkAuth = require('../services/auth-checker')
 const { postNews, getNews, patchNews } = require('../schemas/news-catalog')
 const validate = require('../services/validator')
-const upload = require('../services/uploader')
-const deleteFile = require('../services/file-deleter')
+const { uploadMany } = require('../services/uploader')
+const { deleteFiles, deleteFile } = require('../services/file-deleter')
 
 module.exports = db => Router()
-  .post('/', checkAuth, upload('image'), validate(postNews), async (req, res) => {
+  .post('/', checkAuth, uploadMany('images'), validate(postNews), async (req, res) => {
     try {
       const { title, description } = req.payload
+      const images = []
+      for (file of req.files) {
+        images.push(file.path)
+      }
       const createdNews = (await db.collection('news')
         .insertOne({
           title,
-          path: req.file.path,
+          images,
           description
         })).ops[0]
       return res.status(201).json({
@@ -47,16 +51,16 @@ module.exports = db => Router()
       })
     }
   })
-  .patch('/:id', checkAuth, upload('image'), validate(patchNews), async (req, res) => {
+  .patch('/:id', checkAuth, uploadMany('images'), validate(patchNews), async (req, res) => {
     try {
       const { id } = req.params
-      if (req.file) {
-        const { path } = (await db.collection('news')
+      if (req.files) {
+        const { images } = (await db.collection('news')
           .find({
             _id: ObjectId(id)
           })
           .toArray())[0]
-        deleteFile(path)
+        deleteFiles(images)
       }
       await db.collection('news')
         .updateOne({
@@ -77,12 +81,12 @@ module.exports = db => Router()
   .delete('/:id', checkAuth, async (req, res) => {
     try {
       const { id } = req.params
-      const { path } = (await db.collection('news')
+      const { images } = (await db.collection('news')
         .find({
           _id: ObjectId(id)
         })
         .toArray())[0]
-      deleteFile(path)
+      deleteFiles(images)
 
       await db.collection('news')
         .deleteOne({

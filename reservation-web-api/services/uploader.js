@@ -26,10 +26,19 @@ const fileFilter = (_, file, cb) => {
   }
 }
 
-module.exports = file => {
-  return multer({
-    storage,
-    limits,
-    fileFilter
-  }).single(file)
+module.exports = {
+  uploadOne(file) {
+    return multer({
+      storage,
+      limits,
+      fileFilter
+    }).single(file)
+  },
+  uploadMany(file) {
+    return multer({
+      storage,
+      limits,
+      fileFilter
+    }).array(file, 4)
+  }
 }

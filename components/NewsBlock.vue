@@ -6,7 +6,11 @@
     @click="showTruncated">
       Читати далі
     </button>
-    <img v-if="!isTruncated" class="responsive-img regularImg" :src="img">
+    <img v-for="image in img"
+    :key="image" 
+    v-if="!isTruncated" 
+    class="responsive-img regularImg" 
+    :src="image">
     <button v-if="!isTruncated" class="left-align col s12 btn-flat waves-effect waves-light"
     @click="showTruncated">
       Згорнути новину
@@ -56,6 +60,7 @@ export default {
   .regularImg {
     height: 52vh;
     width: 52vh;
+    margin-right: 1rem;
   }
   h5 {
     font-size: 2rem;

@@ -15,10 +15,19 @@
                     v-model="title" ref="title" />
                     <label for="title" class="inputLabel">Назва</label>
                   </div>
-                  <div class="file-field input-field col s12">
+                  <div v-if="!isNews" class="file-field input-field col s12">
                     <div class="btn fileButton">
                       <span>Файл</span>
                       <input id="image" type="file" ref="file" />
+                    </div>
+                    <div class="file-path-wrapper">
+                      <input type="text" class="file-path validate" placeholder="Зображення"/>
+                    </div>
+                  </div>
+                  <div v-if="isNews" class="file-field input-field col s12">
+                    <div class="btn fileButton">
+                      <span>Файл</span>
+                      <input id="image" type="file" ref="file" multiple />
                     </div>
                     <div class="file-path-wrapper">
                       <input type="text" class="file-path validate" placeholder="Зображення"/>
@@ -104,8 +113,10 @@ export default {
             body.append(prop, this._data[prop])
           }
         }
-        if (this.$refs.file.files[0]) {
-          body.append('image', this.$refs.file.files[0])
+        if (this.$refs.file.files) {
+          for (let prop of this.$refs.file.files) {
+            body.append('images', prop)
+          }
         }
         body.append('categoryName', this.$store.state.currentCategory)
         delete body.errors
