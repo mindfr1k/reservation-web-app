@@ -186,7 +186,7 @@ export default {
   }
   nav a {
     color: #ffffff;
-    font-size: 0.93rem;
+    font-size: 0.9rem;
     font-weight: 500;
     text-decoration: none;
   }
